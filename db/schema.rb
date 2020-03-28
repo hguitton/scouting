@@ -10,7 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_28_141255) do
+ActiveRecord::Schema.define(version: 2020_03_28_141512) do
+
+  create_table "players", force: :cascade do |t|
+    t.string "lastname"
+    t.string "firstname"
+    t.string "birthdate"
+    t.string "status"
+    t.string "nationality"
+    t.string "agent_fr"
+    t.string "agent_us"
+    t.string "position"
+    t.string "height_us"
+    t.integer "height_eu"
+    t.integer "weight_us"
+    t.integer "weight_eu"
+    t.string "salary"
+    t.boolean "available"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
