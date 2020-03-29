@@ -1,6 +1,56 @@
-section.hero.is-primary
+section.hero
   .hero-body
     .container
-      h1.title = @player.name
-      .subtitle.m-b-none = @player.height
-      .subtitle.m-b-none = @player.weight
+      .columns
+        .column
+          .title.is-1 = @player.name
+          .subtitle.is-5 = @player.height + ' - ' + @player.weight
+        .column.has-text-right
+          .subtitle.is-size-4 = "Poste : " + @player.position
+          - @player.profiles.each do |profile|
+            .is-5.has-text-weight-bold = profile.name
+
+section
+  .container
+    .title.is-1 Saisons
+    - unless @player.seasons.empty?
+      table.table.is-striped.is-narrow.is-hoverable.is-bordered
+        thead
+          tr
+            th Updated
+            th Season
+            th League
+            th Team
+            th Min.
+            th Pts
+            th FG%
+            th 3FG%
+            th ORB
+            th DRB
+            th TRB
+            th AST
+            th BLK
+            th STL
+        tbody
+          - @player.seasons.each do |season|
+            tr
+              td 
+              td = season.name
+              td = season.team
+              td = season.country
+              td = season.min
+              td = season.points
+              td = season.fgp
+              td = season.three_fgp
+              td = season.orb
+              td = season.drb
+              td = season.trb
+              td = season.ast
+              td = season.blk
+              td = season.stl
+
+section.m-t-xxl
+  .container
+    .title.is-1 Comments
+    - @player.seasons.each do |season|
+      = season.name
