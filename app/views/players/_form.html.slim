@@ -1,4 +1,4 @@
-= form_for @player do |f|
+= simple_form_for @player do |f|
   - if @player.errors.any?
     #error_explanation
       h2 = "#{pluralize(@player.errors.count, "error")} prohibited this player from being saved:"
@@ -6,4 +6,12 @@
         - @player.errors.full_messages.each do |message|
           li = message
 
+  = f.input :lastname
+  = f.input :firstname
+  = f.input :birthdate
+  = f.input :height_eu
+  = f.input :weight_eu
+  = f.input :position
+  = f.input :status
+  = f.input :salary
   .actions = f.submit

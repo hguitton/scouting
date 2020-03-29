@@ -3,7 +3,11 @@ class PlayersController < ApplicationController
 
   # GET /players
   def index
-    @players = Player.all
+    @players = Player.all.includes(:comments)
+    respond_to do |format|
+      format.html { render :index }
+      format.json
+    end
   end
 
   # GET /players/1
@@ -59,6 +63,15 @@ class PlayersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def player_params
-      params.fetch(:player, {})
+      params.require(:player).permit(
+        :lastname,
+        :firstname,
+        :birthdate,
+        :height_eu,
+        :weight_eu,
+        :position,
+        :status,
+        :salary
+      )
     end
 end
