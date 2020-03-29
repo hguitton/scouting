@@ -1,0 +1,30 @@
+h1 Listing players
+
+table
+  thead
+    tr
+      th Last Update
+      th Name
+      th YOB
+      th Height
+      th Weight
+      th Position
+      th Status
+      th Salary
+
+  tbody
+    - @players.each do |player|
+      tr
+        td
+          em = time_ago_in_words(player.updated_at) + ' ago'
+
+        td = link_to 'Show', player.lastname
+        td = player.birthdate
+        td = player.height_eu
+        td = player.weight_eu
+        td = player.position
+        td = player.status
+        td = player.salary
+br
+
+= link_to 'New Player', new_player_path
