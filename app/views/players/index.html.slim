@@ -1,6 +1,6 @@
-h1 Listing players
+h1.h1.title Listing players
 
-table
+table.table.is-striped.is-narrow.is-hoverable
   thead
     tr
       th Last Update
@@ -11,7 +11,7 @@ table
       th Position
       th Status
       th Salary
-      th 
+      th
 
   tbody
     - @players.each do |player|
@@ -27,4 +27,14 @@ table
         td = player.salary
 br
 
+
+= simple_form_for @player do |f|
+  = f.input :lastname, label: false, wrapper: false, input_html: { class: "input" }
+  = f.input :birthdate, label: false, wrapper: false, input_html: { class: "input" }
+  = f.input :height_eu, label: false, wrapper: false, input_html: { class: "input" }
+  = f.input :weight_eu, label: false, wrapper: false, input_html: { class: "input" }
+  = f.input :position, label: false, wrapper: false, input_html: { class: "input" }
+  = f.input :status, label: false, wrapper: false, input_html: { class: "input" }
+  = f.input :salary, label: false, wrapper: false, input_html: { class: "input" }
+  = f.submit "Ok", class: "button is-primary"
 = link_to 'New Player', new_player_path
