@@ -1,10 +1,89 @@
-= simple_form_for @player do |f|
-  = f.input :lastname, wrapper: false, input_html: { class: "input" }
-  = f.input :firstname, wrapper: false, input_html: { class: "input" }
-  = f.input :birthdate, wrapper: false, input_html: { class: "input" }
-  = f.input :height_eu, wrapper: false, input_html: { class: "input" }
-  = f.input :weight_eu, wrapper: false, input_html: { class: "input" }
-  = f.input :position, wrapper: false, input_html: { class: "input" }
-  = f.input :status, wrapper: false, input_html: { class: "input" }
-  = f.input :salary, wrapper: false, input_html: { class: "input" }
-  = f.submit "Ok", class: "button is-primary"
+.container.is-fluid
+  = form_for @player, wrapper: :test do |f|
+    .m-b-md 
+      = f.text_field :links, class: "input", placeholder: "Link"
+    .grid.grid-5
+      = f.text_field :lastname, class: "input", placeholder: "Lastname"
+      = f.text_field :firstname, class: "input", placeholder: "Firstname"
+      // TODO ADD FORMAT
+      = f.text_field :birthdate, class: "input", placeholder: "Birthdate"
+      // TODO Add Country Select
+      = f.text_field :nationality, class: "input",  placeholder: "Country"
+      .select
+        = f.collection_select :status, ['JNFL', 'Bosman', 'Cotonou', 'JFL'], :to_s, :to_s, {}, class: 'input'
+    hr
+    .grid.grid-6
+      .select
+        = f.collection_select :position, ['Point Guard', 'Guard', 'Shooting Guard', 'Small Foward', 'Forward', 'Power Forward', 'Center'], :to_s, :to_s, {}, class: 'input'
+      .select
+        = f.collection_select :level, ['Jeep Elite', 'NBA', 'Euroleague'], :to_s, :to_s, {}, class: 'input'  
+      .field.has-addons
+        .control
+          = f.text_field :height_eu, class: "input", placeholder: "Height"
+        .control
+          a.button.is-static.p-none cm
+      .field.has-addons
+        .control
+          = f.text_field :height_us, class: "input", placeholder: "Height"
+        .control
+          a.button.is-static.p-none ft            
+      .field.has-addons
+        .control
+          = f.text_field :weight_eu, class: "input", placeholder: "Weight" 
+        .control
+          a.button.is-static.p-none kg
+      .field.has-addons
+        .control
+          = f.text_field :weight_us, class: "input", placeholder: "Weight" 
+        .control
+          a.button.is-static.p-none lbs
+    hr
+    .grid.grid-6
+      = f.collection_check_boxes(:profiles, Profile.all, :id, :name) do |b|
+        - b.label class:'flex aic'
+          = b.check_box
+          .p-l-sm
+            = b.object.name
+
+    hr
+    / Add new season button Cocoon Gem
+    = f.fields_for :seasons do |ff|
+      .grid.grid-4
+        .select
+          = ff.collection_select :name, ['19-20', '18-19', '17-18'], :to_s, :to_s, {}, class: 'input'
+        / TODO ADD Autocomplete
+        = ff.text_field :country, class: "input", placeholder: "Country"
+        / TODO ADD Autocomplete
+        = ff.text_field :team, class: "input", placeholder: "Team" 
+        .select
+          select.input name="player[available]" id="player_available"
+            option value="1" Disponible
+            option value="0" Sous contrat
+    hr
+    .grid.grid-6
+      / Euros to Dollar convert
+      = f.text_field :agent_us, class: "input", placeholder: "Agent US" 
+      = f.text_field :agent_fr, class: "input", placeholder: "Agent FR" 
+      - salaries = ['< 50k€', '50k€ - 100k€', '100k€ - 150k€', '150k€ - 200k€', '200k€ - 250k€', '250k€ +']
+      .select
+        = f.collection_select :salary_estimation, salaries, :to_s, :to_s, {}, class: 'input'
+      .field.has-addons
+        .control
+          = f.text_field :salary_real, class: "input", placeholder: "Real salary"   
+        .control
+          a.button.is-static.p-none k€
+      .field.has-addons
+        .control
+          input.input placeholder="Or real salary"
+        .control
+          a.button.is-static.p-none k$
+      .select
+        = f.collection_select :priority, ["Priorité", "Short list", "A suivre", "Trop cher", "No way"], :to_s, :to_s, {}, class: 'input'    
+
+    hr
+    = f.fields_for :socials do |ff|
+      = ff.text_field :name, class: "input", placeholder: "Social media. e.g http://twitter.com"
+    hr
+    = f.fields_for :comments do |ff|
+      = ff.text_area :content, class: "textarea", placeholder: "Comments"
+    = f.submit "Ok", class: "button is-primary"
