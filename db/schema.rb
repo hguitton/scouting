@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_28_145029) do
+ActiveRecord::Schema.define(version: 2020_03_30_140631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,12 @@ ActiveRecord::Schema.define(version: 2020_03_28_145029) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["player_id"], name: "index_comments_on_player_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "levels", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "players", force: :cascade do |t|
@@ -38,10 +44,17 @@ ActiveRecord::Schema.define(version: 2020_03_28_145029) do
     t.integer "height_eu"
     t.integer "weight_us"
     t.integer "weight_eu"
-    t.string "salary"
+    t.string "salary_estimation"
     t.boolean "available"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "program"
+    t.string "salary_real"
+    t.string "links"
+    t.bigint "level_id"
+    t.bigint "updated_by_user_id"
+    t.index ["level_id"], name: "index_players_on_level_id"
+    t.index ["updated_by_user_id"], name: "index_players_on_updated_by_user_id"
   end
 
   create_table "players_profiles", id: false, force: :cascade do |t|
@@ -77,6 +90,14 @@ ActiveRecord::Schema.define(version: 2020_03_28_145029) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["player_id"], name: "index_seasons_on_player_id"
     t.index ["user_id"], name: "index_seasons_on_user_id"
+  end
+
+  create_table "socials", force: :cascade do |t|
+    t.string "link"
+    t.bigint "player_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["player_id"], name: "index_socials_on_player_id"
   end
 
   create_table "users", force: :cascade do |t|
