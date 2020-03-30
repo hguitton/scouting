@@ -6,12 +6,12 @@
         - @player.errors.full_messages.each do |message|
           li = message
 
-  = f.input :lastname
-  = f.input :firstname
-  = f.input :birthdate
-  = f.input :height_eu
-  = f.input :weight_eu
-  = f.input :position
-  = f.input :status
-  = f.input :salary
+  = f.input :lastname, class: "input"
+  = f.input :firstname, class: "input"
+  = f.input :birthdate, class: "input"
+  = f.input :height_eu, class: "input"
+  = f.input :weight_eu, class: "input"
+  = f.input :position, class: "input"
+  = f.input :status, class: "input"
+  = f.input :salary, class: "input"
   .actions = f.submit

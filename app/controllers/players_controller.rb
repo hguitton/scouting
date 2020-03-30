@@ -4,6 +4,7 @@ class PlayersController < ApplicationController
   # GET /players
   def index
     @players = Player.all.includes(:comments)
+    @player = Player.new
     respond_to do |format|
       format.html { render :index }
       format.json
@@ -29,7 +30,7 @@ class PlayersController < ApplicationController
 
     respond_to do |format|
       if @player.save
-        format.html { redirect_to @player, notice: 'Player was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Player was successfully created.' }
       else
         format.html { render :new }
       end
@@ -58,7 +59,7 @@ class PlayersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_player
-      @player = Player.find(params[:id])
+      @player = Player.find(params[:id]).decorate
     end
 
     # Only allow a list of trusted parameters through.
