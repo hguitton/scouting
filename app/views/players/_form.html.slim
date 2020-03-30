@@ -1,17 +1,10 @@
 = simple_form_for @player do |f|
-  - if @player.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@player.errors.count, "error")} prohibited this player from being saved:"
-      ul
-        - @player.errors.full_messages.each do |message|
-          li = message
-
-  = f.input :lastname, class: "input"
-  = f.input :firstname, class: "input"
-  = f.input :birthdate, class: "input"
-  = f.input :height_eu, class: "input"
-  = f.input :weight_eu, class: "input"
-  = f.input :position, class: "input"
-  = f.input :status, class: "input"
-  = f.input :salary, class: "input"
-  .actions = f.submit
+  = f.input :lastname, wrapper: false, input_html: { class: "input" }
+  = f.input :firstname, wrapper: false, input_html: { class: "input" }
+  = f.input :birthdate, wrapper: false, input_html: { class: "input" }
+  = f.input :height_eu, wrapper: false, input_html: { class: "input" }
+  = f.input :weight_eu, wrapper: false, input_html: { class: "input" }
+  = f.input :position, wrapper: false, input_html: { class: "input" }
+  = f.input :status, wrapper: false, input_html: { class: "input" }
+  = f.input :salary, wrapper: false, input_html: { class: "input" }
+  = f.submit "Ok", class: "button is-primary"

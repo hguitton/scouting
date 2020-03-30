@@ -28,15 +28,4 @@
           td = player.salary
   br
 
-
-  = simple_form_for @player do |f|
-    = f.input :lastname, wrapper: false, input_html: { class: "input" }
-    = f.input :firstname, wrapper: false, input_html: { class: "input" }
-    = f.input :birthdate, wrapper: false, input_html: { class: "input" }
-    = f.input :height_eu, wrapper: false, input_html: { class: "input" }
-    = f.input :weight_eu, wrapper: false, input_html: { class: "input" }
-    = f.input :position, wrapper: false, input_html: { class: "input" }
-    = f.input :status, wrapper: false, input_html: { class: "input" }
-    = f.input :salary, wrapper: false, input_html: { class: "input" }
-    = f.submit "Ok", class: "button is-primary"
   = link_to 'New Player', new_player_path
