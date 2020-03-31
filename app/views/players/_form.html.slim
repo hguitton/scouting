@@ -1,4 +1,4 @@
-.container.is-fluid
+.container.is-fluid data-controller="hello"
   = form_for @player, wrapper: :test do |f|
     .m-b-md 
       = f.text_field :links, class: "input", placeholder: "Link"
@@ -8,7 +8,7 @@
       // TODO ADD FORMAT
       = f.text_field :birthdate, class: "input", placeholder: "Birthdate"
       // TODO Add Country Select
-      = f.text_field :nationality, class: "input",  placeholder: "Country"
+      = f.text_field :nationality, class: "input",  placeholder: "Country", data: { controller: 'autocomplete', 'autocomplete-resource': 'countries' }
       .select
         = f.collection_select :status, ['JNFL', 'Bosman', 'Cotonou', 'JFL'], :to_s, :to_s, {}, class: 'input'
     hr
@@ -52,9 +52,9 @@
         .select
           = ff.collection_select :name, ['19-20', '18-19', '17-18'], :to_s, :to_s, {}, class: 'input'
         / TODO ADD Autocomplete
-        = ff.text_field :country, class: "input", placeholder: "Country"
+        = ff.text_field :country, class: "input", placeholder: "League", data: { controller: 'autocomplete', 'autocomplete-resource': 'leagues' }
         / TODO ADD Autocomplete
-        = ff.text_field :team, class: "input", placeholder: "Team" 
+        = ff.text_field :team, class: "input", placeholder: "Team", data: { controller: 'autocomplete', 'autocomplete-resource': 'teams' }
         .select
           select.input name="player[available]" id="player_available"
             option value="1" Disponible
@@ -62,8 +62,8 @@
     hr
     .grid.grid-6
       / Euros to Dollar convert
-      = f.text_field :agent_us, class: "input", placeholder: "Agent US" 
-      = f.text_field :agent_fr, class: "input", placeholder: "Agent FR" 
+      = f.text_field :agent_us, class: "input", placeholder: "Agent US", data: { controller: 'autocomplete', 'autocomplete-resource': 'agents' }
+      = f.text_field :agent_fr, class: "input", placeholder: "Agent FR", data: { controller: 'autocomplete', 'autocomplete-resource': 'agents' }
       - salaries = ['< 50k€', '50k€ - 100k€', '100k€ - 150k€', '150k€ - 200k€', '200k€ - 250k€', '250k€ +']
       .select
         = f.collection_select :salary_estimation, salaries, :to_s, :to_s, {}, class: 'input'

@@ -9,3 +9,12 @@ require("@rails/activestorage").start()
 require("channels")
 
 import '../src/application.scss'
+
+import $ from 'jquery'
+import jQuery from 'jquery'
+import { Application } from "stimulus"
+import { definitionsFromContext } from "stimulus/webpack-helpers"
+
+const application = Application.start()
+const context = require.context("./controllers", true, /\.js$/)
+application.load(definitionsFromContext(context))
