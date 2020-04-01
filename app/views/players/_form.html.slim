@@ -12,29 +12,29 @@
       .select
         = f.collection_select :status, ['JNFL', 'Bosman', 'Cotonou', 'JFL'], :to_s, :to_s, {}, class: 'input'
     hr
-    .grid.grid-6
+    .grid.grid-6 data-controller="converter"
       .select
         = f.collection_select :position, ['Point Guard', 'Guard', 'Shooting Guard', 'Small Foward', 'Forward', 'Power Forward', 'Center'], :to_s, :to_s, {}, class: 'input'
       .select
         = f.collection_select :level, ['Jeep Elite', 'NBA', 'Euroleague'], :to_s, :to_s, {}, class: 'input'  
       .field.has-addons
         .control
-          = f.text_field :height_eu, class: "input", placeholder: "Height"
+          = f.number_field :height_eu, class: "input", placeholder: "Height", data: { target: 'converter.heightEu', action: 'keyup->converter#updateHeightUs' }
         .control
           a.button.is-static.p-none cm
       .field.has-addons
         .control
-          = f.text_field :height_us, class: "input", placeholder: "Height"
+          = f.text_field :height_us, class: "input", placeholder: "Height", data: { target: 'converter.heightUs', action: 'keyup->converter#updateHeightEu' }
         .control
           a.button.is-static.p-none ft            
       .field.has-addons
         .control
-          = f.text_field :weight_eu, class: "input", placeholder: "Weight" 
+          = f.number_field :weight_eu, class: "input", placeholder: "Weight", data: { target: 'converter.weightEu', action: 'keyup->converter#updateWeightUs' }
         .control
           a.button.is-static.p-none kg
       .field.has-addons
         .control
-          = f.text_field :weight_us, class: "input", placeholder: "Weight" 
+          = f.number_field :weight_us, class: "input", placeholder: "Weight", data: { target: 'converter.weightUs', action: 'keyup->converter#updateWeightEu' }
         .control
           a.button.is-static.p-none lbs
     hr
@@ -51,9 +51,7 @@
       .grid.grid-4
         .select
           = ff.collection_select :name, ['19-20', '18-19', '17-18'], :to_s, :to_s, {}, class: 'input'
-        / TODO ADD Autocomplete
         = ff.text_field :country, class: "input", placeholder: "League", data: { controller: 'autocomplete', 'autocomplete-resource': 'leagues' }
-        / TODO ADD Autocomplete
         = ff.text_field :team, class: "input", placeholder: "Team", data: { controller: 'autocomplete', 'autocomplete-resource': 'teams' }
         .select
           select.input name="player[available]" id="player_available"
