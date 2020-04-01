@@ -1,0 +1,10 @@
+.nested-fields.grid.grid-season.m-t-md
+  = f.hidden_field :user_id, value: current_user.id
+  .select
+    = f.collection_select :name, list_seasons, :to_s, :to_s, {}, class: 'input'
+  = f.text_field :country, class: "input", placeholder: "League", data: { controller: 'autocomplete', 'autocomplete-resource': 'leagues' }
+  = f.text_field :team, class: "input", placeholder: "Team", data: { controller: 'autocomplete', 'autocomplete-resource': 'teams' }
+  = f.text_field :points, class: "input", placeholder: "Points"
+  = f.text_field :trb, class: "input", placeholder: "Rebounds"
+  = f.text_field :ast, class: "input", placeholder: "Assists"
+  = link_to_remove_association "Remove", f, class: "button is-danger"

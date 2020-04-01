@@ -29,6 +29,8 @@ gem 'draper'
 gem 'devise'
 gem 'simple_form'
 gem 'faker'
+gem 'cocoon'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

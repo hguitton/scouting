@@ -16,7 +16,7 @@
       .select
         = f.collection_select :position, ['Point Guard', 'Guard', 'Shooting Guard', 'Small Foward', 'Forward', 'Power Forward', 'Center'], :to_s, :to_s, {}, class: 'input'
       .select
-        = f.collection_select :level, ['Jeep Elite', 'NBA', 'Euroleague'], :to_s, :to_s, {}, class: 'input'  
+        = f.collection_select :level_id, Level.all, :id, :name, {}, class: 'input'  
       .field.has-addons
         .control
           = f.number_field :height_eu, class: "input", placeholder: "Height", data: { target: 'converter.heightEu', action: 'keyup->converter#updateHeightUs' }
@@ -39,24 +39,17 @@
           a.button.is-static.p-none lbs
     hr
     .grid.grid-6
-      = f.collection_check_boxes(:profiles, Profile.all, :id, :name) do |b|
+      = f.collection_check_boxes(:profile_ids, Profile.all, :id, :name) do |b|
         - b.label class:'flex aic'
           = b.check_box
           .p-l-sm
             = b.object.name
 
     hr
-    / Add new season button Cocoon Gem
-    = f.fields_for :seasons do |ff|
-      .grid.grid-4
-        .select
-          = ff.collection_select :name, ['19-20', '18-19', '17-18'], :to_s, :to_s, {}, class: 'input'
-        = ff.text_field :country, class: "input", placeholder: "League", data: { controller: 'autocomplete', 'autocomplete-resource': 'leagues' }
-        = ff.text_field :team, class: "input", placeholder: "Team", data: { controller: 'autocomplete', 'autocomplete-resource': 'teams' }
-        .select
-          select.input name="player[available]" id="player_available"
-            option value="1" Disponible
-            option value="0" Sous contrat
+    = f.fields_for :seasons do |season|
+      = render 'season_fields', f: season
+    .links
+      = link_to_add_association 'Add season', f, :seasons, class: "button m-t-sm is-small"
     hr
     .grid.grid-6
       / Euros to Dollar convert
@@ -80,8 +73,17 @@
 
     hr
     = f.fields_for :socials do |ff|
-      = ff.text_field :name, class: "input", placeholder: "Social media. e.g http://twitter.com"
+      = render "social_fields", f: ff
+    .links.m-t-sm
+      = link_to_add_association 'Add social', f, :socials, class: "button m-t-sm is-small"
     hr
     = f.fields_for :comments do |ff|
-      = ff.text_area :content, class: "textarea", placeholder: "Comments"
+      .nested-fields
+        = ff.hidden_field :user_id, value: current_user.id
+        = ff.text_area :content, class: "textarea", placeholder: "Comments"
+
+    .select
+      select.input name="player[available]" id="player_available"
+        option value="1" Disponible
+        option value="0" Sous contrat
     = f.submit "Ok", class: "button is-primary"

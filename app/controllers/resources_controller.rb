@@ -12,15 +12,17 @@ class ResourcesController < ApplicationController
   end
   
   def leagues
-    render json: leagues_list
+    custom_leagues = Season.all.pluck(:country).uniq
+    render json: (leagues_list + custom_leagues).uniq
   end
 
   def teams
+    custom_teams = Season.all.pluck(:team).uniq
     teams = []
     10.times do
       teams << Faker::Sports::Basketball.team
     end
-    render json: teams.uniq
+    render json: (teams + custom_teams).uniq
   end
 
   private

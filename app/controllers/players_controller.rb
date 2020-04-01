@@ -1,6 +1,6 @@
 class PlayersController < ApplicationController
   before_action :set_player, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /players
   def index
     @players = Player.all.includes(:comments)
@@ -18,6 +18,9 @@ class PlayersController < ApplicationController
   # GET /players/new
   def new
     @player = Player.new
+    @player.seasons.build
+    @player.comments.build
+    @player.socials.build
   end
 
   # GET /players/1/edit
@@ -65,14 +68,28 @@ class PlayersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def player_params
       params.require(:player).permit(
+        :links,
         :lastname,
         :firstname,
         :birthdate,
-        :height_eu,
-        :weight_eu,
-        :position,
+        :nationality,
         :status,
-        :salary
+        :position,
+        :level_id,
+        :height_eu,
+        :height_us,
+        :weight_eu,
+        :weight_us,
+        :available,
+        :agent_us,
+        :agent_fr,
+        :salary_estimation,
+        :salary_real,
+        :priority,
+        profile_ids: [],
+        seasons_attributes: [:id, :user_id, :name, :country, :team, :points, :trb, :ast, :_destroy],
+        comments_attributes: [:id, :user_id, :content],
+        socials_attributes: [:id, :link]
       )
     end
 end

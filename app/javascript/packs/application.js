@@ -8,10 +8,9 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
-import '../src/application.scss'
 
-import $ from 'jquery'
-import jQuery from 'jquery'
+import '../src/application.scss'
+import 'cocoon-js';
 import { Application } from "stimulus"
 import { definitionsFromContext } from "stimulus/webpack-helpers"
 
