@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = ["heightUs", "heightEu", "weightUs", "weightEu"]
+  static targets = ["heightUs", "heightEu", "weightUs", "weightEu", "salaryEuro", "salaryDollar"]
 
   updateHeightUs(e){
     this.heightUsTarget.value = this.toFeet(parseInt(this.heightEuTarget.value))
@@ -15,6 +15,14 @@ export default class extends Controller {
   }
   updateWeightEu(e){
     this.weightEuTarget.value = this.toKg(this.weightUsTarget.value)
+  }
+
+  updateSalaryEuro(n){
+    console.log(n)
+    this.salaryEuroTarget.value = this.toEuro(this.salaryDollarTarget.value)
+  }
+  updateSalaryDollar(n){
+    this.salaryDollarTarget.value = this.toDollar(this.salaryEuroTarget.value)
   }
 
   toFeet(n) {
@@ -45,5 +53,13 @@ export default class extends Controller {
   
   toKg(n){
     return Math.round(n * 0.453592)
+  }
+
+  toEuro(n){
+    return Math.round(n * 0.90)
+  }
+  
+  toDollar(n){
+    return Math.round(n * 1.10)
   }
 }

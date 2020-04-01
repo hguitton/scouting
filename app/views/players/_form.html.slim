@@ -1,4 +1,4 @@
-.container.is-fluid data-controller="hello"
+.container.is-fluid data-controller="converter"
   = form_for @player, wrapper: :test do |f|
     .m-b-md 
       = f.text_field :links, class: "input", placeholder: "Link"
@@ -12,7 +12,7 @@
       .select
         = f.collection_select :status, ['JNFL', 'Bosman', 'Cotonou', 'JFL'], :to_s, :to_s, {}, class: 'input'
     hr
-    .grid.grid-6 data-controller="converter"
+    .grid.grid-6
       .select
         = f.collection_select :position, ['Point Guard', 'Guard', 'Shooting Guard', 'Small Foward', 'Forward', 'Power Forward', 'Center'], :to_s, :to_s, {}, class: 'input'
       .select
@@ -67,16 +67,16 @@
         = f.collection_select :salary_estimation, salaries, :to_s, :to_s, {}, class: 'input'
       .field.has-addons
         .control
-          = f.text_field :salary_real, class: "input", placeholder: "Real salary"   
+          = f.number_field :salary_real, class: "input", placeholder: "Real salary", data: { target: 'converter.salaryEuro', action: 'keyup->converter#updateSalaryDollar' }
         .control
           a.button.is-static.p-none k€
       .field.has-addons
         .control
-          input.input placeholder="Or real salary"
+          input.input type="number" placeholder="Or real salary" data-target='converter.salaryDollar' data-action='keyup->converter#updateSalaryEuro'
         .control
           a.button.is-static.p-none k$
       .select
-        = f.collection_select :priority, ["Priorité", "Short list", "A suivre", "Trop cher", "No way"], :to_s, :to_s, {}, class: 'input'    
+        = f.collection_select :priority, ["Short list", "A suivre", "Trop cher", "No way"], :to_s, :to_s, {}, class: 'input'    
 
     hr
     = f.fields_for :socials do |ff|
