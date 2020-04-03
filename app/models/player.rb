@@ -7,4 +7,6 @@ class Player < ApplicationRecord
   accepts_nested_attributes_for :socials
   has_many :comments
   accepts_nested_attributes_for :comments
+
+  validates :lastname, :firstname, :status, :nationality, presence: true
 end

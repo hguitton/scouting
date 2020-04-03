@@ -8,7 +8,7 @@
       // TODO ADD FORMAT
       = f.text_field :birthdate, class: "input", placeholder: "Birthdate"
       // TODO Add Country Select
-      = f.text_field :nationality, class: "input",  placeholder: "Country", data: { controller: 'autocomplete', 'autocomplete-resource': 'countries' }
+      = f.text_field :nationality, class: "input",  placeholder: "Nationality", data: { controller: 'autocomplete', 'autocomplete-resource': 'countries' }
       .select
         = f.collection_select :status, ['JNFL', 'Bosman', 'Cotonou', 'JFL'], :to_s, :to_s, {}, class: 'input'
     hr

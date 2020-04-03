@@ -1,6 +1,7 @@
 class PlayersController < ApplicationController
   before_action :set_player, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  
   # GET /players
   def index
     @players = Player.all.includes(:comments)
@@ -30,12 +31,14 @@ class PlayersController < ApplicationController
   # POST /players
   def create
     @player = Player.new(player_params)
-
     respond_to do |format|
       if @player.save
-        format.html { redirect_to root_path, notice: 'Player was successfully created.' }
+        format.html { redirect_to players_path, notice: 'Player was successfully created.' }
       else
-        format.html { render :new }
+        format.html { 
+            flash[:alert] = @player.errors.full_messages.join(", ")
+            render :new
+          }
       end
     end
   end
@@ -46,7 +49,10 @@ class PlayersController < ApplicationController
       if @player.update(player_params)
         format.html { redirect_to @player, notice: 'Player was successfully updated.' }
       else
-        format.html { render :edit }
+        format.html { 
+          flash[:alert] = @player.errors.full_messages.join(", ")
+          render :edit 
+        }
       end
     end
   end
@@ -86,6 +92,7 @@ class PlayersController < ApplicationController
         :salary_estimation,
         :salary_real,
         :priority,
+        :program,
         profile_ids: [],
         seasons_attributes: [:id, :user_id, :name, :country, :team, :points, :trb, :ast, :_destroy],
         comments_attributes: [:id, :user_id, :content],
