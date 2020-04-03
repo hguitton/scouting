@@ -28,6 +28,8 @@ gem 'colorize'
 gem 'draper'
 gem 'devise'
 gem 'simple_form'
+gem 'faker'
+gem 'cocoon'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -50,11 +52,13 @@ group :development do
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-  # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
+  gem 'rspec-rails', '4.0.0.beta3'
+  gem 'database_cleaner'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'guard-rspec', '~> 4.7'
+  gem 'shoulda-matchers'
+  gem 'capybara'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

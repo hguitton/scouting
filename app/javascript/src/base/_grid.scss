@@ -1,0 +1,29 @@
+.grid {
+  display: grid;
+  grid-column-gap: 2rem;
+  grid-row-gap: 2rem;
+}
+
+.grid-2 {
+  grid-template-columns:repeat(2, 1fr);
+}
+.grid-3 {
+  grid-template-columns:repeat(3, 1fr);
+}
+.grid-4 {
+  grid-template-columns:repeat(4, 1fr);
+}
+.grid-5 {
+  grid-template-columns:repeat(5, 1fr);
+}
+.grid-6 {
+  grid-template-columns:repeat(6, 1fr);
+}
+.grid-7 {
+  grid-template-columns:repeat(7, 1fr);
+}
+
+
+.grid-season {
+  grid-template-columns: 4fr 4fr 4fr 2fr 2fr 2fr 1fr;
+}

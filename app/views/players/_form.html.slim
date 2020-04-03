@@ -1,17 +1,89 @@
-= simple_form_for @player do |f|
-  - if @player.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@player.errors.count, "error")} prohibited this player from being saved:"
-      ul
-        - @player.errors.full_messages.each do |message|
-          li = message
+.container.is-fluid data-controller="converter"
+  = form_for @player, wrapper: :test do |f|
+    .m-b-md 
+      = f.text_field :links, class: "input", placeholder: "Link"
+    .grid.grid-5
+      = f.text_field :lastname, class: "input", placeholder: "Lastname"
+      = f.text_field :firstname, class: "input", placeholder: "Firstname"
+      // TODO ADD FORMAT
+      = f.text_field :birthdate, class: "input", placeholder: "Birthdate"
+      // TODO Add Country Select
+      = f.text_field :nationality, class: "input",  placeholder: "Nationality", data: { controller: 'autocomplete', 'autocomplete-resource': 'countries' }
+      .select
+        = f.collection_select :status, ['JNFL', 'Bosman', 'Cotonou', 'JFL'], :to_s, :to_s, {}, class: 'input'
+    hr
+    .grid.grid-6
+      .select
+        = f.collection_select :position, ['Point Guard', 'Guard', 'Shooting Guard', 'Small Foward', 'Forward', 'Power Forward', 'Center'], :to_s, :to_s, {}, class: 'input'
+      .select
+        = f.collection_select :level_id, Level.all, :id, :name, {}, class: 'input'  
+      .field.has-addons
+        .control
+          = f.number_field :height_eu, class: "input", placeholder: "Height", data: { target: 'converter.heightEu', action: 'keyup->converter#updateHeightUs' }
+        .control
+          a.button.is-static.p-none cm
+      .field.has-addons
+        .control
+          = f.text_field :height_us, class: "input", placeholder: "Height", data: { target: 'converter.heightUs', action: 'keyup->converter#updateHeightEu' }
+        .control
+          a.button.is-static.p-none ft            
+      .field.has-addons
+        .control
+          = f.number_field :weight_eu, class: "input", placeholder: "Weight", data: { target: 'converter.weightEu', action: 'keyup->converter#updateWeightUs' }
+        .control
+          a.button.is-static.p-none kg
+      .field.has-addons
+        .control
+          = f.number_field :weight_us, class: "input", placeholder: "Weight", data: { target: 'converter.weightUs', action: 'keyup->converter#updateWeightEu' }
+        .control
+          a.button.is-static.p-none lbs
+    hr
+    .grid.grid-6
+      = f.collection_check_boxes(:profile_ids, Profile.all, :id, :name) do |b|
+        - b.label class:'flex aic'
+          = b.check_box
+          .p-l-sm
+            = b.object.name
 
-  = f.input :lastname, class: "input"
-  = f.input :firstname, class: "input"
-  = f.input :birthdate, class: "input"
-  = f.input :height_eu, class: "input"
-  = f.input :weight_eu, class: "input"
-  = f.input :position, class: "input"
-  = f.input :status, class: "input"
-  = f.input :salary, class: "input"
-  .actions = f.submit
+    hr
+    = f.fields_for :seasons do |season|
+      = render 'season_fields', f: season
+    .links
+      = link_to_add_association 'Add season', f, :seasons, class: "button m-t-sm is-small"
+    hr
+    .grid.grid-6
+      / Euros to Dollar convert
+      = f.text_field :agent_us, class: "input", placeholder: "Agent US", data: { controller: 'autocomplete', 'autocomplete-resource': 'agents' }
+      = f.text_field :agent_fr, class: "input", placeholder: "Agent FR", data: { controller: 'autocomplete', 'autocomplete-resource': 'agents' }
+      - salaries = ['< 50k€', '50k€ - 100k€', '100k€ - 150k€', '150k€ - 200k€', '200k€ - 250k€', '250k€ +']
+      .select
+        = f.collection_select :salary_estimation, salaries, :to_s, :to_s, {}, class: 'input'
+      .field.has-addons
+        .control
+          = f.number_field :salary_real, class: "input", placeholder: "Real salary", data: { target: 'converter.salaryEuro', action: 'keyup->converter#updateSalaryDollar' }
+        .control
+          a.button.is-static.p-none k€
+      .field.has-addons
+        .control
+          input.input type="number" placeholder="Or real salary" data-target='converter.salaryDollar' data-action='keyup->converter#updateSalaryEuro'
+        .control
+          a.button.is-static.p-none k$
+      .select
+        = f.collection_select :priority, ["Short list", "A suivre", "Trop cher", "No way"], :to_s, :to_s, {}, class: 'input'    
+
+    hr
+    = f.fields_for :socials do |ff|
+      = render "social_fields", f: ff
+    .links.m-t-sm
+      = link_to_add_association 'Add social', f, :socials, class: "button m-t-sm is-small"
+    hr
+    = f.fields_for :comments do |ff|
+      .nested-fields
+        = ff.hidden_field :user_id, value: current_user.id
+        = ff.text_area :content, class: "textarea", placeholder: "Comments"
+
+    .select
+      select.input name="player[available]" id="player_available"
+        option value="1" Disponible
+        option value="0" Sous contrat
+    = f.submit "Ok", class: "button is-primary"
