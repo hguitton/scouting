@@ -25,6 +25,10 @@ class ResourcesController < ApplicationController
     render json: (teams + custom_teams).uniq
   end
 
+  def player_informations
+    @player = PlayerInfos.new("https://basketball.eurobasket.com/player/Nicolas-de-Jong/France/Elan-Bearnais-Pau-Lacq-Orthez/144216")
+  end
+
   private
   def force_json
     request.format = :json
