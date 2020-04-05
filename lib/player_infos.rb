@@ -1,17 +1,19 @@
 require 'open-uri'
+require 'uri'
 
 class PlayerInfos
   include ApplicationHelper
   attr_accessor :infos
 
   def initialize(url)
-    @url = url
     @infos = {}
-    @doc = Nokogiri::HTML(open(url))
-    @doc.css('#teamlogo div>div>div b').each do |row|
-      scrape_row(row)
+    if url =~ URI::regexp
+      doc = Nokogiri::HTML(open(url))
+      doc.css('#teamlogo div>div>div b').each do |row|
+        scrape_row(row)
+      end
+      @infos[:name] = scrape_name(doc.css('.playertitle'))
     end
-    @infos[:name] = scrape_name(@doc.css('.playertitle'))
   end
 
   private
@@ -22,7 +24,7 @@ class PlayerInfos
     when 'weight'
       @infos[:weight] = scrape_numbers(text_content(row))
     when 'born'
-      @infos[:born] = scrape_birthdate(text_content(row))
+      @infos[:birthdate] = scrape_birthdate(text_content(row))
     when 'nationality'
       @infos[:nationality] = scrape_nationality(text_content(row))
     when 'college'
@@ -51,7 +53,7 @@ class PlayerInfos
 
   def scrape_nationality(content)
     nationality = content.strip.split('-').first
-    countries.each do |c|
+    countries_list.each do |c|
       return c["name"] if c["nationalities"].include? nationality
     end
     return ""

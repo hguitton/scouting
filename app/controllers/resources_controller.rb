@@ -1,5 +1,6 @@
 class ResourcesController < ApplicationController
   before_action :force_json
+  include ApplicationHelper
 
   def agents
     agents_us = Player.where.not(agent_us: ['', nil]).pluck(:agent_us).uniq
@@ -8,7 +9,7 @@ class ResourcesController < ApplicationController
   end
 
   def countries
-    render json: countries_list
+    render json: countries_list.map { |h| h["name"] }
   end
   
   def leagues
@@ -26,7 +27,8 @@ class ResourcesController < ApplicationController
   end
 
   def player_informations
-    @player = PlayerInfos.new("https://basketball.eurobasket.com/player/Nicolas-de-Jong/France/Elan-Bearnais-Pau-Lacq-Orthez/144216")
+    @player = PlayerInfos.new(params[:url])
+    render json: @player
   end
 
   private
@@ -133,9 +135,5 @@ class ResourcesController < ApplicationController
       "Puerto Rican BSN",
       "South Korean KBL",
       "Venezuelan LPB" ]
-  end
-
-  def countries_list
-    countries.map { |h| h["name"] }
   end
 end

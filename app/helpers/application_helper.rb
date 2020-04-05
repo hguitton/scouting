@@ -10,7 +10,7 @@ module ApplicationHelper
     array.map{|e| "#{e[0]} - #{e[1]}"}
   end
 
-  def countries
+  def countries_list
     YAML.load_file("#{Rails.root.to_s}/config/data/countries.yml")["countries"]
   end
 end
