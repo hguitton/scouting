@@ -136,6 +136,6 @@ class ResourcesController < ApplicationController
   end
 
   def countries_list
-    YAML.load_file("#{Rails.root.to_s}/config/data/countries.yml")["countries"].map { |h| h["name"] }
+    countries.map { |h| h["name"] }
   end
 end

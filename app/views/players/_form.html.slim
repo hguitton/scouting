@@ -3,14 +3,17 @@
     .m-b-md 
       = f.text_field :links, class: "input", placeholder: "Link"
     .grid.grid-5
-      = f.text_field :lastname, class: "input", placeholder: "Lastname"
-      = f.text_field :firstname, class: "input", placeholder: "Firstname"
+      = f.text_field :name, class: "input", placeholder: "Name"
       // TODO ADD FORMAT
       = f.text_field :birthdate, class: "input", placeholder: "Birthdate"
       // TODO Add Country Select
       = f.text_field :nationality, class: "input",  placeholder: "Nationality", data: { controller: 'autocomplete', 'autocomplete-resource': 'countries' }
       .select
         = f.collection_select :status, ['JNFL', 'Bosman', 'Cotonou', 'JFL'], :to_s, :to_s, {}, class: 'input'
+      .select
+        select.input name="player[available]" id="player_available"
+          option value="1" Disponible
+          option value="0" Sous contrat
     hr
     .grid.grid-6
       .select
@@ -51,8 +54,8 @@
     .links
       = link_to_add_association 'Add season', f, :seasons, class: "button m-t-sm is-small"
     hr
-    .grid.grid-6
-      / Euros to Dollar convert
+    .grid.grid-7
+      = f.text_field :program, class: "input", placeholder: "College"
       = f.text_field :agent_us, class: "input", placeholder: "Agent US", data: { controller: 'autocomplete', 'autocomplete-resource': 'agents' }
       = f.text_field :agent_fr, class: "input", placeholder: "Agent FR", data: { controller: 'autocomplete', 'autocomplete-resource': 'agents' }
       - salaries = ['< 50k€', '50k€ - 100k€', '100k€ - 150k€', '150k€ - 200k€', '200k€ - 250k€', '250k€ +']
@@ -81,9 +84,4 @@
       .nested-fields
         = ff.hidden_field :user_id, value: current_user.id
         = ff.text_area :content, class: "textarea", placeholder: "Comments"
-
-    .select
-      select.input name="player[available]" id="player_available"
-        option value="1" Disponible
-        option value="0" Sous contrat
     = f.submit "Ok", class: "button is-primary"
