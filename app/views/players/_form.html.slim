@@ -1,25 +1,26 @@
-.container.is-fluid data-controller="converter"
+.container.is-fluid data-controller="converter scraper"
   = form_for @player, wrapper: :test do |f|
     .m-b-md 
-      = f.text_field :links, class: "input", placeholder: "Link"
+      = f.text_field :links, class: "input", placeholder: "Link", data: { action: 'change->scraper#getInfos' }
     .grid.grid-5
-      = f.text_field :lastname, class: "input", placeholder: "Lastname"
-      = f.text_field :firstname, class: "input", placeholder: "Firstname"
+      = f.text_field :name, class: "input", placeholder: "Name",  data: { target: 'scraper.name' }
       // TODO ADD FORMAT
-      = f.text_field :birthdate, class: "input", placeholder: "Birthdate"
+      = f.text_field :birthdate, class: "input", placeholder: "Birthdate",  data: { target: 'scraper.birthdate' }
       // TODO Add Country Select
-      = f.text_field :nationality, class: "input",  placeholder: "Nationality", data: { controller: 'autocomplete', 'autocomplete-resource': 'countries' }
+      = f.text_field :nationality, class: "input",  placeholder: "Nationality", data: { controller: 'autocomplete', 'autocomplete-resource': 'countries', target: 'scraper.nationality' }
       .select
         = f.collection_select :status, ['JNFL', 'Bosman', 'Cotonou', 'JFL'], :to_s, :to_s, {}, class: 'input'
+      .select
+        select.input name="player[available]" id="player_available"
+          option value="1" Disponible
+          option value="0" Sous contrat
     hr
     .grid.grid-6
       .select
-        = f.collection_select :position, ['Point Guard', 'Guard', 'Shooting Guard', 'Small Foward', 'Forward', 'Power Forward', 'Center'], :to_s, :to_s, {}, class: 'input'
-      .select
-        = f.collection_select :level_id, Level.all, :id, :name, {}, class: 'input'  
+        = f.collection_select :position, ['Point Guard', 'Guard', 'Shooting Guard', 'Small Foward', 'Forward', 'Power Forward', 'Center'], :to_s, :to_s, {}, class: 'input', data: { target: 'scraper.position' }
       .field.has-addons
         .control
-          = f.number_field :height_eu, class: "input", placeholder: "Height", data: { target: 'converter.heightEu', action: 'keyup->converter#updateHeightUs' }
+          = f.number_field :height_eu, class: "input", placeholder: "Height", data: { target: 'converter.heightEu scraper.height', action: 'keyup->converter#updateHeightUs' }
         .control
           a.button.is-static.p-none cm
       .field.has-addons
@@ -29,7 +30,7 @@
           a.button.is-static.p-none ft            
       .field.has-addons
         .control
-          = f.number_field :weight_eu, class: "input", placeholder: "Weight", data: { target: 'converter.weightEu', action: 'keyup->converter#updateWeightUs' }
+          = f.number_field :weight_eu, class: "input", placeholder: "Weight", data: { target: 'converter.weightEu scraper.weight', action: 'keyup->converter#updateWeightUs' }
         .control
           a.button.is-static.p-none kg
       .field.has-addons
@@ -37,6 +38,8 @@
           = f.number_field :weight_us, class: "input", placeholder: "Weight", data: { target: 'converter.weightUs', action: 'keyup->converter#updateWeightEu' }
         .control
           a.button.is-static.p-none lbs
+      .select
+        = f.collection_select :level_id, Level.all, :id, :name, {}, class: 'input'  
     hr
     .grid.grid-6
       = f.collection_check_boxes(:profile_ids, Profile.all, :id, :name) do |b|
@@ -51,8 +54,8 @@
     .links
       = link_to_add_association 'Add season', f, :seasons, class: "button m-t-sm is-small"
     hr
-    .grid.grid-6
-      / Euros to Dollar convert
+    .grid.grid-7
+      = f.text_field :program, class: "input", placeholder: "College", data: { target: 'scraper.college' }
       = f.text_field :agent_us, class: "input", placeholder: "Agent US", data: { controller: 'autocomplete', 'autocomplete-resource': 'agents' }
       = f.text_field :agent_fr, class: "input", placeholder: "Agent FR", data: { controller: 'autocomplete', 'autocomplete-resource': 'agents' }
       - salaries = ['< 50k€', '50k€ - 100k€', '100k€ - 150k€', '150k€ - 200k€', '200k€ - 250k€', '250k€ +']
@@ -81,9 +84,4 @@
       .nested-fields
         = ff.hidden_field :user_id, value: current_user.id
         = ff.text_area :content, class: "textarea", placeholder: "Comments"
-
-    .select
-      select.input name="player[available]" id="player_available"
-        option value="1" Disponible
-        option value="0" Sous contrat
     = f.submit "Ok", class: "button is-primary"

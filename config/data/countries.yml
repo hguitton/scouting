@@ -1,0 +1,355 @@
+countries: 
+  - name: "Andorre"
+    nationalities: ["Andorran"]
+  - name: "Émirats arabes unis"
+    nationalities: ["Emirian", "Emirati"]
+  - name: "Afghanistan"
+    nationalities: ["Afghani", "Afghan"]
+  - name: "Albanie"
+    nationalities: ["Albanian", "Alabanian"]
+  - name: "Arménie"
+    nationalities: ["Armenian", "Hayastani"]
+  - name: "Angola"
+    nationalities: ["Angolan"]
+  - name: "Argentine"
+    nationalities: ["Argentine", "Argentinian", "Argentinean "]
+  - name: "Autriche"
+    nationalities: ["Austrian"]
+  - name: "Australie"
+    nationalities: ["Australian"]
+  - name: "Azerbaidjan"
+    nationalities: ["Azerbaijani"]
+  - name: "Bosnie-Herzégovine"
+    nationalities: ["Bosnian", "Herzegovinian"]
+  - name: "Bangladesh"
+    nationalities: ["Bangladeshi"]
+  - name: "Belgique"
+    nationalities: ["Belgian"]
+  - name: "Burkina Faso"
+    nationalities: ["Burkinabe"]
+  - name: "Bulgarie"
+    nationalities: ["Bulgarian"]
+  - name: "Burundi"
+    nationalities: ["Burundian"]
+  - name: "Benin"
+    nationalities: ["Beninese"]
+  - name: "Bermudes"
+    nationalities: ["Bermudan"]
+  - name: "Bolivie"
+    nationalities: ["Bolivian"]
+  - name: "Brésil"
+    nationalities: ["Brazilian"]
+  - name: "Bahamas"
+    nationalities: ["Bahameese", "Bahamian"]
+  - name: "Botswana"
+    nationalities: ["Motswana", "Batswana"]
+  - name: "Bélarus"
+    nationalities: ["Belarusian"]
+  - name: "Belize"
+    nationalities: ["Belizean"]
+  - name: "Canada"
+    nationalities: ["Canadian"]
+  - name: "Congo (Rep. dém.)"
+    nationalities: ["Congolese"]
+  - name: "Rép. centrafricaine"
+    nationalities: ["Central African"]
+  - name: "Suisse"
+    nationalities: ["Swiss"]
+  - name: "Côte d'Ivoire"
+    nationalities: ["Ivorian"]
+  - name: "Chili"
+    nationalities: ["Chilean"]
+  - name: "Cameroun"
+    nationalities: ["Cameroonian"]
+  - name: "Chine"
+    nationalities: ["Chinese"]
+  - name: "Colombie"
+    nationalities: ["Colombian", "Columbian"]
+  - name: "Costa Rica"
+    nationalities: ["Costa Rican"]
+  - name: "Cuba"
+    nationalities: ["Cuban"]
+  - name: "Cap-Vert"
+    nationalities: ["Cape Verdean"]
+  - name: "Chypre"
+    nationalities: ["Cypriot"]
+  - name: "Republique tchèque"
+    nationalities: ["Czech"]
+  - name: "Allemagne"
+    nationalities: ["German"]
+  - name: "Djibouti"
+    nationalities: ["Djiboutian"]
+  - name: "Danemark"
+    nationalities: ["Danish", "Dane"]
+  - name: "République dominicaine"
+    nationalities: ["Dominican"]
+  - name: "Algerie"
+    nationalities: ["Algerian"]
+  - name: "Équateur"
+    nationalities: ["Ecuadorean", "Ecudorean"]
+  - name: "Estonie"
+    nationalities: ["Estonian"]
+  - name: "Égypte"
+    nationalities: ["Egyptian"]
+  - name: "Espagne"
+    nationalities: ["Spanish"]
+  - name: "Éthiopie"
+    nationalities: ["Ethiopian"]
+  - name: "Finlande"
+    nationalities: ["Finnish"]
+  - name: "Fiji"
+    nationalities: ["Fijian"]
+  - name: "Faroe Islands"
+    nationalities: ["Faroese"]
+  - name: "France"
+    nationalities: ["French"]
+  - name: "Gabon"
+    nationalities: ["Gabonese"]
+  - name: "Royaume-Uni - UK"
+    nationalities: ["British", "Scottish"]
+  - name: "Grenade"
+    nationalities: ["Grenadian"]
+  - name: "Géorgie"
+    nationalities: ["Georgian"]
+  - name: "Ghana"
+    nationalities: ["Ghanaian", "Ghanian"]
+  - name: "Gibraltar"
+    nationalities: ["Gibraltarian"]
+  - name: "Gambie"
+    nationalities: ["Gambian"]
+  - name: "Guinée"
+    nationalities: ["Guinean"]
+  - name: "Guinée équat."
+    nationalities: ["Equatorial Guinean", "Equatoguinean"]
+  - name: "Grèce"
+    nationalities: ["Greek"]
+  - name: "Guatemala"
+    nationalities: ["Guatemalan"]
+  - name: "Guam"
+    nationalities: ["Guamanian"]
+  - name: "Guyane"
+    nationalities: ["Guyanese"]
+  - name: "Hong Kong"
+    nationalities: ["Hong Konger"]
+  - name: "Honduras"
+    nationalities: ["Honduran"]
+  - name: "Croatie"
+    nationalities: ["Croatian", "Croat"]
+  - name: "Haiti"
+    nationalities: ["Haitian"]
+  - name: "Hongrie"
+    nationalities: ["Hungarian"]
+  - name: "Indonésie"
+    nationalities: ["Indonesian"]
+  - name: "Irland"
+    nationalities: ["Irish"]
+  - name: "Israel"
+    nationalities: ["Israeli"]
+  - name: "Inde"
+    nationalities: ["Indian"]
+  - name: "Iraq"
+    nationalities: ["Iraqi"]
+  - name: "Iran"
+    nationalities: ["Iranian"]
+  - name: "Islande"
+    nationalities: ["Icelander", "Icelandic"]
+  - name: "Italie"
+    nationalities: ["Italian"]
+  - name: "Jamaique"
+    nationalities: ["Jamaican"]
+  - name: "Jordanie"
+    nationalities: ["Jordanian"]
+  - name: "Japon"
+    nationalities: ["Japanese"]
+  - name: "Kenya"
+    nationalities: ["Kenyan"]
+  - name: "Cambodge"
+    nationalities: ["Cambodian"]
+  - name: "Comores"
+    nationalities: ["Comoran"]
+  - name: "Corée du Nord"
+    nationalities: ["North Korean"]
+  - name: "Corée du Sud"
+    nationalities: ["South Korean"]
+  - name: "Koweit"
+    nationalities: ["Kuwaiti"]
+  - name: "Kazakhstan"
+    nationalities: ["Kazakhstani", "Kazakh"]
+  - name: "Laos"
+    nationalities: ["Laotian"]
+  - name: "Liban"
+    nationalities: ["Lebanese"]
+  - name: "Liechtenstein"
+    nationalities: ["Liechtensteiner"]
+  - name: "Sri Lanka"
+    nationalities: ["Sri Lankan"]
+  - name: "Libéria"
+    nationalities: ["Liberian"]
+  - name: "Lituanie"
+    nationalities: ["Lithunian"]
+  - name: "Luxembourg"
+    nationalities: ["Luxembourger"]
+  - name: "Lettonie"
+    nationalities: ["Latvian"]
+  - name: "Libye"
+    nationalities: ["Libyan"]
+  - name: "Maroc"
+    nationalities: ["Moroccan"]
+  - name: "Monaco"
+    nationalities: ["Monacan"]
+  - name: "Moldavie"
+    nationalities: ["Moldovan"]
+  - name: "Montenegro"
+    nationalities: ["Montenegrin"]
+  - name: "Madagascar"
+    nationalities: ["Malagasy"]
+  - name: "Macédoine"
+    nationalities: ["Macedonian"]
+  - name: "Mali"
+    nationalities: ["Malian"]
+  - name: "Mongolie"
+    nationalities: ["Mongolian"]
+  - name: "Macau"
+    nationalities: ["Macanese"]
+  - name: "Martinique"
+    nationalities: ["Martinican", "Martiniquaís"]
+  - name: "Mauritanie"
+    nationalities: ["Mauritanian"]
+  - name: "Malte"
+    nationalities: ["Maltese"]
+  - name: "Maurice"
+    nationalities: ["Mauritian"]
+  - name: "Maldives"
+    nationalities: ["Maldivan"]
+  - name: "Malawi"
+    nationalities: ["Malawian"]
+  - name: "Mexique"
+    nationalities: ["Mexican"]
+  - name: "Malaisie"
+    nationalities: ["Malaysian"]
+  - name: "Mozambique"
+    nationalities: ["Mozambican"]
+  - name: "Namibie"
+    nationalities: ["Namibian"]
+  - name: "Nouvelle-Calédonie"
+    nationalities: ["New Caledonian", "New Caledonians"]
+  - name: "Niger"
+    nationalities: ["Nigerien"]
+  - name: "Nigéria"
+    nationalities: ["Nigerian"]
+  - name: "Nicaragua"
+    nationalities: ["Nicaraguan", "Nicoya"]
+  - name: "Pays-bas"
+    nationalities: ["Dutch"]
+  - name: "Norvège"
+    nationalities: ["Norwegian"]
+  - name: "Népal"
+    nationalities: ["Nepalese"]
+  - name: "Nauru"
+    nationalities: ["Nauruan"]
+  - name: "Niue"
+    nationalities: ["Niuean"]
+  - name: "Nouvelle-Zélande"
+    nationalities: ["New Zealander"]
+  - name: "Panama"
+    nationalities: ["Panamanian"]
+  - name: "Pérou"
+    nationalities: ["Peruvian"]
+  - name: "Philippines"
+    nationalities: ["Filipino"]
+  - name: "Pakistan"
+    nationalities: ["Pakistani"]
+  - name: "Pologne"
+    nationalities: ["Polish", "Pole"]
+  - name: "Porto Rico"
+    nationalities: ["Puerto Rican"]
+  - name: "Palestine"
+    nationalities: ["Palestinian"]
+  - name: "Portugal"
+    nationalities: ["Portuguese", "Portugese"]
+  - name: "Palaos"
+    nationalities: ["Palauan"]
+  - name: "Paraguay"
+    nationalities: ["Paraguayan"]
+  - name: "Qatar"
+    nationalities: ["Qatari"]
+  - name: "Roumanie"
+    nationalities: ["Romanian"]
+  - name: "Serbie"
+    nationalities: ["Serbian", "Serb"]
+  - name: "Russie"
+    nationalities: ["Russian"]
+  - name: "Rwanda"
+    nationalities: ["Rwandan", "Rwandese"]
+  - name: "Arabie saoudite"
+    nationalities: ["Saudi Arabian", "Saudi"]
+  - name: "Seychelles"
+    nationalities: ["Seychellois"]
+  - name: "Soudan"
+    nationalities: ["Sudanese"]
+  - name: "Suède"
+    nationalities: ["Swedish", "Swede"]
+  - name: "Singapour"
+    nationalities: ["Singaporean"]
+  - name: "Slovenie"
+    nationalities: ["Slovenian", "Slovene"]
+  - name: "Slovaquie"
+    nationalities: ["Slovakian", "Slovak"]
+  - name: "Sénégal"
+    nationalities: ["Senegalese"]
+  - name: "Somalie"
+    nationalities: ["Somali"]
+  - name: "Suriname"
+    nationalities: ["Surinamer", "Surinamese"]
+  - name: "Salvador"
+    nationalities: ["Salvadorean", "Salvadoran"]
+  - name: "Syrie"
+    nationalities: ["Syrian"]
+  - name: "Tchad"
+    nationalities: ["Chadian"]
+  - name: "Togo"
+    nationalities: ["Togolese"]
+  - name: "Thailande"
+    nationalities: ["Thai"]
+  - name: "Tajikistan"
+    nationalities: ["Tajikistani"]
+  - name: "Turkménistan"
+    nationalities: ["Turkmen"]
+  - name: "Tunisie"
+    nationalities: ["Tunisian"]
+  - name: "Tonga"
+    nationalities: ["Tongan"]
+  - name: "Turquie"
+    nationalities: ["Turkish", "Turk"]
+  - name: "Trinité-et-Tobago"
+    nationalities: ["Trinidadian", "Tobagonian"]
+  - name: "Tuvalu"
+    nationalities: ["Tuvaluan"]
+  - name: "Taiwan"
+    nationalities: ["Taiwanese"]
+  - name: "Tanzanie"
+    nationalities: ["Tanzanian"]
+  - name: "Ukraine"
+    nationalities: ["Ukrainian"]
+  - name: "Ouganda"
+    nationalities: ["Ugandan"]
+  - name: "États-Unis - USA"
+    nationalities: ["American", "USA"]
+  - name: "Uruguay"
+    nationalities: ["Uruguayan"]
+  - name: "Ouzbékistan"
+    nationalities: ["Uzbekistani"]
+  - name: "Venezuela"
+    nationalities: ["Venezuelan"]
+  - name: "Vietnam"
+    nationalities: ["Vietnamese"]
+  - name: "Samoa"
+    nationalities: ["Samoan"]
+  - name: "Yémen"
+    nationalities: ["Yemeni", "Yemenese"]
+  - name: "Afrique du sud"
+    nationalities: ["South African"]
+  - name: "Zambie"
+    nationalities: ["Zambian"]
+  - name: "Zimbabwe"
+    nationalities: ["Zimbabwean"]

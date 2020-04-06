@@ -3,22 +3,29 @@ import { Controller } from "stimulus"
 export default class extends Controller {
   static targets = ["heightUs", "heightEu", "weightUs", "weightEu", "salaryEuro", "salaryDollar"]
 
-  updateHeightUs(e){
+  connect() {
+    document.addEventListener("informationsChange", () => {
+      this.updateHeightUs()
+      this.updateWeightUs()
+    });
+  }
+
+  updateHeightUs(){
     this.heightUsTarget.value = this.toFeet(parseInt(this.heightEuTarget.value))
   }
-  updateHeightEu(e){
+
+  updateHeightEu(){
     this.heightEuTarget.value = this.toCm(this.heightUsTarget.value)
   }
 
-  updateWeightUs(e){
+  updateWeightUs(){
     this.weightUsTarget.value = this.toLbs(this.weightEuTarget.value)
   }
-  updateWeightEu(e){
+  updateWeightEu(){
     this.weightEuTarget.value = this.toKg(this.weightUsTarget.value)
   }
 
   updateSalaryEuro(n){
-    console.log(n)
     this.salaryEuroTarget.value = this.toEuro(this.salaryDollarTarget.value)
   }
   updateSalaryDollar(n){
@@ -31,6 +38,8 @@ export default class extends Controller {
     var inches = Math.round((realFeet - feet) * 12);
     if(inches && feet) { 
       return feet + "'" + inches + '"'
+    }else if (feet){
+      return feet + "'"
     }else {
       return ""
     }

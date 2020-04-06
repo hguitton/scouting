@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   get 'resources/countries', to: "resources#countries"
   get 'resources/leagues', to: "resources#leagues"
   get 'resources/teams', to: "resources#teams"
+  post 'resources/informations', to: "resources#player_informations"
 end

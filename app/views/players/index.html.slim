@@ -19,7 +19,7 @@
         tr
           td
             em = time_ago_in_words(player.updated_at) + ' ago'
-          td = link_to player.lastname, player
+          td = link_to player.name, player
           td = player.birthdate
           td = player.height_eu
           td = player.weight_eu
