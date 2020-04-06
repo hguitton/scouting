@@ -31,6 +31,7 @@ class PlayersController < ApplicationController
   # POST /players
   def create
     @player = Player.new(player_params)
+    @player.updated_by_user_id = current_user.id
     respond_to do |format|
       if @player.save
         format.html { redirect_to players_path, notice: 'Player was successfully created.' }
@@ -46,6 +47,7 @@ class PlayersController < ApplicationController
   # PATCH/PUT /players/1
   def update
     respond_to do |format|
+      @player.updated_by_user_id = current_user.id
       if @player.update(player_params)
         format.html { redirect_to @player, notice: 'Player was successfully updated.' }
       else
@@ -75,8 +77,7 @@ class PlayersController < ApplicationController
     def player_params
       params.require(:player).permit(
         :links,
-        :lastname,
-        :firstname,
+        :name,
         :birthdate,
         :nationality,
         :status,

@@ -6,3 +6,7 @@
 @import '../src/base/grid';
 @import '../src/vendor/easy-autocomplete';
 @import "../../node_modules/bulma/bulma.sass";
+
+body {
+  font-size: 14px;
+}

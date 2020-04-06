@@ -1,7 +1,6 @@
 FactoryBot.define do
   factory :player do
-    firstname { Faker::Name.first_name }
-    lastname  { Faker::Name.last_name }
+    name { Faker::Name.name }
     birthdate  { Faker::Date.birthday(min_age: 18, max_age: 35) }
     status { ['JNFL', 'Bosman', 'Cotonou', 'JFL'].sample }
     nationality { Faker::Address.country }
