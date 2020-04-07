@@ -30,7 +30,7 @@ RSpec.describe PlayersController, type: [:controller, :request] do
       end
 
       it 'contains content' do 
-        expect(response.body).to include(players.first.lastname)
+        expect(response.body).to include(players.first.name)
       end
     end
 
@@ -42,7 +42,7 @@ RSpec.describe PlayersController, type: [:controller, :request] do
       end
 
       it 'contains content' do 
-        expect(response.body).to include(players.first.lastname)
+        expect(response.body).to include(players.first.name)
       end
     end
   end

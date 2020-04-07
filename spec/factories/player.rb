@@ -16,6 +16,7 @@ FactoryBot.define do
     available { true }
     program { Faker::Educator.campus }
     level_id { create(:level).id }
+    updated_by_user_id { create(:user).id }
     priority {["Short list", "A suivre", "Trop cher", "No way"].sample }
   end
 end

@@ -2,16 +2,9 @@ class PlayerDecorator < Draper::Decorator
   delegate_all
 
   def last_update
-    if object.comments.empty?
-      build_last_update(player.updated_at, player.user)
-    else
-      lu_comments = object.comments.last.updated_at 
-      lu_player = object.updated_at 
-      return build_last_update(player.updated_at, player.user) if lu_player > lu_comments
-
-      comment = player.comments.last
-      build_last_update(comment.updated_at, comment.user)
-    end
+    return build_last_update(player.updated_at, player.user) if object.comments.empty? || (object.updated_at > object.comments.last.updated_at)
+    comment = player.comments.last
+    build_last_update(comment.updated_at, comment.user)
   end
 
   def build_last_update(date, user)
@@ -48,14 +41,39 @@ class PlayerDecorator < Draper::Decorator
   def profiles
     h.tag.div do
       object.profiles.each do |p|
-        h.concat(h.tag.div p.name)
+        h.concat(h.tag.div(class: "tag is-dark m-xxs") do
+          p.name
+        end)
       end
     end
   end
 
   def salary
-    if object.salary_real
-      
+    return object.salary_real + 'k€' if object.salary_real.present?
+    object.salary_estimation
+  end
+
+  def agent
+    return object.agent_fr if object.agent_fr.present?
+    return object.agent_us if object.agent_us.present?
+  end
+
+  def last_season
+    return if object.seasons.empty?
+    last_season = object.seasons.last
+    h.tag.div do
+      h.concat(h.tag.small last_season.name )
+      h.concat(h.tag.small last_season.country)
+      h.concat(h.tag.div last_season.team)
     end
+  end
+
+  def comments
+    return if object.comments.empty?
+    h.tag.small "#{object.comments.count} comments"
+  end
+
+  def available
+    object.available ? "Dispo." : "Sous contrat"
   end
 end
