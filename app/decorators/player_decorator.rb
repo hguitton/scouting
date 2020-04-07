@@ -7,17 +7,6 @@ class PlayerDecorator < Draper::Decorator
     build_last_update(comment.updated_at, comment.user)
   end
 
-  def build_last_update(date, user)
-    h.tag.div do
-      h.concat(h.tag.div "#{h.time_ago_in_words(date)} ago")
-      h.concat(h.tag.small "by #{user.name}") if user
-    end
-  end
-
-  def name
-    object.name
-  end
-
   def age
     ((Date.today - Date.parse(object.birthdate))/365.25).floor  
   end
@@ -27,14 +16,14 @@ class PlayerDecorator < Draper::Decorator
       h.concat(h.tag.div do 
         object.height_eu.to_s + "cm"
       end)
-      h.concat(h.tag.small " #{object.height_us}") if object.height_us
+      h.concat(h.tag.small "#{object.height_us}") if object.height_us
     end
   end
 
   def weight
     h.tag.div do
       h.concat(h.tag.div object.weight_eu.to_s + "kg")
-      h.concat(h.tag.small " #{object.weight_us} lbs") if object.weight_us
+      h.concat(h.tag.small "#{object.weight_us}lbs") if object.weight_us
     end
   end
 
@@ -70,10 +59,18 @@ class PlayerDecorator < Draper::Decorator
 
   def comments
     return if object.comments.empty?
-    h.tag.small "#{object.comments.count} comments"
+    h.tag.small "#{object.comments.count} comment(s)"
   end
 
   def available
     object.available ? "Dispo." : "Sous contrat"
+  end
+
+  private
+  def build_last_update(date, user)
+    h.tag.div do
+      h.concat(h.tag.div "#{h.time_ago_in_words(date)} ago")
+      h.concat(h.tag.small "by #{user.name}") if user
+    end
   end
 end
