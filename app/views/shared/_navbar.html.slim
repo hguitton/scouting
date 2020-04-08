@@ -1,0 +1,38 @@
+nav.navbar.is-white
+  .container
+    .navbar-brand
+      .navbar-item.brand-text.is-size-5.has-text-grey-dark.has-text-weight-light
+        | Scouting
+      .navbar-burger.burger data-target="navMenu" 
+        span
+        span
+        span
+    #navMenu.navbar-menu
+      .navbar-start
+        a.navbar-item.has-text-weight-bold href="" 
+          | Home
+        a.navbar-item.has-text-weight-bold href="" 
+          | Players
+        a.navbar-item.has-text-weight-bold href="" 
+          | New player
+        a.navbar-item.has-text-weight-bold href="" 
+          | Search
+
+      .navbar-end
+        a.navbar-item.has-text-weight-bold href="" 
+          | Fav
+        .navbar-item.has-text-weight-bold.has-dropdown
+          a.navbar-link
+            | My account
+          .navbar-dropdown
+            a.navbar-item.has-text-weight-bold
+              | Overview
+            a.navbar-item.has-text-weight-bold.is-active
+              | Elements
+            a.navbar-item.has-text-weight-bold
+              | Components
+            hr.navbar-divider/
+            a.navbar-item.has-text-weight-bold
+              | Log out
+
+

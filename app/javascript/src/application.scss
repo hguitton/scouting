@@ -3,9 +3,10 @@
 @import '../src/base/variables';
 @import '../src/base/spacings';
 @import '../src/base/flex';
-@import '../src/base/grid';
 @import '../src/vendor/easy-autocomplete';
 @import "../../node_modules/bulma/bulma.sass";
+@import '../src/base/grid';
+@import '../src/components/index';
 
 body {
   font-size: 14px;

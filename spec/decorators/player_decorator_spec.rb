@@ -60,7 +60,7 @@ RSpec.describe PlayerDecorator do
     before do 
       player.profiles = [ create(:profile, name: "3andD"), create(:profile, name: "Slasher")]
     end
-    let(:condition) {'<div><div class="tag is-dark m-xxs">3andD</div><div class="tag is-dark m-xxs">Slasher</div></div>'}
+    let(:condition) {'<div><div class="tag is-primary m-xxs">3andD</div><div class="tag is-primary m-xxs">Slasher</div></div>'}
 
     it { expect(player.profiles).to match(condition) }
   end
@@ -118,7 +118,7 @@ RSpec.describe PlayerDecorator do
         player.seasons = [create(:season, player: player, name: "2019-2020", country: "France", team: "Le Mans")]
         player.seasons << create(:season, player: player, name: "2019-2020", country: "France", team: "Boulazac")
       end
-      let(:condition) {"<div><small>2019-2020</small><small>France</small><div>Boulazac</div></div>"}
+      let(:condition) {'<div><small class="is-block">2019-2020</small><small class="is-block">France</small><div class="is-block">Boulazac</div></div>'}
       it { expect(player.last_season).to match(condition) }
     end
   end

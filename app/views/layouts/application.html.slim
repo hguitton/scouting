@@ -8,11 +8,14 @@ html
     = stylesheet_pack_tag 'application'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    
-    - if notice
-      .notification.is-success
-        = notice
-    - if alert
-      .notification.is-danger
-        = alert
-    = yield
+    = render 'shared/navbar'
+    = render 'shared/notifications'
+    .columns.is-fullheight
+      .column.is-2.is-sidebar-menu.is-hidden-mobile.m-t-md.m-l-md
+        = render 'shared/menu'
+      .column.is-main-content
+        = yield
+
+
+
+
