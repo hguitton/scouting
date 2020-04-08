@@ -4,6 +4,9 @@
 .easy-autocomplete {
   width: 100% !important;
 }
+.easy-autocomplete input {
+  border-color: hsl(0, 0%, 71%); // $grey-ligth
+}
 
 .easy-autocomplete-container {
   z-index: 5;
