@@ -9,30 +9,33 @@ nav.navbar.is-white
         span
     #navMenu.navbar-menu
       .navbar-start
-        a.navbar-item.has-text-weight-bold href="" 
+        a.navbar-item.has-text-weight-bold href="/players" 
           | Home
-        a.navbar-item.has-text-weight-bold href="" 
+        a.navbar-item.has-text-weight-bold href="/players" 
           | Players
-        a.navbar-item.has-text-weight-bold href="" 
+        a.navbar-item.has-text-weight-bold href="/players/new" 
           | New player
-        a.navbar-item.has-text-weight-bold href="" 
+        a.navbar-item.has-text-weight-bold.disable href="" 
           | Search
 
       .navbar-end
-        a.navbar-item.has-text-weight-bold href="" 
-          | Fav
-        .navbar-item.has-text-weight-bold.has-dropdown
-          a.navbar-link
-            | My account
-          .navbar-dropdown
-            a.navbar-item.has-text-weight-bold
-              | Overview
-            a.navbar-item.has-text-weight-bold.is-active
-              | Elements
-            a.navbar-item.has-text-weight-bold
-              | Components
-            hr.navbar-divider/
-            a.navbar-item.has-text-weight-bold
-              | Log out
+        - if user_signed_in?
+          = link_to "#{current_user.name} - Log out", destroy_user_session_path, { method: "delete", class: "navbar-item has-text-weight-bold" }
+        - else 
+          = link_to "Sign in", new_user_session_path,  class: "navbar-item has-text-weight-bold"
+
+      /   a.navbar-item.has-text-weight-bold.disable href="" 
+      /     | Fav
+      /   .navbar-item.has-text-weight-bold.has-dropdown
+      /     a.navbar-link
+      /       | My account
+      /     .navbar-dropdown
+      /       a.navbar-item.has-text-weight-bold.disable
+      /         | Overview
+      /       a.navbar-item.has-text-weight-bold.disable
+      /         | Elements
+      /       hr.navbar-divider/
+      /       a.navbar-item.has-text-weight-bold
+      /         | Log out
 
 
