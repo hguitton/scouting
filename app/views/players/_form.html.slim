@@ -6,7 +6,6 @@
       = f.text_field :name, class: "input", placeholder: "Name",  data: { target: 'scraper.name' }
       // TODO ADD FORMAT
       = f.text_field :birthdate, class: "input", placeholder: "Birthdate",  data: { target: 'scraper.birthdate' }
-      // TODO Add Country Select
       = f.text_field :nationality, class: "input",  placeholder: "Nationality", data: { controller: 'autocomplete', 'autocomplete-resource': 'countries', target: 'scraper.nationality' }
       .select
         = f.collection_select :status, ['JNFL', 'Bosman', 'Cotonou', 'JFL'], :to_s, :to_s, {}, class: 'input'

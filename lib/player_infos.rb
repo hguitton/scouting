@@ -35,7 +35,9 @@ class PlayerInfos
   end
 
   def scrape_name(row)
-    row.text[1..-1].split[0...-2].join(" ")
+    name = row.text[1..-1].split[0...-2].join(" ").gsub(/\u00a0/, ' ').split
+    name[0] = name[0].capitalize
+    name.join(" ")
   end
 
   def scrape_numbers(content)

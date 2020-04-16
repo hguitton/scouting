@@ -11,11 +11,12 @@ html
   body
     = render 'shared/navbar'
     = render 'shared/notifications'
-    .columns.is-fullheight
-      .column.is-2.is-sidebar-menu.is-hidden-mobile.m-t-md.m-l-md
-        = render 'shared/menu'
-      .column.is-main-content
-        = yield
+    / .columns.is-fullheight
+    /   .column.is-2.is-sidebar-menu.is-hidden-mobile.m-t-md.m-l-md
+    /     = render 'shared/menu'
+    /   .column.is-main-content
+    .container.is-fluid
+      = yield
 
 
 
