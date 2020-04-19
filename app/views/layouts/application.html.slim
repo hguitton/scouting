@@ -3,16 +3,23 @@ html
   head
     title
       | Scouting
+    meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_pack_tag 'application'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
+    = render 'shared/navbar'
+    = render 'shared/notifications'
+    / .columns.is-fullheight
+    /   .column.is-2.is-sidebar-menu.is-hidden-mobile.m-t-md.m-l-md
+    /     = render 'shared/menu'
+    /   .column.is-main-content
     
-    - if notice
-      .notification.is-success
-        = notice
-    - if alert
-      .notification.is-danger
-        = alert
-    = yield
+    .m-t-md
+      .container.is-fluid
+        = yield
+
+
+
+

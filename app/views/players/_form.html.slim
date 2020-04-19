@@ -1,41 +1,40 @@
-.container.is-fluid data-controller="converter scraper"
+.container.is-fluid data-controller="converter scraper format"
   = form_for @player, wrapper: :test do |f|
-    .m-b-md 
-      = f.text_field :links, class: "input", placeholder: "Link", data: { action: 'change->scraper#getInfos' }
+    .m-b-md.m-t-lg
+      .control
+        = f.text_field :links, class: "input", placeholder: "Link", data: { action: 'change->scraper#getInfos' }
     .grid.grid-5
       = f.text_field :name, class: "input", placeholder: "Name",  data: { target: 'scraper.name' }
-      // TODO ADD FORMAT
-      = f.text_field :birthdate, class: "input", placeholder: "Birthdate",  data: { target: 'scraper.birthdate' }
-      // TODO Add Country Select
+      = f.text_field :birthdate, class: "input is-format-birthdate", placeholder: "Birthdate : DD-MM-YYYY",  data: { target: 'scraper.birthdate' }
       = f.text_field :nationality, class: "input",  placeholder: "Nationality", data: { controller: 'autocomplete', 'autocomplete-resource': 'countries', target: 'scraper.nationality' }
       .select
-        = f.collection_select :status, ['JNFL', 'Bosman', 'Cotonou', 'JFL'], :to_s, :to_s, {}, class: 'input'
+        = f.collection_select :status, ['JNFL', 'BOS', 'COT', 'JFL'], :to_s, :to_s, {}, class: 'input'
       .select
         select.input name="player[available]" id="player_available"
-          option value="1" Disponible
-          option value="0" Sous contrat
+          option value="1" Available
+          option value="0" Not available
     hr
     .grid.grid-6
       .select
         = f.collection_select :position, ['Point Guard', 'Guard', 'Shooting Guard', 'Small Foward', 'Forward', 'Power Forward', 'Center'], :to_s, :to_s, {}, class: 'input', data: { target: 'scraper.position' }
       .field.has-addons
         .control
-          = f.number_field :height_eu, class: "input", placeholder: "Height", data: { target: 'converter.heightEu scraper.height', action: 'keyup->converter#updateHeightUs' }
+          = f.number_field :height_eu, class: "input is-format-height", placeholder: "Height", data: { target: 'converter.heightEu scraper.height', action: 'keyup->converter#updateHeightUs' }
         .control
           a.button.is-static.p-none cm
       .field.has-addons
         .control
-          = f.text_field :height_us, class: "input", placeholder: "Height", data: { target: 'converter.heightUs', action: 'keyup->converter#updateHeightEu' }
+          = f.text_field :height_us, class: "input is-format-height-us", placeholder: "Height", data: { target: 'converter.heightUs', action: 'keyup->converter#updateHeightEu' }
         .control
           a.button.is-static.p-none ft            
       .field.has-addons
         .control
-          = f.number_field :weight_eu, class: "input", placeholder: "Weight", data: { target: 'converter.weightEu scraper.weight', action: 'keyup->converter#updateWeightUs' }
+          = f.number_field :weight_eu, class: "input is-format-weight", placeholder: "Weight", data: { target: 'converter.weightEu scraper.weight', action: 'keyup->converter#updateWeightUs' }
         .control
           a.button.is-static.p-none kg
       .field.has-addons
         .control
-          = f.number_field :weight_us, class: "input", placeholder: "Weight", data: { target: 'converter.weightUs', action: 'keyup->converter#updateWeightEu' }
+          = f.number_field :weight_us, class: "input is-format-weight", placeholder: "Weight", data: { target: 'converter.weightUs', action: 'keyup->converter#updateWeightEu' }
         .control
           a.button.is-static.p-none lbs
       .select
@@ -63,12 +62,12 @@
         = f.collection_select :salary_estimation, salaries, :to_s, :to_s, {}, class: 'input'
       .field.has-addons
         .control
-          = f.number_field :salary_real, class: "input", placeholder: "Real salary", data: { target: 'converter.salaryEuro', action: 'keyup->converter#updateSalaryDollar' }
+          = f.number_field :salary_real, class: "input is-format-salary", placeholder: "Real salary", data: { target: 'converter.salaryEuro', action: 'keyup->converter#updateSalaryDollar' }
         .control
           a.button.is-static.p-none k€
       .field.has-addons
         .control
-          input.input type="number" placeholder="Or real salary" data-target='converter.salaryDollar' data-action='keyup->converter#updateSalaryEuro'
+          input.input.is-format-salary type="number" placeholder="Or real salary" data-target='converter.salaryDollar' data-action='keyup->converter#updateSalaryEuro'
         .control
           a.button.is-static.p-none k$
       .select
@@ -84,4 +83,4 @@
       .nested-fields
         = ff.hidden_field :user_id, value: current_user.id
         = ff.text_area :content, class: "textarea", placeholder: "Comments"
-    = f.submit "Ok", class: "button is-primary"
+    = f.submit "OK", class: "m-t-md button is-primary is-medium is-fullwidth" 
