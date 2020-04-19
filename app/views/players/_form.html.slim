@@ -1,10 +1,10 @@
 .container.is-fluid data-controller="converter scraper format"
   = form_for @player, wrapper: :test do |f|
     .m-b-md.m-t-lg
-      = f.text_field :links, class: "input", placeholder: "Link", data: { action: 'change->scraper#getInfos' }
+      .control
+        = f.text_field :links, class: "input", placeholder: "Link", data: { action: 'change->scraper#getInfos' }
     .grid.grid-5
       = f.text_field :name, class: "input", placeholder: "Name",  data: { target: 'scraper.name' }
-      // TODO ADD FORMAT
       = f.text_field :birthdate, class: "input is-format-birthdate", placeholder: "Birthdate : DD-MM-YYYY",  data: { target: 'scraper.birthdate' }
       = f.text_field :nationality, class: "input",  placeholder: "Nationality", data: { controller: 'autocomplete', 'autocomplete-resource': 'countries', target: 'scraper.nationality' }
       .select
@@ -83,4 +83,4 @@
       .nested-fields
         = ff.hidden_field :user_id, value: current_user.id
         = ff.text_area :content, class: "textarea", placeholder: "Comments"
-    = f.submit "Ok", class: "button is-primary"
+    = f.submit "OK", class: "m-t-md button is-primary is-medium is-fullwidth" 
