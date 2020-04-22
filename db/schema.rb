@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_05_160431) do
+ActiveRecord::Schema.define(version: 2020_04_21_205505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,11 +34,9 @@ ActiveRecord::Schema.define(version: 2020_04_05_160431) do
   create_table "players", force: :cascade do |t|
     t.string "name"
     t.string "birthdate"
-    t.string "status"
     t.string "nationality"
     t.string "agent_fr"
     t.string "agent_us"
-    t.string "position"
     t.string "height_us"
     t.integer "height_eu"
     t.integer "weight_us"
@@ -52,8 +50,13 @@ ActiveRecord::Schema.define(version: 2020_04_05_160431) do
     t.string "links"
     t.bigint "level_id"
     t.bigint "updated_by_user_id"
-    t.string "priority"
+    t.bigint "priority_id"
+    t.bigint "status_id"
+    t.bigint "position_id"
     t.index ["level_id"], name: "index_players_on_level_id"
+    t.index ["position_id"], name: "index_players_on_position_id"
+    t.index ["priority_id"], name: "index_players_on_priority_id"
+    t.index ["status_id"], name: "index_players_on_status_id"
     t.index ["updated_by_user_id"], name: "index_players_on_updated_by_user_id"
   end
 
@@ -62,6 +65,21 @@ ActiveRecord::Schema.define(version: 2020_04_05_160431) do
     t.integer "profile_id"
     t.index ["player_id"], name: "index_players_profiles_on_player_id"
     t.index ["profile_id"], name: "index_players_profiles_on_profile_id"
+  end
+
+  create_table "positions", force: :cascade do |t|
+    t.string "name"
+    t.boolean "active", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "short"
+  end
+
+  create_table "priorities", force: :cascade do |t|
+    t.string "name"
+    t.boolean "active", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -98,6 +116,14 @@ ActiveRecord::Schema.define(version: 2020_04_05_160431) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["player_id"], name: "index_socials_on_player_id"
+  end
+
+  create_table "statuses", force: :cascade do |t|
+    t.string "name"
+    t.boolean "active", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "short"
   end
 
   create_table "users", force: :cascade do |t|
