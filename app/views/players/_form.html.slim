@@ -71,7 +71,7 @@
         .control
           a.button.is-static.p-none k$
       .select
-        = f.collection_select :priority, ["Short list", "A suivre", "Trop cher", "No way"], :to_s, :to_s, {}, class: 'input'    
+        = f.collection_select :priority, Priority.all, :id, :name, {}, class: 'input'    
 
     hr
     = f.fields_for :socials do |ff|
