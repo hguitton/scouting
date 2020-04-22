@@ -30,7 +30,7 @@ class PlayerInfos
     when 'college'
       @infos[:college] = scrape_basic(link_content(row))
     when 'position'
-      @infos[:position] = scrape_basic(text_content(row))
+      @infos[:position] = Position.find_by(name: scrape_basic(text_content(row)))&.id
     end
   end
 

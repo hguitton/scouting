@@ -8,7 +8,7 @@
       = f.text_field :birthdate, class: "input is-format-birthdate", placeholder: "Birthdate : DD-MM-YYYY",  data: { target: 'scraper.birthdate' }
       = f.text_field :nationality, class: "input",  placeholder: "Nationality", data: { controller: 'autocomplete', 'autocomplete-resource': 'countries', target: 'scraper.nationality' }
       .select
-        = f.collection_select :status, ['JNFL', 'BOS', 'COT', 'JFL'], :to_s, :to_s, {}, class: 'input'
+        = f.collection_select :status, Status.all, :id, :name, {}, class: 'input'
       .select
         select.input name="player[available]" id="player_available"
           option value="1" Available
@@ -16,7 +16,7 @@
     hr
     .grid.grid-6
       .select
-        = f.collection_select :position, ['Point Guard', 'Guard', 'Shooting Guard', 'Small Foward', 'Forward', 'Power Forward', 'Center'], :to_s, :to_s, {}, class: 'input', data: { target: 'scraper.position' }
+        = f.collection_select :position, Position.all, :id, :name, {}, class: 'input', data: { target: 'scraper.position' }
       .field.has-addons
         .control
           = f.number_field :height_eu, class: "input is-format-height", placeholder: "Height", data: { target: 'converter.heightEu scraper.height', action: 'keyup->converter#updateHeightUs' }
