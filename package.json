@@ -13,6 +13,7 @@
     "jquery": "^3.4.1",
     "node-sass": "^4.13.1",
     "stimulus": "^1.1.1",
+    "tabulator-tables": "^4.6.2",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",
