@@ -52,14 +52,27 @@ class PlayerDecorator < Draper::Decorator
     last_season = object.seasons.last
     h.tag.div do
       h.concat(h.tag.small(class: "is-block"){ last_season.name })
-      h.concat(h.tag.small(class: "is-block"){  last_season.country })
+      h.concat(h.tag.small(class: "is-block"){ last_season.country })
       h.concat(h.tag.div(class: "is-block"){ last_season.team })
     end
   end
 
   def comments
     return if object.comments.empty?
-    h.tag.small "#{object.comments.count} comment(s)"
+    h.tag.div(data:{ controller: "modal"}) do 
+      h.concat(h.tag.small "#{object.comments.count} comment(s)", data: { action: "click->modal#open"})
+      h.concat(h.tag.div(class: "modal-window", data: { target: "modal.modalWindow", action: 'click->modal#close' }) do
+        h.concat(h.tag.div(style: "display: block;") do 
+          object.comments.order(created_at: :desc).each do |comment|
+            h.concat(h.tag.div(class: 'm-b-md') do 
+              h.concat(h.tag.small "#{h.time_ago_in_words(comment.created_at)} ago")
+              h.concat(h.tag.strong " - #{comment.user.name} : ") 
+              h.concat(h.tag.p comment.content)
+            end)
+          end
+        end)
+      end)
+    end
   end
 
   def available
