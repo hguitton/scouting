@@ -1,6 +1,6 @@
 h1.h1.title Listing players
 
-table.table.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.has-text-centered
+table.table.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.has-text-centered data-controller="table" id='table_id'
   thead
     tr
       th Last Update
@@ -40,4 +40,4 @@ table.table.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.has-text-
         td = player.available
 br
 
-= link_to 'New Player', new_player_path
+= link_to 'New Player', new_player_path, class:"button is-primary"
