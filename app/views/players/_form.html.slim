@@ -79,8 +79,9 @@
     .links.m-t-sm
       = link_to_add_association 'Add social', f, :socials, class: "button m-t-sm is-small"
     hr
-    = f.fields_for :comments do |ff|
-      .nested-fields
-        = ff.hidden_field :user_id, value: current_user.id
-        = ff.text_area :content, class: "textarea", placeholder: "Comments"
+    - if params[:action] == "new"
+      = f.fields_for :comments do |ff|
+        .nested-fields
+          = ff.hidden_field :user_id, value: current_user.id
+          = ff.text_area :content, class: "textarea", placeholder: "Comments"
     = f.submit "OK", class: "m-t-md button is-primary is-medium is-fullwidth" 

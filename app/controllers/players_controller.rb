@@ -14,6 +14,7 @@ class PlayersController < ApplicationController
 
   # GET /players/1
   def show
+    @comment = Comment.new
   end
 
   # GET /players/new

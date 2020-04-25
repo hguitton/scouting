@@ -1,0 +1,34 @@
+table.table.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth
+  thead
+    tr
+      th Updated
+      th Season
+      th League
+      th Team
+      th Min.
+      th Pts
+      th FG%
+      th 3FG%
+      th ORB
+      th DRB
+      th TRB
+      th AST
+      th BLK
+      th STL
+  tbody
+    - seasons.each do |season|
+      tr
+        td 
+        td = season.name
+        td = season.country
+        td = season.team
+        td = season.min
+        td = season.points
+        td = season.fgp
+        td = season.three_fgp
+        td = season.orb
+        td = season.drb
+        td = season.trb
+        td = season.ast
+        td = season.blk
+        td = season.stl

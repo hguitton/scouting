@@ -123,7 +123,7 @@ RSpec.describe PlayerDecorator do
     end
   end
 
-  describe '#comments' do 
+  describe '#comments_cell' do 
     context 'without comments' do
       it { expect(player.comments).to be_nil }
     end

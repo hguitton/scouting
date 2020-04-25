@@ -30,7 +30,7 @@ class PlayerDecorator < Draper::Decorator
   def profiles_tags
     h.tag.div do
       object.profiles.each do |p|
-        h.concat(h.tag.div(class: "tag is-primary m-xxs") do
+        h.concat(h.tag.div(class: "tag is-info m-xxs") do
           p.name
         end)
       end
@@ -57,7 +57,7 @@ class PlayerDecorator < Draper::Decorator
     end
   end
 
-  def comments
+  def comments_cell
     return if object.comments.empty?
     h.tag.div(data:{ controller: "modal"}) do 
       h.concat(h.tag.small "#{object.comments.count} comment(s)", data: { action: "click->modal#open"})
