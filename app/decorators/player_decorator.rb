@@ -27,7 +27,7 @@ class PlayerDecorator < Draper::Decorator
     end
   end
 
-  def profiles
+  def profiles_tags
     h.tag.div do
       object.profiles.each do |p|
         h.concat(h.tag.div(class: "tag is-primary m-xxs") do

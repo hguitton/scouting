@@ -12,6 +12,6 @@ class Player < ApplicationRecord
   accepts_nested_attributes_for :comments
 
   belongs_to :user, foreign_key: "updated_by_user_id"
-  validates :name, :status, :nationality, presence: true
+  validates :name, :nationality, presence: true
   
 end

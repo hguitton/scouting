@@ -56,13 +56,13 @@ RSpec.describe PlayerDecorator do
     end
   end
 
-  describe '#profiles' do
+  describe '#profiles_tags' do
     before do 
       player.profiles = [ create(:profile, name: "3andD"), create(:profile, name: "Slasher")]
     end
     let(:condition) {'<div><div class="tag is-primary m-xxs">3andD</div><div class="tag is-primary m-xxs">Slasher</div></div>'}
 
-    it { expect(player.profiles).to match(condition) }
+    it { expect(player.profiles_tags).to match(condition) }
   end
 
   describe '#salary' do 
@@ -130,7 +130,9 @@ RSpec.describe PlayerDecorator do
     
     context 'with comments' do
       before { player.comments = [create(:comment, player: player)]}
-      it { expect(player.comments).to match('<small>1 comment(s)</small>') }
+      let(:condition) {/.*<div data-controller=\"modal\"><small data-action=\"click-&gt;modal#open\">1 comment.*/}
+
+      it { expect(player.comments).to match(condition) }
     end
   end
 
