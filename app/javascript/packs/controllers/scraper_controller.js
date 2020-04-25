@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = ["name", "birthdate", "height", "weight", "position", "nationality", "program"]
+  static targets = ["name", "birthdate", "height", "weight", "position", "nationality", "college"]
   
   getInfos(e){
     this.spinner = e.currentTarget.parentNode
@@ -30,7 +30,9 @@ export default class extends Controller {
   }
 
   updateFields(infos){
-    ["name", "birthdate", "height", "weight", "position", "nationality", "program"].forEach(field => {
+    console.log(infos);
+    
+    ["name", "birthdate", "height", "weight", "position", "nationality", "college"].forEach(field => {
       if(field in infos){
         this.targets.find(field).value = infos[field]
       }

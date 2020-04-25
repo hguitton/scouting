@@ -40,19 +40,23 @@ section.m-t-md
         span = @player.agent_us
     - if @player.links.present?
       .m-b-md
+        strong.m-r-sm Program : 
+        span = @player.program
+    - if @player.links.present?
+      .m-b-md
         strong.m-r-sm Link : 
         span = link_to @player.links, @player.links, target: "_blank"
 
-section.m-t-lg
-  .container
-    .title.is-1 Seasons :
-    - unless @player.seasons.empty?
+- unless @player.seasons.empty?
+  section.m-t-lg
+    .container
+      .title.is-1 Seasons :
       = render 'shared/table_seasons', seasons: @player.seasons
 
 section.m-t-lg.m-b-xxl
   .container
     .title.is-1 Comments :
-    - @player.comments.each do |comment|
+    - @player.comments.order(created_at: :desc).each do |comment|
       .columns
         .column.is-one-quarters
           .flex.fdc
