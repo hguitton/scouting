@@ -1,5 +1,7 @@
 h1.h1.title Listing players
 
+= link_to 'New Player', new_player_path, class:"button is-primary m-b-md"
+
 div data-controller="modal"
   table.table.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.has-text-centered data-controller="table" id='table_id'
     thead
@@ -39,11 +41,4 @@ div data-controller="modal"
           td = player.comments
           td = player.priority.name
           td = player.available
-  
-  / .modal-window data-target="modal.modalWindow"
-  /   .modal-close data-action="click->modal#close"
-  /   h3 Comments
-
   br
-
-= link_to 'New Player', new_player_path, class:"button is-primary"

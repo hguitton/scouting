@@ -64,7 +64,7 @@ class PlayerDecorator < Draper::Decorator
       h.concat(h.tag.div(class: "modal-window", data: { target: "modal.modalWindow", action: 'click->modal#close' }) do
         h.concat(h.tag.div(style: "display: block;") do 
           object.comments.order(created_at: :desc).each do |comment|
-            h.concat(h.tag.div(class: 'm-b-md') do 
+            h.concat(h.tag.div(class: 'm-b-xl') do 
               h.concat(h.tag.small "#{h.time_ago_in_words(comment.created_at)} ago")
               h.concat(h.tag.strong " - #{comment.user.name} : ") 
               h.concat(h.tag.p comment.content)
