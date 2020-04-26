@@ -15,6 +15,7 @@ class PlayersController < ApplicationController
   # GET /players/1
   def show
     @comment = Comment.new
+    @season = Season.new
   end
 
   # GET /players/new
@@ -97,9 +98,9 @@ class PlayersController < ApplicationController
         :updated_by_user_id, 
         :priority_id,
         profile_ids: [],
-        seasons_attributes: [:id, :user_id, :name, :country, :team, :points, :trb, :ast, :_destroy],
+        seasons_attributes: [:id, :user_id, :name, :country, :team, :points, :trb, :ast, :min, :fgp, :three_fgp, :orb, :drb, :blk, :stl, :_destroy],
         comments_attributes: [:id, :user_id, :content],
-        socials_attributes: [:id, :link]
+        socials_attributes: [:id, :link, :_destroy]
       )
     end
 end

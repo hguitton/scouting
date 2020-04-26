@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'players#index'
   resources :players
   resources :comments, only: [:create]
+  resources :seasons, only: [:create]
   
   get 'resources/agents', to: "resources#agents"
   get 'resources/countries', to: "resources#countries"

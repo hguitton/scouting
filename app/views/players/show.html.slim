@@ -42,18 +42,24 @@ section.m-t-md
       .m-b-md
         strong.m-r-sm Program : 
         span = @player.program
+    - if @player.socials.present?
+      .m-b-md
+        strong.m-r-sm Socials : 
+        ul
+        - @player.socials.each do |social|
+          li = social.link
     - if @player.links.present?
       .m-b-md
         strong.m-r-sm Link : 
         span = link_to @player.links, @player.links, target: "_blank"
 
 - unless @player.seasons.empty?
-  section.m-t-lg
+  section.m-t-xl
     .container
       .title.is-1 Seasons :
-      = render 'shared/table_seasons', seasons: @player.seasons
-
-section.m-t-lg.m-b-xxl
+      = render 'shared/table_seasons', seasons: @player.seasons, with_form: true
+      
+section.m-t-xl.m-b-xxl
   .container
     .title.is-1 Comments :
     - @player.comments.order(created_at: :desc).each do |comment|

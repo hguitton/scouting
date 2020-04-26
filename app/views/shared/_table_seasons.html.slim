@@ -1,7 +1,6 @@
 table.table.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth
   thead
     tr
-      th Updated
       th Season
       th League
       th Team
@@ -16,9 +15,8 @@ table.table.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth
       th BLK
       th STL
   tbody
-    - seasons.each do |season|
+    - seasons.order(name: :desc).each do |season|
       tr
-        td 
         td = season.name
         td = season.country
         td = season.team

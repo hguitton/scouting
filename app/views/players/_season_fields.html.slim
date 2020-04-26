@@ -4,7 +4,14 @@
     = f.collection_select :name, list_seasons, :to_s, :to_s, {}, class: 'input'
   = f.text_field :country, class: "input", placeholder: "League", data: { controller: 'autocomplete', 'autocomplete-resource': 'leagues' }
   = f.text_field :team, class: "input", placeholder: "Team", data: { controller: 'autocomplete', 'autocomplete-resource': 'teams' }
+  = f.text_field :min, class: "input", placeholder: "Mins."
   = f.text_field :points, class: "input", placeholder: "Points"
-  = f.text_field :trb, class: "input", placeholder: "Rebounds"
-  = f.text_field :ast, class: "input", placeholder: "Assists"
+  = f.text_field :fgp, class: "input", placeholder: "FG%"
+  = f.text_field :three_fgp, class: "input", placeholder: "3FG%"
+  = f.text_field :orb, class: "input", placeholder: "ORB"
+  = f.text_field :drb, class: "input", placeholder: "DRB"
+  = f.text_field :trb, class: "input", placeholder: "TRB"
+  = f.text_field :ast, class: "input", placeholder: "AST"
+  = f.text_field :blk, class: "input", placeholder: "BLK"
+  = f.text_field :stl, class: "input", placeholder: "STL"
   = link_to_remove_association "Remove", f, class: "button is-danger"
