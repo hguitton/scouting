@@ -27,10 +27,10 @@ class PlayerDecorator < Draper::Decorator
     end
   end
 
-  def profiles
+  def profiles_tags
     h.tag.div do
       object.profiles.each do |p|
-        h.concat(h.tag.div(class: "tag is-primary m-xxs") do
+        h.concat(h.tag.div(class: "tag is-info m-xxs") do
           p.name
         end)
       end
@@ -53,11 +53,11 @@ class PlayerDecorator < Draper::Decorator
     h.tag.div do
       h.concat(h.tag.small(class: "is-block"){ last_season.name })
       h.concat(h.tag.small(class: "is-block"){ last_season.country })
-      h.concat(h.tag.div(class: "is-block"){ last_season.team })
+      h.concat(h.tag.div(class: "has-text-weight-semibold is-block"){ last_season.team })
     end
   end
 
-  def comments
+  def comments_cell
     return if object.comments.empty?
     h.tag.div(data:{ controller: "modal"}) do 
       h.concat(h.tag.small "#{object.comments.count} comment(s)", data: { action: "click->modal#open"})
@@ -67,7 +67,7 @@ class PlayerDecorator < Draper::Decorator
             h.concat(h.tag.div(class: 'm-b-xl') do 
               h.concat(h.tag.small "#{h.time_ago_in_words(comment.created_at)} ago")
               h.concat(h.tag.strong " - #{comment.user.name} : ") 
-              h.concat(h.tag.p comment.content)
+              h.concat(h.tag.p comment.content, class: 'p-l-md')
             end)
           end
         end)

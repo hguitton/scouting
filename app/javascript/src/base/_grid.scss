@@ -1,6 +1,6 @@
 .grid {
   display: grid;
-  grid-column-gap: 2rem;
+  grid-column-gap: .5rem;
   grid-row-gap: 2rem;
   // @include mobile{
   //   background-color: red;
@@ -28,5 +28,5 @@
 
 
 .grid-season {
-  grid-template-columns: 4fr 4fr 4fr 2fr 2fr 2fr 1fr;
+  grid-template-columns: 4fr 4fr 4fr 2fr 2fr 2fr 2fr 2fr 2fr 2fr 2fr 2fr 2fr 1fr;
 }

@@ -1,8 +1,7 @@
 doctype html
 html
   head
-    title
-      | Scouting
+    title= content_for?(:html_title) ? "Scouting - #{yield(:html_title)}" : "Scouting" 
     meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"
     = csrf_meta_tags
     = csp_meta_tag
@@ -19,8 +18,7 @@ html
     /   .column.is-main-content
     
     .m-t-md
-      .container.is-fluid
-        = yield
+      = yield
 
 
 

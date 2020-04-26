@@ -8,7 +8,7 @@
       = f.text_field :birthdate, class: "input is-format-birthdate", placeholder: "Birthdate : DD-MM-YYYY",  data: { target: 'scraper.birthdate' }
       = f.text_field :nationality, class: "input",  placeholder: "Nationality", data: { controller: 'autocomplete', 'autocomplete-resource': 'countries', target: 'scraper.nationality' }
       .select
-        = f.collection_select :status, Status.all, :id, :name, {}, class: 'input'
+        = f.collection_select :status_id, Status.all, :id, :name, {}, class: 'input'
       .select
         select.input name="player[available]" id="player_available"
           option value="1" Available
@@ -16,7 +16,7 @@
     hr
     .grid.grid-6
       .select
-        = f.collection_select :position, Position.all, :id, :name, {}, class: 'input', data: { target: 'scraper.position' }
+        = f.collection_select :position_id, Position.all, :id, :name, {}, class: 'input', data: { target: 'scraper.position' }
       .field.has-addons
         .control
           = f.number_field :height_eu, class: "input is-format-height", placeholder: "Height", data: { target: 'converter.heightEu scraper.height', action: 'keyup->converter#updateHeightUs' }
@@ -71,7 +71,7 @@
         .control
           a.button.is-static.p-none k$
       .select
-        = f.collection_select :priority, Priority.all, :id, :name, {}, class: 'input'    
+        = f.collection_select :priority_id, Priority.all, :id, :name, {}, class: 'input'    
 
     hr
     = f.fields_for :socials do |ff|
@@ -79,8 +79,9 @@
     .links.m-t-sm
       = link_to_add_association 'Add social', f, :socials, class: "button m-t-sm is-small"
     hr
-    = f.fields_for :comments do |ff|
-      .nested-fields
-        = ff.hidden_field :user_id, value: current_user.id
-        = ff.text_area :content, class: "textarea", placeholder: "Comments"
+    - if params[:action] == "new"
+      = f.fields_for :comments do |ff|
+        .nested-fields
+          = ff.hidden_field :user_id, value: current_user.id
+          = ff.text_area :content, class: "textarea", placeholder: "Comments"
     = f.submit "OK", class: "m-t-md button is-primary is-medium is-fullwidth" 
