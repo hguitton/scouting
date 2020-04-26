@@ -13,8 +13,9 @@ html
     = render 'shared/navbar'
     = render 'shared/notifications'
     .columns.is-fullheight
-      .column.is-1.is-sidebar-menu.is-hidden-mobile.m-t-md.m-l-md
-        = render 'shared/menu'
+      - if user_signed_in?
+        .column.is-1.is-sidebar-menu.is-hidden-mobile.m-t-md.m-l-md
+          = render 'shared/menu'
       .column
         .m-t-md
           = yield
