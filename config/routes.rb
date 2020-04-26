@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   resources :comments, only: [:create]
   resources :seasons, only: [:create]
   
+  resources :statuses, only: [:show]
+  resources :positions, only: [:show]
+  resources :profiles, only: [:show]
+  
   get 'resources/agents', to: "resources#agents"
   get 'resources/countries', to: "resources#countries"
   get 'resources/leagues', to: "resources#leagues"

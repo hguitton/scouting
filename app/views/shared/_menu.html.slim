@@ -1,38 +1,23 @@
 aside.side-menu
   p.menu-label
-    | General
+    | Status
   ul.menu-list.has-text-weight-bold
     li
-      a Dashboard
-    li
-      a Customers
+      - @menu_statuses.each do |status|
+        = link_to status.name, status_path(status)
+
   p.menu-label
-    | Administration
+    | Position
   ul.menu-list.has-text-weight-bold
     li
-      a Team Settings
-    li
-      a.is-active Manage Your Team
-      ul
-        li
-          a Members
-        li
-          a Plugins
-        li
-          a Add a member
-    li
-      a Invitations
-    li
-      a Cloud Storage Environment Settings
-    li
-      a Authentication
+      - @menu_positions.each do |position|
+        = link_to position.name, position_path(position)
+
   p.menu-label
-    | Transactions
+    | Profile
   ul.menu-list.has-text-weight-bold
     li
-      a Payments
-    li
-      a Transfers
-    li
-      a Balance
+      - @menu_profiles.each do |profile|
+        = link_to profile.name, profile_path(profile)
+
 
