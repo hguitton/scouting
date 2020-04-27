@@ -1,5 +1,6 @@
 .container.is-fluid data-controller="converter scraper format"
   = form_for @player, wrapper: :test do |f|
+    = f.hidden_field :photo,  data: { target: 'scraper.photo' }
     .m-b-md.m-t-lg
       .control
         = f.text_field :links, class: "input", placeholder: "Link", data: { action: 'change->scraper#getInfos' }
