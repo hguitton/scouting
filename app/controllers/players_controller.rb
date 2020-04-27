@@ -23,7 +23,6 @@ class PlayersController < ApplicationController
     @player = Player.new
     @player.seasons.build
     @player.comments.build
-    @player.socials.build
   end
 
   # GET /players/1/edit
