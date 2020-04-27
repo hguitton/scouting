@@ -45,7 +45,7 @@
       = f.collection_check_boxes(:profile_ids, Profile.all, :id, :name) do |b|
         - b.label class:'flex aic'
           = b.check_box
-          .p-l-sm
+          .p-l-sm.is-size-5
             = b.object.name
 
     hr
