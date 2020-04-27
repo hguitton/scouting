@@ -4,8 +4,11 @@
 section.hero.is-info
   .hero-body
     .container
-      .title.is-1 = @player.name
-      .subtitle.is-3 = @player.position.name
+      .flex.fdr
+        img.img-player.m-r-md src="#{@player.photo}"
+        div
+          .title.is-1 = @player.name
+          .subtitle.is-3 = @player.position.name
       .subtitle.is-4.has-text-weight-bold  = "#{@player.height_eu}cm - #{@player.weight_eu}kg"
       = link_to 'Edit Player', edit_player_path(@player), class:"button is-warning"
 

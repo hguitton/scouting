@@ -6,6 +6,10 @@ select {
   height: 100% !important;
 }
 
+input[type="checkbox"]:checked + div {
+  font-weight: 600;
+}
+
 .input-stats{
   max-width: 80px;
 }

@@ -1,5 +1,6 @@
 .container.is-fluid data-controller="converter scraper format"
   = form_for @player, wrapper: :test do |f|
+    = f.hidden_field :photo,  data: { target: 'scraper.photo' }
     .m-b-md.m-t-lg
       .control
         = f.text_field :links, class: "input", placeholder: "Link", data: { action: 'change->scraper#getInfos' }
@@ -16,7 +17,7 @@
     hr
     .grid.grid-6
       .select
-        = f.collection_select :position_id, Position.all, :id, :name, {}, class: 'input', data: { target: 'scraper.position' }
+        = f.collection_select :position_id, Position.order(order: :asc).all, :id, :name, {}, class: 'input', data: { target: 'scraper.position' }
       .field.has-addons
         .control
           = f.number_field :height_eu, class: "input is-format-height", placeholder: "Height", data: { target: 'converter.heightEu scraper.height', action: 'keyup->converter#updateHeightUs' }
@@ -38,13 +39,13 @@
         .control
           a.button.is-static.p-none lbs
       .select
-        = f.collection_select :level_id, Level.all, :id, :name, {}, class: 'input'  
+        = f.collection_select :level_id, Level.all, :id, :name, {selected: Level.find_by(name: "Euroleague")&.id}, class: 'input'
     hr
     .grid.grid-6
       = f.collection_check_boxes(:profile_ids, Profile.all, :id, :name) do |b|
         - b.label class:'flex aic'
           = b.check_box
-          .p-l-sm
+          .p-l-sm.is-size-5
             = b.object.name
 
     hr

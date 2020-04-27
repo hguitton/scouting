@@ -49,7 +49,7 @@ class PlayerDecorator < Draper::Decorator
 
   def last_season
     return if object.seasons.empty?
-    last_season = object.seasons.last
+    last_season = object.seasons.order(name: :asc).last
     h.tag.div do
       h.concat(h.tag.small(class: "is-block"){ last_season.name })
       h.concat(h.tag.small(class: "is-block"){ last_season.country })

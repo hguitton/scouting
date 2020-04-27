@@ -23,7 +23,6 @@ class PlayersController < ApplicationController
     @player = Player.new
     @player.seasons.build
     @player.comments.build
-    @player.socials.build
   end
 
   # GET /players/1/edit
@@ -78,6 +77,7 @@ class PlayersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def player_params
       params.require(:player).permit(
+        :photo,
         :links,
         :name,
         :birthdate,

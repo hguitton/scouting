@@ -15,8 +15,10 @@ nav.navbar.is-white
           | Players
         a.navbar-item.has-text-weight-bold href="/players/new" 
           | New player
-        a.navbar-item.has-text-weight-bold.disable href="" 
+        .navbar-item.has-text-weight-bold.disable
           | Search
+        .navbar-item.has-text-weight-bold.disable
+          | Roster
 
       .navbar-end
         - if user_signed_in?
