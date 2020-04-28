@@ -28,12 +28,12 @@ gem 'colorize'
 gem 'draper'
 gem 'devise'
 gem 'simple_form'
-gem 'faker'
 gem 'cocoon'
 gem 'nokogiri'
 gem 'bulma-rails', '~> 0.6.2'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
+gem 'dotenv-rails', groups: [:development, :test]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

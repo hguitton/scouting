@@ -39,7 +39,7 @@
         .control
           a.button.is-static.p-none lbs
       .select
-        = f.collection_select :level_id, Level.all, :id, :name, {selected: Level.find_by(name: "Euroleague")&.id}, class: 'input'
+        = f.collection_select :level_id, Level.all, :id, :name, {selected: Level.find_by(name: ENV['DEFAULT_LEVEL'])&.id}, class: 'input'
     hr
     .grid.grid-6
       = f.collection_check_boxes(:profile_ids, Profile.all, :id, :name) do |b|
