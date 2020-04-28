@@ -1,0 +1,23 @@
+aside.side-menu
+  p.menu-label
+    | Status
+  ul.menu-list.has-text-weight-bold
+    li
+      - @menu_statuses.each do |status|
+        = link_to status.name, status_path(status)
+
+  p.menu-label
+    | Position
+  ul.menu-list.has-text-weight-bold
+    li
+      - @menu_positions.each do |position|
+        = link_to position.name, position_path(position)
+
+  p.menu-label
+    | Profile
+  ul.menu-list.has-text-weight-bold
+    li
+      - @menu_profiles.each do |profile|
+        = link_to profile.name, profile_path(profile)
+
+

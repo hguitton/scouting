@@ -1,18 +1,25 @@
 doctype html
 html
   head
-    title
-      | Scouting
+    title= content_for?(:html_title) ? "Scouting - #{yield(:html_title)}" : "Scouting" 
+    meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_pack_tag 'application'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css"
+  script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"
   body
-    
-    - if notice
-      .notification.is-success
-        = notice
-    - if alert
-      .notification.is-danger
-        = alert
-    = yield
+    = render 'shared/navbar'
+    = render 'shared/notifications'
+    .columns.is-fullheight
+      - if user_signed_in?
+        .column.is-1.is-sidebar-menu.is-hidden-mobile.m-t-md.m-l-md
+          = render 'shared/menu'
+      .column
+        .m-t-md
+          = yield
+
+
+
+

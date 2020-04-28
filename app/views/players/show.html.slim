@@ -1,56 +1,83 @@
-section.hero
+- content_for(:html_title)
+  = @player.name
+
+section.hero.is-info
   .hero-body
     .container
-      .columns
-        .column
+      .flex.fdr
+        img.img-player.m-r-md src="#{@player.photo}"
+        div
           .title.is-1 = @player.name
-          .subtitle.is-5 = @player.height + ' - ' + @player.weight
-        .column.has-text-right
-          .subtitle.is-size-4 = "Poste : " + @player.position
-          - @player.profiles.each do |profile|
-            .is-5.has-text-weight-bold = profile.name
+          .subtitle.is-3 = @player.position.name
+      .subtitle.is-4.has-text-weight-bold  = "#{@player.height_eu}cm - #{@player.weight_eu}kg"
+      = link_to 'Edit Player', edit_player_path(@player), class:"button is-warning"
 
-section
+section.m-t-md
   .container
-    .title.is-1 Saisons
-    - unless @player.seasons.empty?
-      table.table.is-striped.is-narrow.is-hoverable.is-bordered
-        thead
-          tr
-            th Updated
-            th Season
-            th League
-            th Team
-            th Min.
-            th Pts
-            th FG%
-            th 3FG%
-            th ORB
-            th DRB
-            th TRB
-            th AST
-            th BLK
-            th STL
-        tbody
-          - @player.seasons.each do |season|
-            tr
-              td 
-              td = season.name
-              td = season.team
-              td = season.country
-              td = season.min
-              td = season.points
-              td = season.fgp
-              td = season.three_fgp
-              td = season.orb
-              td = season.drb
-              td = season.trb
-              td = season.ast
-              td = season.blk
-              td = season.stl
+    .title.is-1 Profile :
+    .m-b-lg
+      - @player.profiles.each do |profile|
+        span.tag.is-info.is-medium.m-r-sm = profile.name
 
-section.m-t-xxl
+    - if @player.salary_real.present?
+      .m-b-md
+        strong.m-r-sm Salary:
+        span = @player.salary_real + "k€"
+    - else 
+      .m-b-md
+        strong.m-r-sm Salary est. :
+        span = @player.salary_estimation
+    .m-b-md
+      strong.m-r-sm Level : 
+      span = @player.level.name
+    .m-b-md
+      strong.m-r-sm Priority : 
+      span = @player.priority.name
+    - if @player.agent_fr.present?
+      .m-b-md
+        strong.m-r-sm Agent FR: 
+        span = @player.agent_fr
+    - if @player.agent_us.present?
+      .m-b-md
+        strong.m-r-sm Agent US: 
+        span = @player.agent_us
+    - if @player.links.present?
+      .m-b-md
+        strong.m-r-sm Program : 
+        span = @player.program
+    - if @player.socials.present?
+      .m-b-md
+        strong.m-r-sm Socials : 
+        ul
+        - @player.socials.each do |social|
+          li = social.link
+    - if @player.links.present?
+      .m-b-md
+        strong.m-r-sm Link : 
+        span = link_to @player.links, @player.links, target: "_blank"
+
+- unless @player.seasons.empty?
+  section.m-t-xl
+    .container
+      .title.is-1 Seasons :
+      = render 'shared/table_seasons', seasons: @player.seasons, with_form: true
+      
+section.m-t-xl.m-b-xxl
   .container
-    .title.is-1 Comments
-    - @player.seasons.each do |season|
-      = season.name
+    .title.is-1 Comments :
+    - @player.comments.order(created_at: :desc).each do |comment|
+      .columns
+        .column.is-one-quarters
+          .flex.fdc
+            strong = comment.user.name
+            small = "#{time_ago_in_words(comment.created_at)} ago (#{comment.created_at.strftime('%d/%m/%Y %T')})"
+        .column.is-three-quarters
+          .has-text-justified = comment.content
+      hr
+    .form
+      = form_for @comment do |f|
+        = f.hidden_field :user_id, value: current_user.id
+        = f.hidden_field :player_id, value: @player.id
+        = f.text_area :content, class: "textarea", placeholder: "Comment", rows: 5
+        = f.submit "Add comment", class: "m-t-md button is-primary is-fullwidth" 
+

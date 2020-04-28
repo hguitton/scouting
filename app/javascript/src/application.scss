@@ -2,4 +2,21 @@
 
 @import '../src/base/variables';
 @import '../src/base/spacings';
-@import "../../node_modules/bulma/bulma.sass";
+@import '../src/base/flex';
+@import '../src/vendor/easy-autocomplete';
+@import "bulma";
+@import '../src/vendor/tabulator/tabulator_bulma.scss';
+@import '../src/base/grid';
+@import '../src/components/index';
+body {
+  font-size: 14px;
+}
+
+.disable {
+  opacity: .3;
+  cursor: not-allowed;
+}
+
+.img-player {
+  object-fit: contain;
+}

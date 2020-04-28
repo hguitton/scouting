@@ -1,0 +1,130 @@
+// Flex General
+.flex {
+  display: flex;
+}
+.flex-priority.flex-priority {
+  display: flex;
+}
+.iflex {
+  display: inline-flex;
+}
+.flex-grow {
+  flex-grow: 1;
+}
+.fb33 {
+  flex-basis: 33%;
+}
+.fb50 {
+  flex-basis: 50%;
+}
+.fb100 {
+  flex-basis: 100%;
+}
+.fdr {
+  flex-direction: row;
+}
+.fdrr {
+  flex-direction: row-reverse;
+}
+.fdc {
+  flex-direction: column;
+}
+.fdcr {
+  flex-direction: column-reverse;
+}
+
+// Content Justification
+.jcc {
+  justify-content: center;
+}
+.jcsb {
+  justify-content: space-between;
+}
+.jcsa {
+  justify-content: space-around;
+}
+.jcfs {
+  justify-content: flex-start;
+}
+.jcfe {
+  justify-content: flex-end;
+}
+
+// Item Alignment
+.aic {
+  align-items: center;
+}
+.aifs {
+  align-items: flex-start;
+}
+.aife {
+  align-items: flex-end;
+}
+.ais {
+  align-items: stretch;
+}
+.aib {
+  align-items: baseline;
+}
+
+// Self Alignment
+.asc {
+  align-self: center;
+}
+.asfs {
+  align-self: flex-start;
+}
+.asfe {
+  align-self: flex-end;
+}
+.ass {
+  align-self: stretch;
+}
+.asb {
+  align-self: baseline;
+}
+
+// Content Alignment
+.acc {
+  align-content: center;
+}
+.afcs {
+  align-content: flex-start;
+}
+.acfe {
+  align-content: flex-end;
+}
+.acs {
+  align-content: stretch;
+}
+.acb {
+  align-content: baseline;
+}
+
+// Flex Wrap
+.fwrap {
+  flex-wrap: wrap;
+}
+
+// Columns
+.fcols-2 > * {
+  width: 50%;
+}
+
+// Order
+
+.order-1 {
+  order: 1;
+}
+.order-2 {
+  order: 2;
+}
+.order-3 {
+  order: 3;
+}
+.order-4 {
+  order: 4;
+}
+.order-5 {
+  order: 5;
+}

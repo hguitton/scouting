@@ -1,8 +1,6 @@
-h1 Editing player
+- content_for(:html_title)
+  = "Edit #{@player.name}"
+
+h1.h1.title.has-text-bold.has-text-centered = "Edit : #{@player.name}"
 
 == render 'form'
-
-=> link_to 'Show', @player
-'|
-=< link_to 'Back', players_path
-
