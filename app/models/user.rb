@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable
 
-  if ENV['SIGNUP_ALLOWED']
+  if ENV['SIGNUP_ALLOWED'] == true
     devise :registerable
   end
 end
