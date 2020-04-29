@@ -11,9 +11,7 @@
       .select
         = f.collection_select :status_id, Status.all, :id, :name, {}, class: 'input'
       .select
-        select.input name="player[available]" id="player_available"
-          option value="1" Available
-          option value="0" Not available
+        = f.collection_select :available, ['Available', 'Unknown', 'Not available'], :to_s, :to_s, {}, class: 'input'
     hr
     .grid.grid-6
       .select
