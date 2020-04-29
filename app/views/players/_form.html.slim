@@ -54,7 +54,7 @@
     hr
     .grid.grid-7
       = f.text_field :program, class: "input", placeholder: "College", data: { target: 'scraper.college' }
-      = f.text_field :agent_us, class: "input", placeholder: "Agent US", data: { controller: 'autocomplete', 'autocomplete-resource': 'agents' }
+      = f.text_field :agent_us, class: "input", placeholder: "Agent US", data: { target: 'scraper.agent', controller: 'autocomplete', 'autocomplete-resource': 'agents' }
       = f.text_field :agent_fr, class: "input", placeholder: "Agent FR", data: { controller: 'autocomplete', 'autocomplete-resource': 'agents' }
       - salaries = ['< 50k€', '50k€ - 100k€', '100k€ - 150k€', '150k€ - 200k€', '200k€ - 250k€', '250k€ +']
       .select
