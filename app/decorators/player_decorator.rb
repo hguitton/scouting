@@ -75,10 +75,6 @@ class PlayerDecorator < Draper::Decorator
     end
   end
 
-  def available
-    object.available ? "Dispo." : "Sous contrat"
-  end
-
   private
   def build_last_update(date, user)
     h.tag.div do
