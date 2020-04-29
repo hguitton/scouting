@@ -19,7 +19,7 @@ div data-controller="modal"
         th Available?
 
     tbody
-      - players.decorate.each do |player|
+      - players.order(created_at: :desc).decorate.each do |player|
         tr
           td
             em = player.last_update
