@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :statuses, only: [:show]
   resources :positions, only: [:show]
   resources :profiles, only: [:show]
+  resources :search, only: [:new, :create]
   
   get 'resources/agents', to: "resources#agents"
   get 'resources/countries', to: "resources#countries"

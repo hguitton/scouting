@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_29_144757) do
+ActiveRecord::Schema.define(version: 2020_04_30_133033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,23 @@ ActiveRecord::Schema.define(version: 2020_04_29_144757) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "searches", force: :cascade do |t|
+    t.integer "min_height"
+    t.integer "max_height"
+    t.integer "min_weight"
+    t.integer "max_weight"
+    t.integer "min_age"
+    t.integer "max_age"
+    t.integer "positions", default: [], array: true
+    t.integer "profiles", default: [], array: true
+    t.integer "statuses", default: [], array: true
+    t.integer "available"
+    t.integer "min_salary"
+    t.integer "max_salary"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "seasons", force: :cascade do |t|
     t.integer "player_id"
     t.integer "user_id"
@@ -145,5 +162,4 @@ ActiveRecord::Schema.define(version: 2020_04_29_144757) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
 end

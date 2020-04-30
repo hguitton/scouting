@@ -1,0 +1,90 @@
+= form_for @search, url: search_index_path do |f|
+  .columns.p-t-xl data-controller="format"
+    .column.is-2
+      .title.has-text-bold.has-text-centered.has-text-black Position
+      = f.collection_check_boxes(:positions, Position.order(order: :asc).all, :id, :name) do |b|
+        - b.label class:'m-l-md m-b-sm flex aic'
+          = b.check_box(checked: true)
+          .p-l-sm.is-size-5
+            = b.object.name
+    .column.is-2
+      .title.has-text-bold.has-text-centered.has-text-black Status
+      = f.collection_check_boxes(:statuses, Status.all, :id, :name) do |b|
+        - b.label class:'m-l-md m-b-sm flex aic'
+          = b.check_box(checked: true)
+          .p-l-sm.is-size-5
+            = b.object.name
+    .column.is-3
+      .title.has-text-bold.has-text-centered.has-text-black Informations
+      .flex.fdr.m-b-md
+        div
+          .field.has-addons
+            .control
+              = f.number_field :min_height, class: "input is-format-height", placeholder: "Min height", value: "160"
+            .control
+              a.button.is-static.p-none cm
+          p.help Min Height
+        .m-l-md
+          .field.has-addons
+            .control
+              = f.number_field :max_height, class: "input is-format-height", placeholder: "Min height", value: "240"
+            .control
+              a.button.is-static.p-none cm
+          p.help Max Height
+      .flex.fdr.m-b-md
+        .m-t-md
+          .field.has-addons
+            .control
+              = f.number_field :min_weight, class: "input is-format-weight", placeholder: "Min weight", value: "50"
+            .control
+              a.button.is-static.p-none kg
+          p.help Min Weight
+        .m-t-md.m-l-md
+          .field.has-addons
+            .control
+              = f.number_field :max_weight, class: "input is-format-weight", placeholder: "Max weight", value: "160"
+            .control
+              a.button.is-static.p-none kg
+          p.help Max Weight
+
+      .flex.fdr
+        .m-t-md
+          .field.has-addons
+            .control
+              = f.number_field :min_age, class: "input is-format-weight", placeholder: "Min age", value: "15"
+            .control
+              a.button.is-static.p-none ans
+          p.help Min Age
+        .m-t-md.m-l-md
+          .field.has-addons
+            .control
+              = f.number_field :max_age, class: "input is-format-weight", placeholder: "Max age", value: "45"
+            .control
+              a.button.is-static.p-none ans
+          p.help Max Age
+    .column.is-3
+      .title.has-text-bold.has-text-centered.has-text-black Profile
+      = f.collection_check_boxes(:profiles, Profile.all, :id, :name) do |b|
+        - b.label class:'flex aic m-l-lg m-b-sm' 
+          = b.check_box(checked: true)
+          .p-l-sm.is-size-5
+            = b.object.name
+    .column.is-2
+      .title.has-text-bold.has-text-centered.has-text-black Salary
+      .flex.fdc
+        div
+          .field.has-addons
+            .control
+              = f.number_field :min_salary, class: "input is-format-salary", placeholder: "Min salary", value: "50"
+            .control
+              a.button.is-static.p-none k€   
+          p.help Min. Salary
+
+        .m-t-md
+          .field.has-addons
+            .control
+              = f.number_field :max_salary, class: "input is-format-salary", placeholder: "Max salary", value: "500"
+            .control
+              a.button.is-static.p-none k€   
+          p.help Max. Salary
+  = f.submit "Search", class: "m-t-md button is-primary is-medium is-fullwidth" 
