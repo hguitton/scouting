@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 2020_04_30_133033) do
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
-    t.integer "player_id"
-    t.integer "user_id"
+    t.bigint "player_id"
+    t.bigint "user_id"
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -62,8 +62,8 @@ ActiveRecord::Schema.define(version: 2020_04_30_133033) do
   end
 
   create_table "players_profiles", id: false, force: :cascade do |t|
-    t.integer "player_id"
-    t.integer "profile_id"
+    t.bigint "player_id"
+    t.bigint "profile_id"
     t.index ["player_id"], name: "index_players_profiles_on_player_id"
     t.index ["profile_id"], name: "index_players_profiles_on_profile_id"
   end
@@ -108,8 +108,8 @@ ActiveRecord::Schema.define(version: 2020_04_30_133033) do
   end
 
   create_table "seasons", force: :cascade do |t|
-    t.integer "player_id"
-    t.integer "user_id"
+    t.bigint "player_id"
+    t.bigint "user_id"
     t.string "name"
     t.string "team"
     t.string "country"

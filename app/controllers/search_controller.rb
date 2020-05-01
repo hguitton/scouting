@@ -12,7 +12,16 @@ class SearchController < ApplicationController
     end
   end
 
+  def show
+    @players = @search.find_players
+  end
+
   private
+
+  def set_search
+    @search = Search.find(params[:id])
+  end
+
   def search_params
     params.require(:search).permit(:min_height, :max_height, :min_weight, :max_weight, :min_age, :max_age, :positions, :profiles, :statuses, :available, :min_salary, :max_salary)
   end
