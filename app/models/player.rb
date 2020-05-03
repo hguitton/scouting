@@ -27,7 +27,13 @@ class Player < ApplicationRecord
   end
 
   def self.with_salary_between(min, max)
-
+    start_index = end_index = nil
+    Settings.players.salaries.each_with_index do |salary, index|
+      start_index = index if (salary.min..salary.max).include? min
+      end_index = index if (salary.min..salary.max).include? max
+    end
+    salaries_requested = Settings.players.salaries[start_index..end_index].map(&:name)
+    puts salaries_requested.inspect.red
   end
 
   def self.with_profiles(profile_ids)

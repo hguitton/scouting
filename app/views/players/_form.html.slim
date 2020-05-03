@@ -77,7 +77,7 @@
       div
         label.label Agent FR
         = f.text_field :agent_fr, class: "input", placeholder: "Agent FR", data: { controller: 'autocomplete', 'autocomplete-resource': 'agents' }
-      - salaries = ['< 50k€', '50k€ - 100k€', '100k€ - 150k€', '150k€ - 200k€', '200k€ - 250k€', '250k€ +']
+      - salaries = Settings.players.salaries.map(&:name)
       .select
           = f.collection_select :salary_estimation, salaries, :to_s, :to_s, {}, class: 'input'
       div
