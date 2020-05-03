@@ -1,5 +1,5 @@
 class SearchController < ApplicationController
-  before_action :set_search, only: [:show]
+  before_action :set_search, only: [:show, :update]
   before_action :authenticate_user!
 
   def index
@@ -21,6 +21,13 @@ class SearchController < ApplicationController
   end
 
   def update
+    respond_to do |format|
+      if @search.update(search_params)
+        format.html { redirect_to @search, notice: 'Search was successfully updated.' }
+      else
+        format.html { }
+      end
+    end
   end
 
   private

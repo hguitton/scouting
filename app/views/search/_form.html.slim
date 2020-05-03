@@ -1,17 +1,19 @@
-= form_for @search, url: url, method: :put do |f|
+= form_for @search, url: url do |f|
   .columns.p-t-xl data-controller="format"
     .column.is-2
       .title.has-text-bold.has-text-centered.has-text-black Position
       = f.collection_check_boxes(:positions, Position.order(order: :asc).all, :id, :name) do |b|
         - b.label class:'m-l-md m-b-sm flex aic'
-          = b.check_box(checked: true)
+          - checked = @search.new_record? ? true : @search.positions.include?(b.object.id)
+          = b.check_box(checked: checked)
           .p-l-sm.is-size-5
             = b.object.name
     .column.is-2
       .title.has-text-bold.has-text-centered.has-text-black Status
       = f.collection_check_boxes(:statuses, Status.all, :id, :name) do |b|
         - b.label class:'m-l-md m-b-sm flex aic'
-          = b.check_box(checked: true)
+          - checked = @search.new_record? ? true : @search.statuses.include?(b.object.id)
+          = b.check_box(checked: checked)
           .p-l-sm.is-size-5
             = b.object.name
     .column.is-3
@@ -65,8 +67,9 @@
     .column.is-3
       .title.has-text-bold.has-text-centered.has-text-black Profile
       = f.collection_check_boxes(:profiles, Profile.all, :id, :name) do |b|
-        - b.label class:'flex aic m-l-lg m-b-sm' 
-          = b.check_box
+        - b.label class:'flex aic m-l-lg m-b-sm'
+          - checked = @search.new_record? ? false : @search.profiles.include?(b.object.id)
+          = b.check_box(checked: checked)
           .p-l-sm.is-size-5
             = b.object.name
     .column.is-2

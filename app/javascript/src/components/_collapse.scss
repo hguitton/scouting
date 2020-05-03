@@ -1,0 +1,13 @@
+.collapse {
+  transition: max-height 0.3s;
+  will-change: max-height;
+}
+
+.collapse-closed {
+  max-height: 0;
+  overflow: hidden;
+}
+
+.collapse-opened {
+  max-height: 100vh;
+}
