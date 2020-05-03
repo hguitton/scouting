@@ -37,6 +37,20 @@ class SearchController < ApplicationController
   end
 
   def search_params
-    params.require(:search).permit(:min_height, :max_height, :min_weight, :max_weight, :min_age, :max_age, :available, :min_salary, :max_salary, positions: [], profiles: [], statuses: [])
+    params.require(:search).permit(
+      :min_height, 
+      :max_height, 
+      :min_weight, 
+      :max_weight, 
+      :min_age, 
+      :max_age, 
+      :min_salary, 
+      :max_salary, 
+      available: [], 
+      positions: [], 
+      profiles: [], 
+      statuses: [],
+      priorities: []
+    )
   end
 end

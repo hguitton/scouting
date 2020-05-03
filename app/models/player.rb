@@ -63,4 +63,9 @@ class Player < ApplicationRecord
       puts "Invalid Date"
     end
   end
+
+  def set_defaults
+    self.height_eu = 0 if self.height_eu.nil?
+    self.weight_eu = 0 if self.weight_eu.nil?
+  end
 end
