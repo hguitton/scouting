@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_02_183618) do
+ActiveRecord::Schema.define(version: 2020_05_03_184628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,11 +101,12 @@ ActiveRecord::Schema.define(version: 2020_05_02_183618) do
     t.integer "positions", default: [], array: true
     t.integer "profiles", default: [], array: true
     t.integer "statuses", default: [], array: true
-    t.integer "available"
     t.integer "min_salary"
     t.integer "max_salary"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "priorities", default: [], array: true
+    t.string "available", default: [], array: true
   end
 
   create_table "seasons", force: :cascade do |t|

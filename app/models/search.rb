@@ -8,8 +8,8 @@ class Search < ApplicationRecord
           .with_status(statuses)
           .with_age_between(min_age,max_age)
           .with_profiles(profiles.reject(&:blank?))
-          #.with_salary
-          #.with_available
+          .with_salary_between(min_salary, max_salary)
+          .with_available(available)
           #.with_priority
   end
 end

@@ -73,8 +73,8 @@
           .p-l-sm.is-size-5
             = b.object.name
     .column.is-2
-      .title.has-text-bold.has-text-centered.has-text-black Salary
       .flex.fdc
+        .title.has-text-bold.has-text-centered.has-text-black Salary
         div
           .field.has-addons
             .control
@@ -90,4 +90,12 @@
             .control
               a.button.is-static.p-none k€   
           p.help Max. Salary
+        .title.has-text-bold.has-text-centered.has-text-black Available
+        = f.collection_check_boxes(:profiles, Profile.all, :id, :name) do |b|
+          - b.label class:'flex aic m-l-lg m-b-sm'
+            - checked = @search.new_record? ? true : @search.available.include?(b.object.id)
+            = b.check_box(checked: checked)
+            .p-l-sm.is-size-5
+              = b.object.name
+
   = f.submit "Search", class: "m-t-md button is-primary is-medium is-fullwidth" 

@@ -21,6 +21,7 @@ class Player < ApplicationRecord
   scope :with_weight_between, -> (min, max) { where(weight_eu: min..max) }
   scope :with_position, -> (position_ids) { where(position_id: position_ids) }
   scope :with_status, -> (status_ids) { where(status_id: status_ids) }
+  scope :with_available, -> (available) { where(available: available) }
   
   def self.with_age_between(min, max)
     where(birthdate_timestamp: max.years.ago..min.years.ago)
@@ -33,7 +34,7 @@ class Player < ApplicationRecord
       end_index = index if (salary.min..salary.max).include? max
     end
     salaries_requested = Settings.players.salaries[start_index..end_index].map(&:name)
-    puts salaries_requested.inspect.red
+    where(salary_real: min..max).or(Player.where(salary_real: "").where(salary_estimation: salaries_requested))
   end
 
   def self.with_profiles(profile_ids)
