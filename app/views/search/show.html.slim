@@ -1,0 +1,9 @@
+- content_for(:html_title)
+  = "Search results"
+
+h1.h1.title.has-text-bold.has-text-centered Search results : 
+
+= render 'form', url: search_path(@search)
+
+#results
+  = render 'shared/table_players', players: @players

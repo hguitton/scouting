@@ -1,4 +1,4 @@
-= form_for @search, url: search_index_path do |f|
+= form_for @search, url: url, method: :put do |f|
   .columns.p-t-xl data-controller="format"
     .column.is-2
       .title.has-text-bold.has-text-centered.has-text-black Position
@@ -20,14 +20,14 @@
         div
           .field.has-addons
             .control
-              = f.number_field :min_height, class: "input is-format-height", placeholder: "Min height", value: "160"
+              = f.number_field :min_height, class: "input is-format-height", placeholder: "Min height", value: "#{@search.min_height ||= '160'}"
             .control
               a.button.is-static.p-none cm
           p.help Min Height
         .m-l-md
           .field.has-addons
             .control
-              = f.number_field :max_height, class: "input is-format-height", placeholder: "Min height", value: "240"
+              = f.number_field :max_height, class: "input is-format-height", placeholder: "Min height", value: "#{@search.max_height ||= '240'}"
             .control
               a.button.is-static.p-none cm
           p.help Max Height
@@ -35,14 +35,14 @@
         .m-t-md
           .field.has-addons
             .control
-              = f.number_field :min_weight, class: "input is-format-weight", placeholder: "Min weight", value: "50"
+              = f.number_field :min_weight, class: "input is-format-weight", placeholder: "Min weight", value: "#{@search.min_weight ||= '50'}"
             .control
               a.button.is-static.p-none kg
           p.help Min Weight
         .m-t-md.m-l-md
           .field.has-addons
             .control
-              = f.number_field :max_weight, class: "input is-format-weight", placeholder: "Max weight", value: "160"
+              = f.number_field :max_weight, class: "input is-format-weight", placeholder: "Max weight", value: "#{@search.max_weight ||= '160'}"
             .control
               a.button.is-static.p-none kg
           p.help Max Weight
@@ -51,14 +51,14 @@
         .m-t-md
           .field.has-addons
             .control
-              = f.number_field :min_age, class: "input is-format-weight", placeholder: "Min age", value: "15"
+              = f.number_field :min_age, class: "input is-format-weight", placeholder: "Min age", value: "#{@search.min_age ||= '15'}"
             .control
               a.button.is-static.p-none ans
           p.help Min Age
         .m-t-md.m-l-md
           .field.has-addons
             .control
-              = f.number_field :max_age, class: "input is-format-weight", placeholder: "Max age", value: "45"
+              = f.number_field :max_age, class: "input is-format-weight", placeholder: "Max age", value: "#{@search.max_age ||= '45'}"
             .control
               a.button.is-static.p-none ans
           p.help Max Age
@@ -66,7 +66,7 @@
       .title.has-text-bold.has-text-centered.has-text-black Profile
       = f.collection_check_boxes(:profiles, Profile.all, :id, :name) do |b|
         - b.label class:'flex aic m-l-lg m-b-sm' 
-          = b.check_box(checked: true)
+          = b.check_box
           .p-l-sm.is-size-5
             = b.object.name
     .column.is-2
