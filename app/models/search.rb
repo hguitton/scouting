@@ -11,7 +11,7 @@ class Search < ApplicationRecord
           .with_profiles(profiles.reject(&:blank?))
           .with_salary_between(min_salary, max_salary)
           .with_available(available)
-          #.with_priority
+          .with_priority(priorities)
   end
 
   def set_defaults

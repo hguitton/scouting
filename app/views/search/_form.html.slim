@@ -20,7 +20,7 @@
         .title.has-text-bold.has-text-centered.has-text-black.m-t-md Priority
         = f.collection_check_boxes(:priorities, Priority.all, :id, :name) do |b|
           - b.label class:'flex aic m-l-md m-b-sm'
-            - checked = @search.new_record? ? true : @search.profiles.include?(b.object.id)
+            - checked = @search.new_record? ? true : @search.priorities.include?(b.object.id)
             = b.check_box(checked: checked)
             .p-l-sm.is-size-5
               = b.object.name
@@ -87,7 +87,7 @@
         div
           .field.has-addons
             .control
-              = f.number_field :min_salary, class: "input is-format-salary", placeholder: "Min salary", value: "40"
+              = f.number_field :min_salary, class: "input is-format-salary", placeholder: "Min salary", value: "#{@search.min_salary ||= '40'}"
             .control
               a.button.is-static.p-none k€   
           p.help Min. Salary
@@ -95,7 +95,7 @@
         .m-t-md
           .field.has-addons
             .control
-              = f.number_field :max_salary, class: "input is-format-salary", placeholder: "Max salary", value: "500"
+              = f.number_field :max_salary, class: "input is-format-salary", placeholder: "Max salary", value: "#{@search.max_salary ||= '500'}"
             .control
               a.button.is-static.p-none k€   
           p.help Max. Salary

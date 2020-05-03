@@ -21,6 +21,7 @@ class Player < ApplicationRecord
   scope :with_weight_between, -> (min, max) { where(weight_eu: min..max) }
   scope :with_position, -> (position_ids) { where(position_id: position_ids) }
   scope :with_status, -> (status_ids) { where(status_id: status_ids) }
+  scope :with_priority, -> (priority_ids) { where(priority_id: priority_ids) }
   scope :with_available, -> (available) { where(available: available) }
   
   def self.with_age_between(min, max)
