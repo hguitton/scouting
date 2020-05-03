@@ -21,7 +21,7 @@
       div
         label.label Position
         .select
-          = f.collection_select :available, ['Available', 'Unknown', 'Not available'], :to_s, :to_s, {}, class: 'input'
+          = f.collection_select :available, Settings.players.available, :to_s, :to_s, {}, class: 'input'
     hr
     .grid.grid-6
       div

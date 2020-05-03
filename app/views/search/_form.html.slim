@@ -9,13 +9,22 @@
           .p-l-sm.is-size-5
             = b.object.name
     .column.is-2
-      .title.has-text-bold.has-text-centered.has-text-black Status
-      = f.collection_check_boxes(:statuses, Status.all, :id, :name) do |b|
-        - b.label class:'m-l-md m-b-sm flex aic'
-          - checked = @search.new_record? ? true : @search.statuses.include?(b.object.id)
-          = b.check_box(checked: checked)
-          .p-l-sm.is-size-5
-            = b.object.name
+      .flex.fdc
+        .title.has-text-bold.has-text-centered.has-text-black Status
+        = f.collection_check_boxes(:statuses, Status.all, :id, :name) do |b|
+          - b.label class:'flex aic m-l-md m-b-sm'
+            - checked = @search.new_record? ? true : @search.statuses.include?(b.object.id)
+            = b.check_box(checked: checked)
+            .p-l-sm.is-size-5
+              = b.object.name
+        .title.has-text-bold.has-text-centered.has-text-black.m-t-md Priority
+        = f.collection_check_boxes(:priorities, Priority.all, :id, :name) do |b|
+          - b.label class:'flex aic m-l-md m-b-sm'
+            - checked = @search.new_record? ? true : @search.profiles.include?(b.object.id)
+            = b.check_box(checked: checked)
+            .p-l-sm.is-size-5
+              = b.object.name
+
     .column.is-3
       .title.has-text-bold.has-text-centered.has-text-black Informations
       .flex.fdr.m-b-md
@@ -90,12 +99,13 @@
             .control
               a.button.is-static.p-none k€   
           p.help Max. Salary
-        .title.has-text-bold.has-text-centered.has-text-black Available
-        = f.collection_check_boxes(:profiles, Profile.all, :id, :name) do |b|
-          - b.label class:'flex aic m-l-lg m-b-sm'
-            - checked = @search.new_record? ? true : @search.available.include?(b.object.id)
+        
+        .m-t-md.title.has-text-bold.has-text-centered.has-text-black Available
+        = f.collection_check_boxes(:available, Settings.players.available, :to_s, :to_s) do |b|
+          - b.label class:'flex aic m-b-sm'
+            - checked = @search.new_record? ? true : @search.available.include?(b.object)
             = b.check_box(checked: checked)
             .p-l-sm.is-size-5
-              = b.object.name
+              = b.object
 
   = f.submit "Search", class: "m-t-md button is-primary is-medium is-fullwidth" 

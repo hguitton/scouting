@@ -1,4 +1,5 @@
 players:
+  available: ['Available', 'Unknown', 'Not available']
   salaries:
     - 
       name: "< 50k€"
