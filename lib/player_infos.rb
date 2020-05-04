@@ -30,7 +30,7 @@ class PlayerInfos
       @infos[:nationality] = scrape_nationality(text_content(row))
     when 'college'
       @infos[:college] = scrape_basic(link_content(row))
-    when 'agency'
+    when 'agency', 'agent'
       @infos[:agent] = scrape_basic(link_content(row))
     when 'position'
       @infos[:position] = Position.find_by(name: scrape_basic(text_content(row)))&.id
