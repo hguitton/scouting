@@ -35,6 +35,8 @@ class PlayerInfos
       @infos[:agent] = scrape_basic(link_content(row))
     when 'position'
       @infos[:position] = Position.find_by(name: scrape_basic(text_content(row)))&.id
+    when 'team'
+      @league = scrape_basic(link_content(row)).split.last.tr('()', '')
     end
   end
 
@@ -75,9 +77,14 @@ class PlayerInfos
     stats = {}
     row = content.css('h4')[0]&.text&.split
     return stats unless row
-    stats[:name] = row[1]
-    stats[:country] = row[2].tr('()', '')
-    line = content.css('table')[1]&.css('.my_pStats1')&.css('td').map(&:text)
+    header = ""
+    title = content.css('h4').map(&:text).select{|t| t.include?(@league)}.first
+  
+    stats[:name] = title.split[1].gsub('-', ' - ')
+    stats[:country] = title[/\(.*?\)/].tr('()', '')
+
+    table = content.xpath("//h4[text()='#{title}']/following-sibling::table")[1]
+    line = table&.css('.my_pStats1')&.css('td').map(&:text)
     stats[:team] = line[0]
     stats[:min] = line[2]
     stats[:points] = line[3]

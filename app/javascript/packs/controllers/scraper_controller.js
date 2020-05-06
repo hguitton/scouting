@@ -35,10 +35,10 @@ export default class extends Controller {
         this.targets.find(field).value = infos[field]
       }
     });
-
-    ["team", "min", "points", "fgp", "three_fgp", "orb", "drb", "trb", "ast", "blk", "stl"].forEach(field => {
+    const base = "player[seasons_attributes][0][";
+    ["name", "country", "team", "min", "points", "fgp", "three_fgp", "orb", "drb", "trb", "ast", "blk", "stl"].forEach(field => {
       if(field in infos["stats"]){
-        console.log(field);
+        document.getElementsByName(base + field + "]")[0].value = infos["stats"][field]
       }
     })
   }
