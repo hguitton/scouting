@@ -19,11 +19,7 @@ class ResourcesController < ApplicationController
 
   def teams
     custom_teams = Season.all.pluck(:team).uniq
-    teams = []
-    10.times do
-      teams << Faker::Sports::Basketball.team
-    end
-    render json: (teams + custom_teams).uniq
+    render json: custom_teams.uniq
   end
 
   def player_informations
