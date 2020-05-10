@@ -1,17 +1,43 @@
 .nested-fields.grid.grid-season.m-t-md
   = f.hidden_field :user_id, value: current_user.id
-  .select
-    = f.collection_select :name, list_seasons, :to_s, :to_s, {}, class: 'input'
-  = f.text_field :country, class: "input", placeholder: "League", data: { controller: 'autocomplete', 'autocomplete-resource': 'leagues' }
-  = f.text_field :team, class: "input", placeholder: "Team", data: { controller: 'autocomplete', 'autocomplete-resource': 'teams' }
-  = f.text_field :min, class: "input", placeholder: "Mins."
-  = f.text_field :points, class: "input", placeholder: "Points"
-  = f.text_field :fgp, class: "input", placeholder: "FG%"
-  = f.text_field :three_fgp, class: "input", placeholder: "3FG%"
-  = f.text_field :orb, class: "input", placeholder: "ORB"
-  = f.text_field :drb, class: "input", placeholder: "DRB"
-  = f.text_field :trb, class: "input", placeholder: "TRB"
-  = f.text_field :ast, class: "input", placeholder: "AST"
-  = f.text_field :blk, class: "input", placeholder: "BLK"
-  = f.text_field :stl, class: "input", placeholder: "STL"
+  .field
+    .select
+      = f.collection_select :name, list_seasons, :to_s, :to_s, {}, class: 'input'
+    p.help Season
+  .field
+    = f.text_field :country, class: "input", placeholder: "League", data: { controller: 'autocomplete', 'autocomplete-resource': 'leagues' }
+    p.help League
+  .field
+    = f.text_field :team, class: "input", placeholder: "Team", data: { controller: 'autocomplete', 'autocomplete-resource': 'teams' }
+    p.help Team
+  .field
+    = f.text_field :min, class: "input", placeholder: "Mins."
+    p.help Minutes
+  .field
+    = f.text_field :points, class: "input", placeholder: "Points"
+    p.help Points
+  .field
+    = f.text_field :fgp, class: "input", placeholder: "FG%"
+    p.help FG%
+  .field
+    = f.text_field :three_fgp, class: "input", placeholder: "3FG%"
+    p.help 3FG%
+  .field
+    = f.text_field :orb, class: "input", placeholder: "ORB"
+    p.help ORB
+  .field
+    = f.text_field :drb, class: "input", placeholder: "DRB"
+    p.help DRB
+  .field
+    = f.text_field :trb, class: "input", placeholder: "TRB"
+    p.help TRB
+  .field
+    = f.text_field :ast, class: "input", placeholder: "AST"
+    p.help Assists
+  .field
+    = f.text_field :blk, class: "input", placeholder: "BLK"
+    p.help Blocks
+  .field
+    = f.text_field :stl, class: "input", placeholder: "STL"
+    p.help Steals
   = link_to_remove_association "Remove", f, class: "button is-danger"

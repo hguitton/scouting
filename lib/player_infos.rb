@@ -8,12 +8,13 @@ class PlayerInfos
   def initialize(url)
     @infos = {}
     if url =~ URI::regexp
-      doc = Nokogiri::HTML(open(url))
+      doc = Nokogiri::HTML(open(url, 'Cookie' => ENV["COOKIE"]))
       doc.css('#teamlogo div>div>div b').each do |row|
         scrape_row(row)
       end
       @infos[:name] = scrape_name(doc.css('.playertitle'))
       @infos[:photo] = scrape_photo(doc.css('#PlayerInfo'))
+      @infos[:stats] = scrape_stats(doc.css("#divStatsData"))
     end
   end
 
@@ -30,10 +31,12 @@ class PlayerInfos
       @infos[:nationality] = scrape_nationality(text_content(row))
     when 'college'
       @infos[:college] = scrape_basic(link_content(row))
-    when 'agency'
+    when 'agency', 'agent'
       @infos[:agent] = scrape_basic(link_content(row))
     when 'position'
       @infos[:position] = Position.find_by(name: scrape_basic(text_content(row)))&.id
+    when 'team'
+      @league = scrape_basic(link_content(row)).split.last.tr('()', '')
     end
   end
 
@@ -68,6 +71,32 @@ class PlayerInfos
       return c["name"] if c["nationalities"].include? nationality
     end
     return ""
+  end
+
+  def scrape_stats(content)
+    stats = {}
+    row = content.css('h4')[0]&.text&.split
+    return stats unless row
+    header = ""
+    title = content.css('h4').map(&:text).select{|t| t.include?(@league)}.first
+  
+    stats[:name] = title.split[1].gsub('-', ' - ')
+    stats[:country] = title[/\(.*?\)/].tr('()', '')
+
+    table = content.xpath("//h4[text()='#{title}']/following-sibling::table")[1]
+    line = table&.css('.my_pStats1')&.css('td').map(&:text)
+    stats[:team] = line[0]
+    stats[:min] = line[2]
+    stats[:points] = line[3]
+    stats[:fgp] = line[4]
+    stats[:three_fgp] = line[5]
+    stats[:orb] = line[7]
+    stats[:drb] = line[8]
+    stats[:trb] = line[9]
+    stats[:ast] = line[10]
+    stats[:blk] = line[12]
+    stats[:stl] = line[13]
+    stats
   end
 
   def text_content(row)

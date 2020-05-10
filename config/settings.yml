@@ -1,0 +1,28 @@
+players:
+  available: ['Available', 'Unknown', 'Not available']
+  salaries:
+    - 
+      name: "< 50k€"
+      min: 0
+      max: 49
+    - 
+      name: "50k€ - 99k€"
+      min: 50
+      max: 99
+    - 
+      name: "100k€ - 149k€"
+      min: 100
+      max: 149
+    - 
+      name: "150k€ - 199k€"
+      min: 150
+      max: 199
+    - 
+      name: "200k€ - 249k€"
+      min: 200
+      max: 249
+    - 
+      name: "250k€ +"
+      min: 250
+      max: 999
+version: "0.2"
