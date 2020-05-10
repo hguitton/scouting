@@ -19,7 +19,7 @@ section.m-t-md
       - @player.profiles.each do |profile|
         span.tag.is-info.is-medium.m-r-sm = profile.name
 
-    - if @player.salary_real.present?
+    - unless @player.salary_real.zero?
       .m-b-md
         strong.m-r-sm Salary:
         span = @player.salary_real + "k€"

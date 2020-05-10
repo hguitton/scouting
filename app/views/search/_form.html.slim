@@ -46,7 +46,7 @@
         .m-t-md
           .field.has-addons
             .control
-              = f.number_field :min_weight, class: "input is-format-weight", placeholder: "Min weight", value: "#{@search.min_weight ||= '50'}"
+              = f.number_field :min_weight, class: "input is-format-weight", placeholder: "Min weight", value: "#{@search.min_weight ||= '0'}"
             .control
               a.button.is-static.p-none kg
           p.help Min Weight

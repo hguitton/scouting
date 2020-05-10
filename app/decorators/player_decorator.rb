@@ -38,7 +38,7 @@ class PlayerDecorator < Draper::Decorator
   end
 
   def salary
-    return object.salary_real + 'k€' if object.salary_real.present?
+    return "#{object.salary_real}k€" if object.salary_real.present?
     object.salary_estimation
   end
 

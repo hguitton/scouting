@@ -1,6 +1,7 @@
 class Player < ApplicationRecord
   after_save :add_birthdate_timestamp
-  
+  before_save :set_defaults
+
   belongs_to :level
   belongs_to :status
   belongs_to :priority
@@ -35,7 +36,7 @@ class Player < ApplicationRecord
       end_index = index if (salary.min..salary.max).include? max
     end
     salaries_requested = Settings.players.salaries[start_index..end_index].map(&:name)
-    where(salary_real: min..max).or(Player.where(salary_real: "").where(salary_estimation: salaries_requested))
+    where(salary_real: min..max).or(Player.where(salary_real: [0, nil]).where(salary_estimation: salaries_requested))
   end
 
   def self.with_profiles(profile_ids)
