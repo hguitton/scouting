@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_29_144757) do
+ActiveRecord::Schema.define(version: 2020_05_10_093519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
-    t.integer "player_id"
-    t.integer "user_id"
+    t.bigint "player_id"
+    t.bigint "user_id"
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2020_04_29_144757) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "program"
-    t.string "salary_real"
+    t.integer "salary_real"
     t.string "links"
     t.bigint "level_id"
     t.bigint "updated_by_user_id"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2020_04_29_144757) do
     t.bigint "status_id"
     t.bigint "position_id"
     t.string "photo"
+    t.datetime "birthdate_timestamp"
     t.index ["level_id"], name: "index_players_on_level_id"
     t.index ["position_id"], name: "index_players_on_position_id"
     t.index ["priority_id"], name: "index_players_on_priority_id"
@@ -62,8 +63,8 @@ ActiveRecord::Schema.define(version: 2020_04_29_144757) do
   end
 
   create_table "players_profiles", id: false, force: :cascade do |t|
-    t.integer "player_id"
-    t.integer "profile_id"
+    t.bigint "player_id"
+    t.bigint "profile_id"
     t.index ["player_id"], name: "index_players_profiles_on_player_id"
     t.index ["profile_id"], name: "index_players_profiles_on_profile_id"
   end
@@ -90,9 +91,27 @@ ActiveRecord::Schema.define(version: 2020_04_29_144757) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "searches", force: :cascade do |t|
+    t.integer "min_height"
+    t.integer "max_height"
+    t.integer "min_weight"
+    t.integer "max_weight"
+    t.integer "min_age"
+    t.integer "max_age"
+    t.integer "positions", default: [], array: true
+    t.integer "profiles", default: [], array: true
+    t.integer "statuses", default: [], array: true
+    t.integer "min_salary"
+    t.integer "max_salary"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "available", default: [], array: true
+    t.integer "priorities", default: [], array: true
+  end
+
   create_table "seasons", force: :cascade do |t|
-    t.integer "player_id"
-    t.integer "user_id"
+    t.bigint "player_id"
+    t.bigint "user_id"
     t.string "name"
     t.string "team"
     t.string "country"
