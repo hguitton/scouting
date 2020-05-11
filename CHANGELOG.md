@@ -2,6 +2,9 @@
 
 ## develop
 
+# 10-05-20: 0.2.1
+- Hotfix: Fix salary default bug
+
 # 10-05-20: 0.2
 - Search Feature
 - Add labels to form
