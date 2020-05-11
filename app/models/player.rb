@@ -69,5 +69,6 @@ class Player < ApplicationRecord
   def set_defaults
     self.height_eu = 0 if self.height_eu.nil?
     self.weight_eu = 0 if self.weight_eu.nil?
+    self.salary_real = 0 if self.salary_real.nil?
   end
 end
