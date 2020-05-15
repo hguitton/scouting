@@ -31,6 +31,7 @@ gem 'simple_form'
 gem 'cocoon'
 gem 'nokogiri'
 gem 'bulma-rails', '~> 0.6.2'
+gem 'sentry-raven'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 gem 'dotenv-rails', groups: [:development, :test]
