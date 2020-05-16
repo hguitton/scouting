@@ -11,9 +11,9 @@ FactoryBot.define do
     height_eu { Faker::Demographic.height }
     weight_us { Faker::Number.between(from: 100, to: 300) }
     weight_eu { Faker::Number.between(from: 70, to: 150) }
-    salary_estimation { ['< 50k€', '50k€ - 100k€', '100k€ - 150k€', '150k€ - 200k€', '200k€ - 250k€', '250k€+ '].sample }
+    salary_estimation { ['< 50k€', '50k€ - 99k€', '100k€ - 149k€', '150k€ - 199k€', '200k€ - 249k€', '250k€+ '].sample }
     salary_real { Faker::Number.between(from: 50, to: 300) }
-    available { true }
+    available { "Available" }
     program { Faker::Educator.campus }
     level_id { create(:level).id }
     updated_by_user_id { create(:user).id }

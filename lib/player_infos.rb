@@ -79,11 +79,14 @@ class PlayerInfos
     return stats unless row
     header = ""
     title = content.css('h4').map(&:text).select{|t| t.include?(@league)}.first
-  
+    unless title
+      title = content.css('h4').map(&:text).first
+    end
+    table = content.xpath("//h4[text()='#{title}']/following-sibling::table")[1]
+    puts table.inspect.red
     stats[:name] = title.split[1].gsub('-', ' - ')
     stats[:country] = title[/\(.*?\)/].tr('()', '')
-
-    table = content.xpath("//h4[text()='#{title}']/following-sibling::table")[1]
+    
     line = table&.css('.my_pStats1')&.css('td').map(&:text)
     stats[:team] = line[0]
     stats[:min] = line[2]

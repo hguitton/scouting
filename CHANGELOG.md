@@ -2,6 +2,12 @@
 
 ## develop
 
+# 16-05-20: 0.2.3
+- Fix scraper
+
+# 11-05-20: 0.2.2
+- Hotfix: Fix salary decorator
+
 # 10-05-20: 0.2.1
 - Hotfix: Fix salary default bug
 

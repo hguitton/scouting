@@ -9,6 +9,7 @@ section.hero.is-info
         div
           .title.is-1 = @player.name
           .subtitle.is-3 = @player.position.name
+      .subtitle.is-4.has-text-weight-bold  = "Age : #{@player.age}"
       .subtitle.is-4.has-text-weight-bold  = "#{@player.height_eu}cm - #{@player.weight_eu}kg"
       = link_to 'Edit Player', edit_player_path(@player), class:"button is-warning"
 
@@ -22,7 +23,7 @@ section.m-t-md
     - unless @player.salary_real.zero?
       .m-b-md
         strong.m-r-sm Salary:
-        span = @player.salary_real + "k€"
+        span = "#{@player.salary_real}k€"
     - else 
       .m-b-md
         strong.m-r-sm Salary est. :
