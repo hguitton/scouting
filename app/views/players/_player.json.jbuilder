@@ -1,5 +1,5 @@
 json.(player, :name, :birthdate, :height_eu, :weight_eu, :height_us, :weight_us, :position, :status, :salary_estimation, :salary_real, :created_at, :updated_at)
-json.updated_by "Hugo"
+json.updated_by_user
 json.program ""
 json.available true
 json.profiles player.profiles, :name
