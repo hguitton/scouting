@@ -2,6 +2,24 @@ require 'rails_helper'
 
 RSpec.describe PlayerDecorator do
   let(:player) { create(:player).decorate }
+  let(:user) { create(:user) }
+  
+  before :each do
+    sign_in user
+  end
+
+  describe '#favorite_star' do
+    context 'is not in favorites' do 
+      let(:condition) {'.*class="icon" data-controller="favorite" data-favorite-url="/users/.*/add_favorite.*favorite#fav.*'}
+      it { expect(player.favorite_star).to match(condition) }
+    end
+    
+    context "is in favorites" do
+      before { user.favorite_players << player }
+      let(:condition) {'.*class="icon has-text-warning" data-controller="favorite" data-favorite-url="/users/.*/remove_favorite.*favorite#unfav.*'}
+      it { expect(player.favorite_star).to match(condition) }
+    end
+  end
 
   describe '#last_update' do
     context 'by creator' do 
