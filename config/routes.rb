@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   resources :users do 
     member do
       get :favorites
-      post 'add_favorite', to: "users#add_fav_player"
-      post 'remove_favorite', to: "users#remove_fav_player"
+      post 'add_favorite/:player_id', to: "users#add_fav_player", as: :add_favorite
+      post 'remove_favorite/:player_id', to: "users#remove_fav_player", as: :remove_favorite
     end
   end
   get 'resources/agents', to: "resources#agents"
