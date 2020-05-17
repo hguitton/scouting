@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :positions, only: [:show]
   resources :profiles, only: [:show]
   resources :search, only: [:index, :new, :create, :show, :update]
+  resources :rosters
   resources :users do 
     member do
       get :favorites

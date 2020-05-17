@@ -1,0 +1,15 @@
+- content_for(:html_title)
+  = "Rosters"
+
+h1.h1.title.has-text-centered Rosters
+.columns.is-mobile
+  .column.is-half-desktop.is-offset-one-quarter-desktop.is-fullwidth-mobile
+    - @rosters.each do |roster|
+      .flex.fdr.jcsb
+        .asc.has-text-centered.has-text-weight-bold = roster.name 
+        .asc.has-text-centered
+          em = roster.description 
+        .asc.has-text-centered
+          td.has-text-centered = link_to 'Open / Update', roster_path(roster), class:"button is-info is-small"
+          td.has-text-centered = link_to 'Delete', roster_path(roster), class:"button is-danger m-l-sm is-small", method: :delete
+      hr

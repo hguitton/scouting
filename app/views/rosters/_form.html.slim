@@ -1,0 +1,6 @@
+.columns.is-mobile
+  .column.is-one-third-desktop.is-offset-one-third-desktop.is-fullwidth-mobile.p-t-xl
+    = form_for @roster do |f|
+      = f.text_field :name, class: "input", placeholder: "Roster name"
+      = f.text_field :description, class: "input m-t-md", placeholder: "Description"
+      = f.submit "Create", class: "m-t-md button is-primary is-fullwidth"
