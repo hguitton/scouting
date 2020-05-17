@@ -13,4 +13,8 @@ module ApplicationHelper
   def countries_list
     YAML.load_file("#{Rails.root.to_s}/config/data/countries.yml")["countries"]
   end
+
+  def users_list
+    User.where.not(id: 1).where.not(id: current_user.id)
+  end
 end

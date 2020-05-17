@@ -13,7 +13,8 @@ class Player < ApplicationRecord
   accepts_nested_attributes_for :socials, allow_destroy: true, reject_if: proc { |att| att[:link].blank? }
   has_many :comments
   accepts_nested_attributes_for :comments, allow_destroy: true, reject_if: proc { |att| att[:content].blank? }
-
+  
+  has_and_belongs_to_many :favorited_by_users, class_name: "User", join_table: "players_users"
   belongs_to :user, foreign_key: "updated_by_user_id"
   validates :name, :nationality, presence: true
   

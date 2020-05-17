@@ -3,31 +3,41 @@ import Cleave from "cleave.js"
 
 export default class extends Controller {
   connect() {
-    new Cleave('.is-format-birthdate', {
-      date: true,
-      delimiter: '-',
-      datePattern: ['d', 'm', 'Y']
-    });
+    if ($('.is-format-birthdate').length > 0) {
+      new Cleave('.is-format-birthdate', {
+        date: true,
+        delimiter: '-',
+        datePattern: ['d', 'm', 'Y']
+      });
+    }
 
-    new Cleave('.is-format-height-us', {
-      numericOnly: true,
-      delimiters: ['\'', '\"'],
-      blocks: [1, 2],
-    });
+    if ($('.is-format-height-us').length > 0) {
+      new Cleave('.is-format-height-us', {
+        numericOnly: true,
+        delimiters: ['\'', '\"'],
+        blocks: [1, 2],
+      });
+    }
 
-    new Cleave('.is-format-salary', {
-      numericOnly: true,
-      blocks: [3]
-    });
+    if ($('.is-format-salary').length > 0) {
+      new Cleave('.is-format-salary', {
+        numericOnly: true,
+        blocks: [3]
+      });
+    }
+    
+    if ($('.is-format-weight').length > 0) {
+      new Cleave('.is-format-weight', {
+        numericOnly: true,
+        blocks: [3]
+      });
+    }
 
-    new Cleave('.is-format-weight', {
-      numericOnly: true,
-      blocks: [3]
-    });
-
-    new Cleave('.is-format-height', {
-      numericOnly: true,
-      blocks: [3]
-    });
+    if ($('.is-format-height').length > 0) {
+      new Cleave('.is-format-height', {
+        numericOnly: true,
+        blocks: [3]
+      });
+    }
   }
 }

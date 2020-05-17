@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_10_093519) do
+ActiveRecord::Schema.define(version: 2020_05_16_125630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,15 @@ ActiveRecord::Schema.define(version: 2020_05_10_093519) do
     t.bigint "profile_id"
     t.index ["player_id"], name: "index_players_profiles_on_player_id"
     t.index ["profile_id"], name: "index_players_profiles_on_profile_id"
+  end
+
+  create_table "players_users", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "player_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["player_id"], name: "index_players_users_on_player_id"
+    t.index ["user_id"], name: "index_players_users_on_user_id"
   end
 
   create_table "positions", force: :cascade do |t|
