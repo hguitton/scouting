@@ -25,13 +25,8 @@ export default class extends Controller {
                         invalidPlaceholder: "(invalid date)",
                     }
                 },
-                {
-                    title: "Height", columns: [
-                        { title: "Height_eu", field: "height_eu" },
-                        { title: "Height_us", field: "height_us" },
-                    ],
-                },
-                { title: "Weight", field: "weight_eu", },
+                { title: "Height", field: "height", formatter: this.formatHeight },
+                { title: "Weight", field: "weight", formatter: this.formatWeight },
                 { title: "status", field: "status", formatter: this.formatName },
                 //{ title: "Nat.", field: "nationality", },
                 { title: "Pos.", field: "position", formatter: this.formatName },
@@ -55,6 +50,20 @@ export default class extends Controller {
         var valueReturn = "";
         if (cell.getValue() != null)
             valueReturn = cell.getValue().name;
+        return valueReturn
+    }
+
+    formatHeight(cell, formatterParams, onRendered) {
+        var valueReturn = "";
+        if (cell.getValue() != null)
+            valueReturn = cell.getValue().height_eu + '<br/>' + cell.getValue().height_us;
+        return valueReturn
+    }
+
+    formatWeight(cell, formatterParams, onRendered) {
+        var valueReturn = "";
+        if (cell.getValue() != null)
+            valueReturn = cell.getValue().weight_eu + '<br/>' + cell.getValue().weight_us;
         return valueReturn
     }
 

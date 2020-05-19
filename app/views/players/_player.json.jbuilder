@@ -1,4 +1,6 @@
-json.(player, :name, :birthdate, :height_eu, :weight_eu, :height_us, :weight_us, :position, :status, :salary_estimation, :salary_real, :created_at, :updated_at)
+json.(player, :name, :birthdate, :position, :status, :salary_estimation, :salary_real, :created_at, :updated_at)
+json.height(player, :height_eu, :height_us)
+json.weight(player, :weight_eu, :weight_us)
 json.updated_by_user
 json.program ""
 json.available true
