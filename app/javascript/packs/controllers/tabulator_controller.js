@@ -34,11 +34,7 @@ export default class extends Controller {
                 { title: "Salary", field: "salary_real", },
                 //{ title: "Agent", field: "agent", },
                 { title: "Last season", field: "seasons", formatter: this.formatSeason },
-                {
-                    title: "Comments", field: "comments", formatter: this.formatComments, cellClick: function (e, cell) {
-                        window.alert(cell.getValue());
-                    },
-                },
+                { title: "Comments", field: "comments", formatter: this.formatComments },
                 //{ title: "Priority", field: "priority", },
                 { title: "Available", field: "available", formatter: "tickCross" },
             ]
@@ -86,7 +82,12 @@ export default class extends Controller {
     formatComments(cell, formatterParams, onRendered) {
         var valueReturn = "";
         if (cell.getValue() != null) {
-            valueReturn = cell.getValue().length + " comments";
+            valueReturn = '<div data-controller="modal" > <small data-action="click->modal#open">' + cell.getValue().length +
+                ' comment(s)</small><div class="modal-window" data-target="modal.modalWindow" data-action="click->modal#close"><div style="display: block;">';
+            cell.getValue().forEach(element => {
+                valueReturn += '<div class="m-b-xl"><small>' + element.created_at + '</small><strong> -  : </strong><p class="p-l-md">' + element.content + '</p></div>';
+            });
+            valueReturn += '</div></div></div > ';
         }
         return valueReturn;
     }
