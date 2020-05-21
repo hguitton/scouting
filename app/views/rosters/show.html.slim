@@ -1,0 +1,15 @@
+- content_for(:html_title)
+  = "#{@roster.name}"
+
+h1.h1.title.has-text-centered = @roster.name
+.h1.subtitle.has-text-centered = @roster.description
+
+.columns
+  .column.is-three-fifths
+    = render 'table', roster: @roster
+  .column
+    = render 'side_column'
+
+.columns
+  .column.is-fullwidth
+    = render 'available_players'
