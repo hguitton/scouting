@@ -3,9 +3,11 @@ class RosterSpotsController < ApplicationController
   before_action :authenticate_user!
   
   def create
-    @roster_spot = RosterSpot.new(roster_spot_params)
+    @roster = Roster.find(params[:roster_id])
+    @roster_spot = @roster.roster_spots.new(roster_spot_params)
+
     if @roster_spot.save
-      redirect_to roster_spots_path, notice: 'Roster was successfully created.'
+      redirect_to roster_path(@roster), notice: 'Spot was successfully created.'
     else
       flash[:alert] = @roster_spot.errors.full_messages.join(", ")
       render :new

@@ -25,6 +25,13 @@ export default class extends Controller {
         blocks: [3]
       });
     }
+
+    if ($('.is-format-salary-roster').length > 0) {
+      new Cleave('.is-format-salary-roster', {
+        numeral: true,
+        numeralThousandsGroupStyle: 'thousand'
+      });
+    }
     
     if ($('.is-format-weight').length > 0) {
       new Cleave('.is-format-weight', {

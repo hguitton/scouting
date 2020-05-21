@@ -1,4 +1,4 @@
-table.table.compact.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.has-text-centered
+table.table.compact.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.has-text-centered data-controller="format"
   thead
     tr
       th Position
@@ -6,20 +6,22 @@ table.table.compact.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.h
       th Player(s)
       th Minutes
       th Budgets
+      th
   tbody
-
+    - roster.roster_spots.includes(:position).order("positions.order asc").each do |spot|
+      tr
+        td = spot.position.short
+        td = spot.name
+        td = spot.players.count
+        td = spot.minutes
+        td = spot.price
+        td
   tfoot
-    tr
-      td 1/2
-      td PG Back-up
-      td Lesca
-      td 15
-      td 50.000
     = form_for RosterSpot.new, url: roster_spots_path(roster_id: roster.id) do |f|
       tr
         th = f.collection_select :position_id, Position.order(order: :asc).all, :id, :name, {}, class: 'input is-small', data: { target: 'scraper.position' }
         th = f.text_field :name, class: "input is-small",  placeholder: "Status, impact, ..."
         th 
         th = f.number_field :minutes, class: "input is-small",  placeholder: "Minutes"
-        th = f.text_field :price, class: "input is-small",  placeholder: "Budget"
+        th = f.text_field :price, class: "input is-small is-format-salary-roster",  placeholder: "Budget"
         th = f.submit '+', class: "button is-small is-success"
