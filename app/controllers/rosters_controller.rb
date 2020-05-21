@@ -1,5 +1,5 @@
 class RostersController < ApplicationController
-  before_action :set_roster, only: [:show, :edit, :update, :destroy]
+  before_action :set_roster, only: [:show, :edit, :update, :destroy, :add_player, :remove_player]
   before_action :authenticate_user!
   
   def index
@@ -35,6 +35,22 @@ class RostersController < ApplicationController
   def destroy
     @roster.destroy
     redirect_to rosters_url, notice: 'Roster was successfully destroyed.'
+  end
+  
+  def add_player
+    player = Player.find(params[:player_id])
+    unless @roster.players.include?(player)
+      @roster.players << player if player
+      redirect_to @roster, notice: 'Player was successfully added to the Roster.'
+    else
+      redirect_to @roster, alert: 'Player is already in Roster'
+    end
+  end
+  
+  def remove_player
+    player = Player.find(params[:player_id])
+    @roster.players.delete(player) if player
+    redirect_to @roster
   end
 
   private

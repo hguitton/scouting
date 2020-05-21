@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   resources :positions, only: [:show]
   resources :profiles, only: [:show]
   resources :search, only: [:index, :new, :create, :show, :update]
-  resources :rosters do 
+  resources :rosters do
+    member do 
+      post 'add_player/:player_id', to: "rosters#add_player", as: :add_player
+      post 'remove_player/:player_id', to: "rosters#remove_player", as: :remove_player
+    end
     resources :spots, controller: :roster_spots, only: [:create, :update, :destroy]
   end
   resources :users do 

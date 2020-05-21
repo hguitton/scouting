@@ -10,6 +10,8 @@ h1.h1.title.has-text-centered = @roster.name
   .column
     = render 'side_column'
 
+hr
+.h1.title.has-text-centered List of players
 .columns
   .column.is-fullwidth
-    = render 'available_players'
+    = render 'available_players', players: @roster.players, roster: @roster

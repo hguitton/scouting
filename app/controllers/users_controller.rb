@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   def remove_fav_player
     if @user == current_user
       player = Player.find(params[:player_id])
-      @user.favorite_players.delete(player)
+      @user.favorite_players.delete(player) if player
     end
   end
   private

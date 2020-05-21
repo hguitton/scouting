@@ -1,0 +1,31 @@
+table.table.compact.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.has-text-centered
+  thead
+    tr
+      th Name
+      th Age
+      th Height
+      th Weight
+      th Status
+      th Pos.
+      th Profiles
+      th Salary
+      th Remove
+  tbody
+    - players.order(created_at: :desc).each do |player|
+      - player = player.decorate
+      tr
+        td = link_to player.name, player, data: { turbolinks: false }
+        td = player.age
+        td = player.height
+        td = player.weight
+        td = player.status.short
+        td = player.nationality
+        td = player.position.short
+        td = player.profiles_tags
+        td = player.salary
+        td 
+          = link_to remove_player_roster_path(roster, player), method: :post do
+            span.icon.has-text-danger
+              i.fas.fa-minus-square
+
+br
