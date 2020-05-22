@@ -7,6 +7,7 @@ class RostersController < ApplicationController
   end
 
   def show
+    @spot = @roster.roster_spots.includes(:position).order("positions.order asc").first
   end
 
   def new
@@ -35,6 +36,10 @@ class RostersController < ApplicationController
   def destroy
     @roster.destroy
     redirect_to rosters_url, notice: 'Roster was successfully destroyed.'
+  end
+
+  def get_spot
+    
   end
   
   def add_player

@@ -2,16 +2,14 @@
   = "#{@roster.name}"
 
 h1.h1.title.has-text-centered = @roster.name
-.h1.subtitle.has-text-centered = @roster.description
+.h2.subtitle.has-text-centered = @roster.description
 
-.columns
-  .column.is-three-fifths
-    = render 'table', roster: @roster
-  .column
-    = render 'side_column'
+div data-controller="roster"
+  = render 'table', roster: @roster
+  /= render 'side_column', spot: @spot
 
-hr
-.h1.title.has-text-centered List of players
-.columns
-  .column.is-fullwidth
-    = render 'available_players', players: @roster.players, roster: @roster
+  hr
+  .h1.title.has-text-centered List of players
+  .columns
+    .column.is-fullwidth
+      = render 'available_players', players: @roster.players, roster: @roster
