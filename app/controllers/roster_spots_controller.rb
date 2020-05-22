@@ -25,7 +25,7 @@ class RosterSpotsController < ApplicationController
 
   def destroy
     @roster_spot.destroy
-    redirect_to rosters_url, notice: 'Roster was successfully destroyed.'
+    redirect_to rosters_url, notice: 'RosterSpot was successfully destroyed.'
   end
 
   private

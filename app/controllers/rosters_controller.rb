@@ -41,9 +41,9 @@ class RostersController < ApplicationController
     player = Player.find(params[:player_id])
     unless @roster.players.include?(player)
       @roster.players << player if player
-      redirect_to @roster, notice: 'Player was successfully added to the Roster.'
+      redirect_back(fallback_location: roster_path(@roster), notice: 'Player was successfully added to the Roster.')
     else
-      redirect_to @roster, alert: 'Player is already in Roster'
+      redirect_back(fallback_location: roster_path(@roster), alert: 'Player is already in Roster.')
     end
   end
   
