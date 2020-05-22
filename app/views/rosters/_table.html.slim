@@ -12,7 +12,10 @@ table.table.compact.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.h
       tr
         td = spot.position.short
         td = spot.name
-        td = spot.players.count
+        td
+          ul class="sortable sortable-#{spot.id}" data-target="roster.sortable" data-id="#{spot.id}"
+            - spot.players.each do |p|
+              li = p.name
         td = spot.minutes
         td = spot.price
         td = link_to roster_spot_path(roster,spot), method: :delete do
