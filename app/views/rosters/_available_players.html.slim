@@ -1,6 +1,6 @@
 ul.players-pool
   - players.order(created_at: :desc).each do |player|
-    li = "#{player.name} #{player.id}"
+    li data-player-id="#{player.id}" = player.name
 
 / table.table.compact.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.has-text-centered
 /   thead

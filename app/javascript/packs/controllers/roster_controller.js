@@ -12,14 +12,53 @@ export default class extends Controller {
 
     sortable('.players-pool',{
       acceptFrom: this.list + ', .players-pool'
-    });
+    })
     
     sortable(this.list, {
       acceptFrom: this.list + ', .players-pool'
     });
 
-    sortable('.sortable')[0].addEventListener('sortupdate', function(e) {
-      console.log(e.detail);
+    sortable('.sortable').forEach(sortableEl =>{
+      sortableEl.addEventListener('sortupdate', (e) => {
+        
+        var players = this.buildSpotChanged(e.detail.destination.items);
+        var path = sortableEl.dataset.url
+        this.updateSpot(path, players)
+        
+        // If the origin isn't pool and not self (change order), update the origin too 
+        if(!e.detail.origin.container.classList.contains('players-pool') && sortableEl != e.detail.origin.container){
+          var players = this.buildSpotChanged(e.detail.origin.items);
+          var path = e.detail.origin.container.dataset.url
+          this.updateSpot(path, players)
+        }
+      })
+    })
+
+    // Only update origin when a player is moved to the Pool
+    sortable('.players-pool').forEach(sortableEl =>{
+      sortableEl.addEventListener('sortupdate', (e) => { 
+        var players = this.buildSpotChanged(e.detail.origin.items);
+        var path = e.detail.origin.container.dataset.url
+        this.updateSpot(path, players)
+      });
+    })
+  }
+
+  buildSpotChanged(items){
+    var players = []
+    items.forEach((item, i) => {
+      players[i]= item.dataset.playerId;
+    })
+    return players
+  }
+
+  updateSpot(path, players){
+    $.ajax({
+      method: "POST",
+      url: path,
+      data: {
+        players: players
+      }
     })
   }
 }

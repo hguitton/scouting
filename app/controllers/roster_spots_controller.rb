@@ -1,5 +1,5 @@
 class RosterSpotsController < ApplicationController
-  before_action :set_roster_spot, only: [:update, :destroy]
+  before_action :set_roster_spot, only: [:update, :destroy, :update_players]
   before_action :authenticate_user!
   
   def create
@@ -21,6 +21,14 @@ class RosterSpotsController < ApplicationController
       flash[:alert] = @roster_spot.errors.full_messages.join(", ")
       render :edit 
     end
+  end
+
+  def update_players
+    @roster_spot.player_spots.destroy_all
+    params[:players].each_with_index do |player, index|
+      @roster_spot.player_spots.create(player_id: player.to_i, order: index)
+    end
+    redirect_to @roster_spot.roster
   end
 
   def destroy

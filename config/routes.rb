@@ -16,7 +16,11 @@ Rails.application.routes.draw do
       post 'add_player/:player_id', to: "rosters#add_player", as: :add_player
       post 'remove_player/:player_id', to: "rosters#remove_player", as: :remove_player
     end
-    resources :spots, controller: :roster_spots, only: [:create, :update, :destroy]
+    resources :spots, controller: :roster_spots, only: [:create, :update, :destroy] do
+      member do
+        post 'update_players'
+      end
+    end
   end
   resources :users do 
     member do

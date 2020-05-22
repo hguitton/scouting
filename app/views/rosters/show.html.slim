@@ -4,10 +4,8 @@
 h1.h1.title.has-text-centered = @roster.name
 .h2.subtitle.has-text-centered = @roster.description
 
-div data-controller="roster"
+div data-controller="roster" data-id="#{@roster.id}"
   = render 'table', roster: @roster
-  /= render 'side_column', spot: @spot
-
   hr
   .h1.title.has-text-centered List of players
   .columns
