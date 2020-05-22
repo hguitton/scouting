@@ -42,7 +42,6 @@ div data-controller="roster-selection"
           td = player.priority.name
           td = player.available
           td data-controller="modal" 
-            /= link_to add_player_roster_path(id: 2, player_id: player), method: :post do 
             span.icon.has-text-success data-selector="rosters-modal" data-action="click->modal#open click->roster-selection#setPlayer" data-player="#{player.id}"
               i.fas.fa-plus-square
   br

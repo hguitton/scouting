@@ -15,7 +15,9 @@ table.table.compact.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.h
         td = spot.players.count
         td = spot.minutes
         td = spot.price
-        td
+        td = link_to roster_spot_path(roster,spot), method: :delete do
+          span.icon.has-text-danger
+            i.fas.fa-minus-square
   tfoot
     = form_for RosterSpot.new, url: roster_spots_path(roster_id: roster.id) do |f|
       tr
@@ -24,4 +26,4 @@ table.table.compact.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.h
         th 
         th = f.number_field :minutes, class: "input is-small",  placeholder: "Minutes"
         th = f.text_field :price, class: "input is-small is-format-salary-roster",  placeholder: "Budget"
-        th = f.submit '+', class: "button is-small is-success"
+        th = f.submit 'Add', class: "button is-small is-success"

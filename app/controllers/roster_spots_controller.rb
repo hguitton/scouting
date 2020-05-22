@@ -24,13 +24,14 @@ class RosterSpotsController < ApplicationController
   end
 
   def destroy
+    @roster = @roster_spot.roster
     @roster_spot.destroy
-    redirect_to rosters_url, notice: 'RosterSpot was successfully destroyed.'
+    redirect_to @roster, notice: 'RosterSpot was successfully destroyed.'
   end
 
   private
     def set_roster_spot
-      @roster_spot = RosterSpot.find(params[:id]).decorate
+      @roster_spot = RosterSpot.find(params[:id])
     end
 
     def roster_spot_params

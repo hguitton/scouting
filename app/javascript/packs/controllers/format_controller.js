@@ -28,8 +28,8 @@ export default class extends Controller {
 
     if ($('.is-format-salary-roster').length > 0) {
       new Cleave('.is-format-salary-roster', {
-        numeral: true,
-        numeralThousandsGroupStyle: 'thousand'
+        numericOnly: true,
+        blocks: [3,3]
       });
     }
     
