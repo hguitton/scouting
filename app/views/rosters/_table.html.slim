@@ -4,8 +4,8 @@ table.table.compact.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.h
       th.has-text-centered Position
       th.has-text-centered Name
       th.has-text-centered Player(s)
-      th.has-text-centered Minutes
-      th.has-text-centered Budgets
+      th.has-text-centered.w-110p Minutes
+      th.has-text-centered.w-150p Budgets
       th
   tbody
     - roster.roster_spots.includes(:position).order("positions.order asc").each do |spot|

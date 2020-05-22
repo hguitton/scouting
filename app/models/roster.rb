@@ -1,6 +1,7 @@
 class Roster < ApplicationRecord
   include ActionView::Helpers
   has_and_belongs_to_many :players
+  belongs_to :user
   has_many :roster_spots
   validates :name, presence: true
 
@@ -13,6 +14,7 @@ class Roster < ApplicationRecord
   end
 
   def available_players
+    return [] if players.count.zero?
     players - roster_spots.sum(&:players)
   end
 end

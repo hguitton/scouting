@@ -16,6 +16,7 @@ class RostersController < ApplicationController
 
   def create
     @roster = Roster.new(roster_params)
+    @roster.user = current_user
     if @roster.save
       redirect_to rosters_path, notice: 'Roster was successfully created.'
     else

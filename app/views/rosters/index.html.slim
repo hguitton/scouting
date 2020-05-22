@@ -13,3 +13,6 @@ h1.h1.title.has-text-centered Rosters
           td.has-text-centered = link_to 'Open / Update', roster_path(roster), class:"button is-info is-small"
           td.has-text-centered = link_to 'Delete', roster_path(roster), class:"button is-danger m-l-sm is-small", method: :delete
       hr
+.columns.is-mobile
+  .column.is-half-desktop.is-offset-one-quarter-desktop.is-fullwidth-mobile
+    = link_to "New Roster", new_roster_path, class:"button is-success is-fullwidth"
