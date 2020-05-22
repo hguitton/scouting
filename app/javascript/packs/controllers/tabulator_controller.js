@@ -15,7 +15,12 @@ export default class extends Controller {
                         invalidPlaceholder: "(invalid date)",
                     }
                 },
-                { title: "Name", field: "name", },
+                {
+                    title: "Name", field: "link", formatter: "link", formatterParams: {
+                        labelField: "name",
+                        target: "_blank",
+                    }
+                },
                 {
                     title: "Age", field: "birthdate", formatter: "datetimediff", formatterParams: {
                         inputFormat: "DD-MM-YYYY",
@@ -25,12 +30,12 @@ export default class extends Controller {
                 },
                 { title: "Height", field: "height", formatter: this.customFormatter, sorter: this.customSorter },
                 { title: "Weight", field: "weight", formatter: this.customFormatter, sorter: this.customSorter },
-                { title: "status", field: "status", },
+                { title: "Status", field: "status", },
                 { title: "Nat.", field: "nationality", },
                 { title: "Pos.", field: "position", formatter: this.customFormatter, sorter: this.customSorter },
                 { title: "Profiles", field: "profiles", headerSort: false, formatter: this.customFormatter },
                 { title: "Salary", field: "salary", formatter: this.customFormatter, sorter: this.customSorter },
-                { title: "Agent", field: "agent", },
+                { title: "Agent", field: "agent", headerSort: false, formatter: this.customFormatter },
                 { title: "Last season", field: "seasons", headerSort: false, formatter: this.customFormatter },
                 { title: "Comments", field: "comments", formatter: this.customFormatter, sorter: this.customSorter },
                 { title: "Priority", field: "priority", },
@@ -53,12 +58,19 @@ export default class extends Controller {
                     valueReturn = cell.getValue().eu + ' kg <br/>' + cell.getValue().us + ' lbs';
                     break;
 
+                case "agent":
+                    valueReturn = cell.getValue().eu + ' <br/>' + cell.getValue().us;
+                    break;
+
                 case "position":
-                    valueReturn = cell.getValue().name;
+                    valueReturn = cell.getValue().short;
                     break;
 
                 case "salary":
-                    valueReturn = cell.getValue().real + '<br/>' + cell.getValue().estimation;
+                    if (cell.getValue().real != 0)
+                        valueReturn = cell.getValue().real;
+                    else
+                        valueReturn = cell.getValue().estimation;
                     break;
 
                 case "seasons":
