@@ -16,10 +16,10 @@ class RosterSpotsController < ApplicationController
 
   def update
     if @roster_spot.update(roster_spot_params)
-      redirect_to @roster_spot, notice: 'Roster was successfully updated.'
+      redirect_to @roster_spot.roster, notice: 'RosterSpot was successfully updated.'
     else
       flash[:alert] = @roster_spot.errors.full_messages.join(", ")
-      render :edit 
+      redirect_to @roster_spot.roster
     end
   end
 

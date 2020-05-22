@@ -4,6 +4,7 @@ import sortable from "html5sortable/dist/html5sortable.es"
 export default class extends Controller {
   static targets = ['sortable']
   connect(){
+
     this.list = ""
     this.sortableTargets.forEach(el => {
       this.list += " .sortable-" + el.dataset.id + ","
@@ -60,5 +61,9 @@ export default class extends Controller {
         players: players
       }
     })
+  }
+
+  updateSpotFields(e){
+    e.currentTarget.form.submit();
   }
 }

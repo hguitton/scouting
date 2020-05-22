@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 import Cleave from "cleave.js"
 
 export default class extends Controller {
-  connect() {
+  connect() {    
     if ($('.is-format-birthdate').length > 0) {
       new Cleave('.is-format-birthdate', {
         date: true,
@@ -27,10 +27,13 @@ export default class extends Controller {
     }
 
     if ($('.is-format-salary-roster').length > 0) {
-      new Cleave('.is-format-salary-roster', {
-        numericOnly: true,
-        blocks: [3,3]
-      });
+      $('.is-format-salary-roster').toArray().forEach(function(field){
+        new Cleave(field, {
+          numeral: true,
+          numeralDecimalMark: ',',
+          delimiter: ' '
+        });
+      })
     }
     
     if ($('.is-format-weight').length > 0) {

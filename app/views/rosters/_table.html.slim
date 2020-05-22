@@ -1,32 +1,38 @@
 table.table.compact.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.has-text-centered data-controller="format"
   thead
     tr
-      th Position
-      th Name
-      th Player(s)
-      th Minutes
-      th Budgets
+      th.has-text-centered Position
+      th.has-text-centered Name
+      th.has-text-centered Player(s)
+      th.has-text-centered Minutes
+      th.has-text-centered Budgets
       th
   tbody
     - roster.roster_spots.includes(:position).order("positions.order asc").each do |spot|
       tr
-        td = spot.position.short
-        td = spot.name
-        td
-          ul class="sortable sortable-#{spot.id}" data-target="roster.sortable" data-id="#{spot.id}" data-url="#{update_players_roster_spot_path(roster, spot)}"
-            - spot.players.order(order: :asc).each do |p|
-              li data-player-id="#{p.id}" = p.name
-        td = spot.minutes
-        td = spot.price
-        td = link_to roster_spot_path(roster,spot), method: :delete do
-          span.icon.has-text-danger
-            i.fas.fa-minus-square
+        = form_for spot, url: roster_spot_path(roster, spot), method: :patch do |f|
+          td = f.collection_select :position_id, Position.order(order: :asc).all, :id, :name, {}, class: 'input', data: { action: "change->roster#updateSpotFields"}
+          td = f.text_field :name, class: "input", placeholder: "Status, impact, ...", data: { action: "change->roster#updateSpotFields"}
+          td
+            ul class="sortable sortable-#{spot.id}" data-target="roster.sortable" data-id="#{spot.id}" data-url="#{update_players_roster_spot_path(roster, spot)}"
+              - spot.players.order(order: :asc).each do |p|
+                li data-player-id="#{p.id}" = p.name
+          td = f.number_field :minutes, class: "input",  placeholder: "Minutes", value: spot.minutes, min: 1, max: 40, data: { action: "change->roster#updateSpotFields"}
+          td = f.text_field :price, class: "input is-format-salary-roster",  placeholder: "Budget", value: spot.price, data: { action: "change->roster#updateSpotFields"}
+          td = link_to roster_spot_path(roster,spot), method: :delete do
+            span.icon.has-text-danger
+              i.fas.fa-minus-square
+
+    tr
+      = form_for RosterSpot.new, url: roster_spots_path(roster_id: roster.id) do |f|
+        td = f.collection_select :position_id, Position.order(order: :asc).all, :id, :name, {}, class: 'input'
+        td = f.text_field :name, class: "input",  placeholder: "Status, impact, ..."
+        td 
+        td = f.number_field :minutes, class: "input",  placeholder: "Minutes"
+        td = f.text_field :price, class: "input is-format-salary-roster",  placeholder: "Budget"
+        td = f.submit 'Add', class: "button is-success"
   tfoot
-    = form_for RosterSpot.new, url: roster_spots_path(roster_id: roster.id) do |f|
-      tr
-        th = f.collection_select :position_id, Position.order(order: :asc).all, :id, :name, {}, class: 'input is-small', data: { target: 'scraper.position' }
-        th = f.text_field :name, class: "input is-small",  placeholder: "Status, impact, ..."
-        th 
-        th = f.number_field :minutes, class: "input is-small",  placeholder: "Minutes"
-        th = f.text_field :price, class: "input is-small is-format-salary-roster",  placeholder: "Budget"
-        th = f.submit 'Add', class: "button is-small is-success"
+    tr
+      th.is-size-5 colspan="3" Total
+      th.is-size-5.has-text-centered = roster.total_minutes
+      th.is-size-5.has-text-centered = roster.total_price
