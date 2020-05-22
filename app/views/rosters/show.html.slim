@@ -10,4 +10,4 @@ div data-controller="roster" data-id="#{@roster.id}"
   .h1.title.has-text-centered List of players
   .columns
     .column.is-fullwidth
-      = render 'available_players', players: @roster.players, roster: @roster
+      = render 'available_players', players: @roster.available_players, roster: @roster

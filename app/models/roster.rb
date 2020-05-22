@@ -11,4 +11,8 @@ class Roster < ApplicationRecord
   def total_price
     number_with_delimiter(roster_spots.sum{|rs| rs.price.delete(' ').to_i }, delimiter: " ")
   end
+
+  def available_players
+    players - roster_spots.sum(&:players)
+  end
 end
