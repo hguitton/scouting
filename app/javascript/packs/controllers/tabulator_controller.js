@@ -5,8 +5,6 @@ import Tabulator from 'tabulator-tables';
 
 export default class extends Controller {
     connect() {
-        var jsonData = 'players.json';
-
         //define table
         var table = new Tabulator("#bob", {
             columns: [
@@ -25,69 +23,90 @@ export default class extends Controller {
                         invalidPlaceholder: "(invalid date)",
                     }
                 },
-                { title: "Height", field: "height", formatter: this.formatHeight },
-                { title: "Weight", field: "weight", formatter: this.formatWeight },
-                { title: "status", field: "status", formatter: this.formatName },
-                //{ title: "Nat.", field: "nationality", },
-                { title: "Pos.", field: "position", formatter: this.formatName },
-                { title: "Profiles", field: "profiles", formatter: this.formatArrayName },
-                { title: "Salary", field: "salary_real", },
-                //{ title: "Agent", field: "agent", },
-                { title: "Last season", field: "seasons", formatter: this.formatSeason },
-                { title: "Comments", field: "comments", formatter: this.formatComments },
-                //{ title: "Priority", field: "priority", },
-                { title: "Available", field: "available", formatter: "tickCross" },
+                { title: "Height", field: "height", formatter: this.customFormatter, sorter: this.customSorter },
+                { title: "Weight", field: "weight", formatter: this.customFormatter, sorter: this.customSorter },
+                { title: "status", field: "status", },
+                { title: "Nat.", field: "nationality", },
+                { title: "Pos.", field: "position", formatter: this.customFormatter, sorter: this.customSorter },
+                { title: "Profiles", field: "profiles", headerSort: false, formatter: this.customFormatter },
+                { title: "Salary", field: "salary", formatter: this.customFormatter, sorter: this.customSorter },
+                { title: "Agent", field: "agent", },
+                { title: "Last season", field: "seasons", headerSort: false, formatter: this.customFormatter },
+                { title: "Comments", field: "comments", formatter: this.customFormatter, sorter: this.customSorter },
+                { title: "Priority", field: "priority", },
+                { title: "Available", field: "available", },
             ]
         });
-        table.setData(jsonData);
+        // define URL data json
+        table.setData('players.json');
     }
 
-    formatName(cell, formatterParams, onRendered) {
-        var valueReturn = "";
-        if (cell.getValue() != null)
-            valueReturn = cell.getValue().name;
-        return valueReturn
-    }
-
-    formatHeight(cell, formatterParams, onRendered) {
-        var valueReturn = "";
-        if (cell.getValue() != null)
-            valueReturn = cell.getValue().height_eu + '<br/>' + cell.getValue().height_us;
-        return valueReturn
-    }
-
-    formatWeight(cell, formatterParams, onRendered) {
-        var valueReturn = "";
-        if (cell.getValue() != null)
-            valueReturn = cell.getValue().weight_eu + '<br/>' + cell.getValue().weight_us;
-        return valueReturn
-    }
-
-    formatSeason(cell, formatterParams, onRendered) {
+    customFormatter(cell, formatterParams, onRendered) {
         var valueReturn = "";
         if (cell.getValue() != null) {
-            cell.getValue().forEach(element => valueReturn += element.name + ' <br/> ' + element.country + ' <br/> ' + element.team);
+            switch (cell.getField()) {
+                case "height":
+                    valueReturn = cell.getValue().eu + ' cm <br/>' + cell.getValue().us + ' ft';
+                    break;
+
+                case "weight":
+                    valueReturn = cell.getValue().eu + ' kg <br/>' + cell.getValue().us + ' lbs';
+                    break;
+
+                case "position":
+                    valueReturn = cell.getValue().name;
+                    break;
+
+                case "salary":
+                    valueReturn = cell.getValue().real + '<br/>' + cell.getValue().estimation;
+                    break;
+
+                case "seasons":
+                    cell.getValue().forEach(element => valueReturn += element.name + ' <br/> ' + element.country + ' <br/> ' + element.team);
+                    break;
+
+                case "comments":
+                    valueReturn = '<div data-controller="modal" > <small data-action="click->modal#open">' + cell.getValue().length +
+                        ' comment(s)</small><div class="modal-window" data-target="modal.modalWindow" data-action="click->modal#close"><div style="display: block;">';
+                    cell.getValue().forEach(element => {
+                        valueReturn += '<div class="m-b-xl"><small>' + element.created_at + '</small><strong> -  : </strong><p class="p-l-md">' + element.content + '</p></div>';
+                    });
+                    valueReturn += '</div></div></div > ';
+                    break;
+
+                case "profiles":
+                    cell.getValue().forEach(element => valueReturn += element.name + ' <br/> ');
+                    break;
+
+                default:
+                    valueReturn = "error : " + cell.getField();
+                    break;
+            }
         }
         return valueReturn;
     }
 
-    formatArrayName(cell, formatterParams, onRendered) {
-        var valueReturn = "";
-        if (cell.getValue() != null) {
-            cell.getValue().forEach(element => valueReturn += element.name + ' <br/> ');
-        }
-        return valueReturn;
-    }
+    customSorter(a, b, aRow, bRow, column, dir, sorterParams) {
+        var valueReturn = 0;
+        switch (column.getField()) {
+            case "height": case "weight":
+                valueReturn = a.eu - b.eu;
+                break;
 
-    formatComments(cell, formatterParams, onRendered) {
-        var valueReturn = "";
-        if (cell.getValue() != null) {
-            valueReturn = '<div data-controller="modal" > <small data-action="click->modal#open">' + cell.getValue().length +
-                ' comment(s)</small><div class="modal-window" data-target="modal.modalWindow" data-action="click->modal#close"><div style="display: block;">';
-            cell.getValue().forEach(element => {
-                valueReturn += '<div class="m-b-xl"><small>' + element.created_at + '</small><strong> -  : </strong><p class="p-l-md">' + element.content + '</p></div>';
-            });
-            valueReturn += '</div></div></div > ';
+            case "comments":
+                valueReturn = a.length - b.length;
+                break;
+
+            case "salary":
+                valueReturn = a.real - b.real;
+                break;
+
+            case "position":
+                valueReturn = a.order - b.order;
+                break;
+
+            default:
+                break;
         }
         return valueReturn;
     }
