@@ -20,7 +20,7 @@ table.table.compact.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.h
                 = render 'card', player: ps.player, first_choice: ps.order.zero?
 
           td = f.number_field :minutes, class: "input",  placeholder: "Minutes", value: spot.minutes, min: 1, max: 40, data: { action: "change->roster#updateSpotFields"}
-          td = f.text_field :price, class: "input is-format-salary-roster",  placeholder: "Budget", value: spot.price, data: { action: "change->roster#updateSpotFields"}
+          td = f.text_field :price, class: "input is-format-salary-roster", placeholder: "Budget", value: spot.price, data: { action: "change->roster#updateSpotFields"}
           td = link_to roster_spot_path(roster,spot), method: :delete do
             span.icon.has-text-danger
               i.fas.fa-minus-square
@@ -28,10 +28,10 @@ table.table.compact.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.h
     tr
       = form_for RosterSpot.new, url: roster_spots_path(roster_id: roster.id) do |f|
         td = f.collection_select :position_id, Position.order(order: :asc).all, :id, :name, {}, class: 'input'
-        td = f.text_field :name, class: "input",  placeholder: "Status, impact, ..."
+        td = f.text_field :name, class: "input", placeholder: "Status, impact, ..."
         td 
-        td = f.number_field :minutes, class: "input",  placeholder: "Minutes"
-        td = f.text_field :price, class: "input is-format-salary-roster",  placeholder: "Budget"
+        td = f.number_field :minutes, class: "input", placeholder: "Minutes",  min: 1, max: 40
+        td = f.text_field :price, class: "input is-format-salary-roster", placeholder: "Budget"
         td = f.submit 'Add', class: "button is-success"
   tfoot
     tr

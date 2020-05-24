@@ -1,8 +1,8 @@
 .card-roster data-player-id="#{player.id}"
   .card.card-roster-small
     header.card-header.card-small
-      span class="card-header-title #{ 'has-text-grey-light' unless first_choice}"= player.name
-      span class="card-small-infos #{ 'has-text-grey-light' unless first_choice}" = "#{player.status_name} "
+      span class="card-header-title #{'has-text-grey-light' unless first_choice}"= player.name
+      span class="card-small-infos #{'has-text-grey-light' unless first_choice}" = "#{player.status_name} "
   .card.card-roster-big
     header.card-header
       p.card-header-title = player.name
@@ -14,5 +14,5 @@
           span = "#{player.status_name}  - #{player.nationality}"
           p = "#{player.position_name}  - #{player.height_eu}cm - #{player.weight_eu}kg"
     footer.card-footer
-      a.card-footer-item href="#" Infos
-      a.card-footer-item href="#" Delete
+      = link_to 'Infos', player, class: "card-footer-item", target: :_blank
+      = link_to 'Delete', remove_player_roster_path(@roster, player.id), class: "card-footer-item", method: :post
