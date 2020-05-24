@@ -15,9 +15,9 @@ table.table.compact.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.h
           td = f.text_field :name, class: "input", placeholder: "Status, impact, ...", data: { action: "change->roster#updateSpotFields"}
         
           td
-            ul class="sortable sortable-#{spot.id}" data-target="roster.sortable" data-id="#{spot.id}" data-url="#{update_players_roster_spot_path(roster, spot)}"
+            div class="sortable sortable-#{spot.id}" data-target="roster.sortable" data-id="#{spot.id}" data-url="#{update_players_roster_spot_path(roster, spot)}"
               - spot.player_spots.includes(:player).each do |ps|
-                li class="#{ps.order.zero? ? 'has-text-success' : ''}" data-player-id="#{ps.player_id}" = ps.player_name
+                = render 'card', player: ps.player, first_choice: ps.order.zero?
 
           td = f.number_field :minutes, class: "input",  placeholder: "Minutes", value: spot.minutes, min: 1, max: 40, data: { action: "change->roster#updateSpotFields"}
           td = f.text_field :price, class: "input is-format-salary-roster",  placeholder: "Budget", value: spot.price, data: { action: "change->roster#updateSpotFields"}

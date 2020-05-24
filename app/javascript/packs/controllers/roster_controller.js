@@ -21,7 +21,8 @@ export default class extends Controller {
 
     sortable('.sortable').forEach(sortableEl =>{
       sortableEl.addEventListener('sortupdate', (e) => {
-        
+        console.log(e.detail)
+        console.log(e.detail.destination.items)
         var players = this.buildSpotChanged(e.detail.destination.items);
         var path = sortableEl.dataset.url
         this.updateSpot(path, players)

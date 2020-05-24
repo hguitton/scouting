@@ -1,3 +1,3 @@
-ul.players-pool
+.grid.grid-5.players-pool
   - players.each do |player|
-    li data-player-id="#{player.id}" = player.name
+    = render 'card', player: player, first_choice: false

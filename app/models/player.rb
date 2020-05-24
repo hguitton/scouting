@@ -19,7 +19,9 @@ class Player < ApplicationRecord
   has_many :roster_spots, through: :player_spots
   belongs_to :user, foreign_key: "updated_by_user_id"
   validates :name, :nationality, presence: true
-  
+  delegate :name, :short, to: :position, prefix: true
+  delegate :name, to: :status, prefix: true
+
 
   scope :with_height_between, -> (min, max) { where(height_eu: min..max) }
   scope :with_weight_between, -> (min, max) { where(weight_eu: min..max) }
