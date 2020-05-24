@@ -7,7 +7,6 @@ class RostersController < ApplicationController
   end
 
   def show
-    @spot = @roster.roster_spots.includes(:position).order("positions.order asc").first
   end
 
   def new

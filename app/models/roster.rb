@@ -15,6 +15,6 @@ class Roster < ApplicationRecord
 
   def available_players
     return [] if players.count.zero?
-    players - roster_spots.sum(&:players)
+    players - roster_spots.includes(:players).sum(&:players)
   end
 end
