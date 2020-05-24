@@ -12,7 +12,7 @@ export default class extends Controller {
   }
 
   modal(event) {
-    if (event.currentTarget.dataset.selector){      
+    if (event.currentTarget.dataset.selector){
       return document.getElementById(event.currentTarget.dataset.selector);
     }
     return this.modalWindowTarget;

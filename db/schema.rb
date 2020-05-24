@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_16_125630) do
+ActiveRecord::Schema.define(version: 2020_05_17_163607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,16 @@ ActiveRecord::Schema.define(version: 2020_05_16_125630) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "player_spots", force: :cascade do |t|
+    t.bigint "roster_spot_id"
+    t.bigint "player_id"
+    t.integer "order"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["player_id"], name: "index_player_spots_on_player_id"
+    t.index ["roster_spot_id"], name: "index_player_spots_on_roster_spot_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -69,6 +79,15 @@ ActiveRecord::Schema.define(version: 2020_05_16_125630) do
     t.index ["profile_id"], name: "index_players_profiles_on_profile_id"
   end
 
+  create_table "players_rosters", force: :cascade do |t|
+    t.bigint "roster_id"
+    t.bigint "player_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["player_id"], name: "index_players_rosters_on_player_id"
+    t.index ["roster_id"], name: "index_players_rosters_on_roster_id"
+  end
+
   create_table "players_users", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "player_id"
@@ -98,6 +117,27 @@ ActiveRecord::Schema.define(version: 2020_05_16_125630) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "roster_spots", force: :cascade do |t|
+    t.string "name"
+    t.bigint "roster_id"
+    t.bigint "position_id"
+    t.string "price"
+    t.string "minutes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["position_id"], name: "index_roster_spots_on_position_id"
+    t.index ["roster_id"], name: "index_roster_spots_on_roster_id"
+  end
+
+  create_table "rosters", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_rosters_on_user_id"
   end
 
   create_table "searches", force: :cascade do |t|

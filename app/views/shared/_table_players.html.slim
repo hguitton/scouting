@@ -1,4 +1,5 @@
-div data-controller="modal"
+div data-controller="roster-selection" 
+  = render 'shared/rosters_modal'
   table.table.compact.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.has-text-centered data-controller="table" id='table_id'
     thead
       tr
@@ -18,7 +19,7 @@ div data-controller="modal"
         th Comments
         th Priority
         th Available?
-
+        th
     tbody
       - players.order(created_at: :desc).each do |player|
         - player = player.decorate
@@ -40,5 +41,7 @@ div data-controller="modal"
           td = player.comments_cell
           td = player.priority.name
           td = player.available
-
+          td data-controller="modal" 
+            span.icon.has-text-success data-selector="rosters-modal" data-action="click->modal#open click->roster-selection#setPlayer" data-player="#{player.id}"
+              i.fas.fa-plus-square
   br

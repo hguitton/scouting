@@ -1,0 +1,18 @@
+.card-roster data-player-id="#{player.id}"
+  .card.card-roster-small
+    header.card-header.card-small
+      span class="card-header-title #{'has-text-grey-light' unless first_choice}"= player.name
+      span class="card-small-infos #{'has-text-grey-light' unless first_choice}" = "#{player.status.name} "
+  .card.card-roster-big
+    header.card-header
+      p.card-header-title = player.name
+    .card-content.p-sm
+      .flex.fdr
+        img.img-player.m-r-md src="#{player.photo}"
+
+        .content
+          span = "#{player.status.name}  - #{player.nationality}"
+          p = "#{player.position.name}  - #{player.height_eu}cm - #{player.weight_eu}kg"
+    footer.card-footer
+      = link_to 'Infos', player, class: "card-footer-item", target: :_blank
+      = link_to 'Delete', remove_player_roster_path(@roster, player.id), class: "card-footer-item", method: :post

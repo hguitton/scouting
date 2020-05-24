@@ -1,0 +1,13 @@
+- content_for(:html_title)
+  = "#{@roster.name}"
+
+h1.h1.title.has-text-centered = @roster.name
+.h2.subtitle.has-text-centered = @roster.description
+
+div data-controller="roster" data-id="#{@roster.id}"
+  = render 'table', roster: @roster
+  hr
+  .h1.title.has-text-centered List of players
+  .columns
+    .column.is-fullwidth
+      = render 'available_players', players: @roster.available_players, roster: @roster
