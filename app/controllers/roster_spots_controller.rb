@@ -25,8 +25,11 @@ class RosterSpotsController < ApplicationController
 
   def update_players
     @roster_spot.player_spots.destroy_all
-    params[:players].each_with_index do |player, index|
-      @roster_spot.player_spots.create(player_id: player.to_i, order: index)
+    players = params[:players]
+    if players
+      players.each_with_index do |player, index|
+        @roster_spot.player_spots.create(player_id: player.to_i, order: index)
+      end
     end
     redirect_to @roster_spot.roster
   end
