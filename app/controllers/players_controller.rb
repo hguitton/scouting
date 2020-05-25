@@ -4,8 +4,9 @@ class PlayersController < ApplicationController
   
   # GET /players
   def index
-    @players = Player.all.includes({ comments: :user}, :position, :status, :priority, :profiles, :seasons)
-    @player = Player.new
+    @players = Player.includes({ comments: :user}, :position, :status, :priority, :profiles, :seasons).all
+    @player = Player.new  
+
     respond_to do |format|
       format.html { render :index }
       format.json

@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   before_action :set_menu
   before_action :set_rosters
+  
+  def current_user
+    @current_user ||= super && User.includes(:favorite_players).find(@current_user.id)
+  end
 
   def set_menu
     @menu_statuses = Status.all

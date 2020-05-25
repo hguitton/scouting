@@ -1,4 +1,8 @@
-json.(player, :name, :birthdate, :nationality, :available, :created_at, :updated_at)
+json.(player, :name, :birthdate, :nationality, :available, :created_at)
+
+json.favorited current_user.favorite_players.include?(player)
+json.updated_at player.updated_at.in_time_zone('Paris')
+json.updated_by_user
 
 json.height do
     json.eu player.height_eu
@@ -20,9 +24,10 @@ json.agent do
     json.us player.agent_us
 end
 
-json.updated_by_user
-
-json.profiles player.profiles, :name
+json.profiles player.profiles do |profile|
+  json.name profile.name
+  json.link profile_path(profile.id)
+end
 
 json.status player.status.name
 
