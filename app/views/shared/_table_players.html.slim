@@ -1,47 +1,48 @@
-div data-controller="roster-selection" 
-  = render 'shared/rosters_modal'
-  table.table.compact.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.has-text-centered data-controller="table" id='table_id'
-    thead
-      tr
-        th
-        th Last Update
-        th Name
-        th Age
-        th Height
-        th Weight
-        th Status
-        th Nat.
-        th Pos.
-        th Profiles
-        th Salary
-        th Agent
-        th Last season
-        th Comments
-        th Priority
-        th Available?
-        th
-    tbody
-      - players.order(created_at: :desc).each do |player|
-        - player = player.decorate
-        tr
-          td = player.favorite_star
-          td
-            em = player.last_update
-          td = link_to player.name, player, data: { turbolinks: false }
-          td = player.age
-          td = player.height
-          td = player.weight
-          td = player.status.short
-          td = player.nationality
-          td = player.position.short
-          td = player.profiles_tags
-          td = player.salary
-          td = player.agent
-          td = player.last_season
-          td = player.comments_cell
-          td = player.priority.name
-          td = player.available
-          td data-controller="modal" 
-            span.icon.has-text-success data-selector="rosters-modal" data-action="click->modal#open click->roster-selection#setPlayer" data-player="#{player.id}"
-              i.fas.fa-plus-square
-  br
+#tabulator-players
+/ div data-controller="roster-selection" 
+/   = render 'shared/rosters_modal'
+/   table.table.compact.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.has-text-centered data-controller="table" id='table_id'
+/     thead
+/       tr
+/         th
+/         th Last Update
+/         th Name
+/         th Age
+/         th Height
+/         th Weight
+/         th Status
+/         th Nat.
+/         th Pos.
+/         th Profiles
+/         th Salary
+/         th Agent
+/         th Last season
+/         th Comments
+/         th Priority
+/         th Available?
+/         th
+/     tbody
+/       - players.order(created_at: :desc).each do |player|
+/         - player = player.decorate
+/         tr
+/           td = player.favorite_star
+/           td
+/             em = player.last_update
+/           td = link_to player.name, player, data: { turbolinks: false }
+/           td = player.age
+/           td = player.height
+/           td = player.weight
+/           td = player.status.short
+/           td = player.nationality
+/           td = player.position.short
+/           td = player.profiles_tags
+/           td = player.salary
+/           td = player.agent
+/           td = player.last_season
+/           td = player.comments_cell
+/           td = player.priority.name
+/           td = player.available
+/           td data-controller="modal" 
+/             span.icon.has-text-success data-selector="rosters-modal" data-action="click->modal#open click->roster-selection#setPlayer" data-player="#{player.id}"
+/               i.fas.fa-plus-square
+/   br

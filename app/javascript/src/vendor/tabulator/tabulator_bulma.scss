@@ -42,6 +42,7 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 
 //Tabulator Containing Element
 .tabulator{
+	margin-right: 50px;
 	position: relative;
 
 	background-color: $backgroundColor;
@@ -72,8 +73,6 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 	.tabulator-header{
 		position:relative;
 		box-sizing: border-box;
-
-		width:100%;
 		border:$table-cell-border;
 		border-width:$table-head-cell-border-width;
 		background-color: $headerBackgroundColor;
@@ -740,8 +739,7 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 		box-sizing:border-box;
 		padding:$table-cell-padding;
 		// border-right:1px solid $rowBorderColor;
-		border:$table-cell-border;
-		border-width:$table-cell-border-width;
+		border: $table-cell-border;
 		vertical-align:middle;
 		white-space:nowrap;
 		overflow:hidden;

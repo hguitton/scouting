@@ -1,6 +1,10 @@
 json.(player, :name, :birthdate, :nationality, :available, :created_at)
 
-json.favorited current_user.favorite_players.include?(player)
+json.favorite do 
+  json.value current_user.favorite_players.include?(player)
+  json.remove_link remove_favorite_user_path(current_user.id, player.id)
+  json.add_link add_favorite_user_path(current_user.id, player.id)
+end
 json.updated_at player.updated_at.in_time_zone('Paris')
 json.updated_by_user
 
