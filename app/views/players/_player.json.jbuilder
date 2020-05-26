@@ -1,4 +1,6 @@
-json.(player, :name, :birthdate, :nationality, :available, :created_at)
+json.(player, :name, :nationality, :available, :created_at)
+
+json.birthdate player.birthdate_timestamp
 
 json.favorite do 
   json.value current_user.favorite_players.include?(player)

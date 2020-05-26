@@ -1,26 +1,42 @@
 import { Controller } from "stimulus";
 import * as moment from "moment";
 window.moment = moment;
+import $ from 'jquery';  
+window.jQuery = $; window.$ = $;
 import Tabulator from "tabulator-tables";
 
 export default class extends Controller {
   connect() {
     //define table
     var table = new Tabulator("#tabulator-players", {
+      layout:"fitColumns",
+      responsiveLayout:"hide",
+      persistence:{
+        sort:true,
+        columns:true,
+      },
       columns: [
         {
-          title: "Fav.",
+          title: "",
           field: "favorite",
           formatter: this.customFormatter,
+          hozAlign : 'center',
+          vertAlign : 'middle',
+          responsive: 0,
+          width: '40'
         },
         {
-          title: "Last update",
+          title: "Update",
           field: "updated_at",
           formatter: "datetimediff",
           formatterParams: {
             humanize: true,
             invalidPlaceholder: "(invalid date)",
           },
+          hozAlign : 'center',
+          vertAlign : 'middle',
+          width: '80',
+          responsive: 4
         },
         {
           title: "Name",
@@ -30,6 +46,10 @@ export default class extends Controller {
             labelField: "name",
             target: "_blank",
           },
+          vertAlign : 'middle',
+          width: "10%",
+          minWidth: '100',
+          responsive: 0
         },
         {
           title: "Age",
@@ -40,64 +60,122 @@ export default class extends Controller {
             humanize: true,
             invalidPlaceholder: "(invalid date)",
           },
+          hozAlign : 'center',
+          vertAlign : 'middle',
+          width: '70',
+          responsive: 3
         },
         {
           title: "Height",
           field: "height",
           formatter: this.customFormatter,
           sorter: this.customSorter,
+          width: '70',
         },
         {
           title: "Weight",
           field: "weight",
           formatter: this.customFormatter,
           sorter: this.customSorter,
+          width: '70',
+          responsive: 3
         },
-        { title: "Status", field: "status" },
-        { title: "Nat.", field: "nationality" },
+        { 
+          title: "Status", 
+          field: "status",
+          width: '75',
+          hozAlign : 'center',
+          vertAlign : 'middle'
+        },
+        { 
+          title: "Nat.",
+          field: "nationality",
+          width: '115',
+          hozAlign : 'center',
+          vertAlign : 'middle',
+          responsive: 3  
+        },
         {
           title: "Pos.",
           field: "position",
           formatter: this.customFormatter,
           sorter: this.customSorter,
+          widthGrow: 1,
+          hozAlign : 'center',
+          vertAlign : 'middle',
+          width: '70'
         },
         {
           title: "Profiles",
           field: "profiles",
           headerSort: false,
           formatter: this.customFormatter,
+          widthGrow: 3,
+          hozAlign : 'center',
+          vertAlign : 'middle',
+          minWidth : "250",
         },
         {
           title: "Salary",
           field: "salary",
           formatter: this.customFormatter,
           sorter: this.customSorter,
+          hozAlign : 'center',
+          vertAlign : 'middle',
+          minWidth: '120',
+          responsive: 1
         },
         {
           title: "Agent",
           field: "agent",
           headerSort: false,
           formatter: this.customFormatter,
+          hozAlign : 'center',
+          vertAlign : 'middle',
+          width: '90',
+          responsive: 4
         },
         {
           title: "Last season",
           field: "seasons",
           headerSort: false,
           formatter: this.customFormatter,
+          responsive: 4,
+          minWidth: '120'
         },
         {
           title: "Comments",
           field: "comments",
           formatter: this.customFormatter,
           sorter: this.customSorter,
+          hozAlign : 'center',
+          vertAlign : 'middle',
+          minWidth: '90',
+          responsive: 1
         },
-        { title: "Priority", field: "priority" },
-        { title: "Available", field: "available" },
+        { 
+          title: "Priority",
+          field: "priority",
+          hozAlign : 'center',
+          vertAlign : 'middle',
+          minWidth: '80',
+          responsive: 3 
+        },
+        { 
+          title: "Available",
+          field: "available",
+          hozAlign : 'center',
+          vertAlign : 'middle',
+          minWidth: '80',
+          responsive: 4
+        },
       ],
-      responsiveLayout:"collapse",
     });
     // define URL data json
     table.setData("players.json");
+    window.addEventListener('resize', function(){
+      table.redraw();
+  });
   }
 
   customFormatter(cell, formatterParams, onRendered) {
@@ -141,17 +219,10 @@ export default class extends Controller {
           break;
 
         case "seasons":
-          cell
-            .getValue()
-            .forEach(
-              (element) =>
-                (valueReturn +=
-                  element.name +
-                  " <br/> " +
-                  element.country +
-                  " <br/> " +
-                  element.team)
-            );
+          if(cell.getValue()[0]){
+            var season = cell.getValue()[0]
+            valueReturn = season.name + " <br/> " + season.country + " <br/> <strong>" + season.team + "</strong>"
+          }
           break;
 
         case "comments":
