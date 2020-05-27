@@ -42,6 +42,7 @@ json.priority player.priority.name
 json.position player.position, :short, :order
 
 json.comments player.comments do |comment|
+  json.player_id player.id
   json.content comment.content
   json.created_at comment.created_at
   json.created_by comment.created_by.name

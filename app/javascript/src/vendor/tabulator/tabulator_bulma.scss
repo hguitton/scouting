@@ -733,10 +733,8 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 	//cell element
 	.tabulator-cell{
 		display:inline-block;
-		position: relative;
 		box-sizing:border-box;
 		padding:$table-cell-padding;
-		// border-right:1px solid $rowBorderColor;
 		border: $table-cell-border;
 		vertical-align:middle;
     white-space: normal;

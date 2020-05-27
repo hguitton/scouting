@@ -184,7 +184,6 @@ export default class extends Controller {
   customFormatter(cell, formatterParams, onRendered) {
     var valueReturn = "";
     if (cell.getValue() != null) {
-      console.log(cell.getField());
       switch (cell.getField()) {
         case "favorite":
           if (cell.getValue().value) {
@@ -227,11 +226,6 @@ export default class extends Controller {
           valueReturn = cell.getValue().short;
           break;
 
-        case "bob":
-          console.log("COUCOUCOUCOUC");
-          valueReturn = cell.getField();
-          break;
-
         case "salary":
           if (cell.getValue().real != 0) valueReturn = cell.getValue().real;
           else valueReturn = cell.getValue().estimation;
@@ -251,19 +245,29 @@ export default class extends Controller {
           break;
 
         case "comments":
+          var player_id = cell.getRow()._row.data.id;
           valueReturn =
-            '<div data-controller="modal" > <small data-action="click->modal#open">' +
+            '<div data-controller="modal"><small data-action="click->modal#open" data-selector="comments_' +
+            player_id +
+            '">' +
             cell.getValue().length +
-            ' comment(s)</small><div class="modal-window" data-target="modal.modalWindow" data-action="click->modal#close"><div style="display: block;">';
+            " comment(s)</small></div>";
+          var commentsList =
+            '<div class="modal-window" id="comments_' + player_id + "\" onclick=\"this.classList.remove('modal-opened')\"> <div style='display: block;'>";
           cell.getValue().forEach((element) => {
-            valueReturn +=
+            commentsList +=
               '<div class="m-b-xl"><small>' +
               element.created_at +
-              '</small><strong> -  : </strong><p class="p-l-md">' +
+              "</small><strong> - " +
+              element.created_by +
+              ' : </strong><p class="p-l-md">' +
               element.content +
               "</p></div>";
           });
-          valueReturn += "</div></div></div > ";
+          commentsList += "</div></div>";
+          document
+            .getElementById("tabulator-players-comments")
+            .insertAdjacentHTML("beforeend", commentsList);
           break;
 
         case "profiles":
@@ -288,7 +292,9 @@ export default class extends Controller {
               <span class="icon is-medium has-text-success" 
                 data-selector="rosters-modal" 
                 data-action="click->modal#open click->roster-selection#setPlayer" 
-                data-player="` + cell.getValue()+`">
+                data-player="` +
+            cell.getValue() +
+            `">
               <i class="fas fa-lg fa-plus-square"></i></span></div>`;
 
           break;
