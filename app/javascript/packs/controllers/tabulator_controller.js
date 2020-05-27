@@ -7,17 +7,28 @@ export default class extends Controller {
   connect() {
     //define table
     var table = new Tabulator("#tabulator-players", {
+      pagination:"local",
+      paginationSize: 10, 
       layout: "fitColumns",
       responsiveLayout: "hide",
       columns: [
         {
           title: "",
           field: "favorite",
-          formatter: this.customFormatter,
+          formatter: this.favoriteFormatter,
           hozAlign: "center",
           vertAlign: "middle",
           responsive: 0,
           width: "40",
+        },
+        {
+          title: "Ros.",
+          field: "id",
+          formatter: this.rosterFormatter,
+          hozAlign: "center",
+          vertAlign: "middle",
+          width: "5",
+          responsive: 0,
         },
         {
           title: "Update",
@@ -42,8 +53,7 @@ export default class extends Controller {
             target: "_blank",
           },
           vertAlign: "middle",
-          width: "10%",
-          minWidth: "100",
+          minWidth: "120",
           responsive: 0,
         },
         {
@@ -62,15 +72,19 @@ export default class extends Controller {
         {
           title: "Height",
           field: "height",
-          formatter: this.customFormatter,
+          formatter: this.heightFormatter,
           sorter: this.customSorter,
+          hozAlign: "center",
+          vertAlign: "middle",
           width: "70",
         },
         {
           title: "Weight",
           field: "weight",
-          formatter: this.customFormatter,
+          formatter: this.weightFormatter,
           sorter: this.customSorter,
+          hozAlign: "center",
+          vertAlign: "middle",
           width: "70",
           responsive: 3,
         },
@@ -92,7 +106,7 @@ export default class extends Controller {
         {
           title: "Pos.",
           field: "position",
-          formatter: this.customFormatter,
+          formatter: this.positionFormatter,
           sorter: this.customSorter,
           widthGrow: 1,
           hozAlign: "center",
@@ -103,15 +117,15 @@ export default class extends Controller {
           title: "Profiles",
           field: "profiles",
           headerSort: false,
-          formatter: this.customFormatter,
+          formatter: this.profilesFormatter,
           hozAlign: "center",
           vertAlign: "middle",
-          minWidth: "100",
+          minWidth: "110",
         },
         {
           title: "Salary",
           field: "salary",
-          formatter: this.customFormatter,
+          formatter: this.salaryFormatter,
           sorter: this.customSorter,
           hozAlign: "center",
           vertAlign: "middle",
@@ -122,7 +136,7 @@ export default class extends Controller {
           title: "Agent",
           field: "agent",
           headerSort: false,
-          formatter: this.customFormatter,
+          formatter: this.agentFormatter,
           hozAlign: "center",
           vertAlign: "middle",
           width: "90",
@@ -132,18 +146,20 @@ export default class extends Controller {
           title: "Last season",
           field: "seasons",
           headerSort: false,
-          formatter: this.customFormatter,
+          formatter: this.seasonsFormatter,
+          hozAlign: "center",
+          vertAlign: "middle",
           responsive: 4,
           minWidth: "150",
         },
         {
           title: "Comments",
           field: "comments",
-          formatter: this.customFormatter,
+          formatter: this.commentsFormatter,
           sorter: this.customSorter,
           hozAlign: "center",
           vertAlign: "middle",
-          minWidth: "90",
+          width: "110",
           responsive: 1,
         },
         {
@@ -151,7 +167,7 @@ export default class extends Controller {
           field: "priority",
           hozAlign: "center",
           vertAlign: "middle",
-          minWidth: "80",
+          width: "110",
           responsive: 3,
         },
         {
@@ -159,151 +175,105 @@ export default class extends Controller {
           field: "available",
           hozAlign: "center",
           vertAlign: "middle",
-          minWidth: "80",
+          width: "120",
           responsive: 4,
-        },
-        {
-          title: "Ros.",
-          field: "id",
-          formatter: this.customFormatter,
-          hozAlign: "center",
-          vertAlign: "middle",
-          minWidth: "15",
-          responsive: 0,
-        },
+        }
       ],
     });
     // define URL data json
-    table.setData("players.json");
+    table.setData("/players.json");
 
     window.addEventListener("resize", function () {
       table.redraw();
     });
   }
 
-  customFormatter(cell, formatterParams, onRendered) {
-    var valueReturn = "";
-    if (cell.getValue() != null) {
-      switch (cell.getField()) {
-        case "favorite":
-          if (cell.getValue().value) {
-            valueReturn =
-              `<span class='icon has-text-warning' data-controller='favorite' data-favorite-url='` +
-              cell.getValue().remove_link +
-              `'>
-                <i class='fas fa-star' data-action='click->favorite#unfav'></i>
-              </span>`;
-          } else {
-            valueReturn =
-              `<span class='icon' data-controller='favorite' data-favorite-url='` +
-              cell.getValue().add_link +
-              `'>
-                <i class='far fa-star' data-action='click->favorite#fav'></i>
-              </span>`;
-          }
-          break;
-        case "height":
-          valueReturn =
-            cell.getValue().eu +
-            " cm <br/><small>" +
-            cell.getValue().us +
-            " ft</small>";
-          break;
-
-        case "weight":
-          valueReturn =
-            cell.getValue().eu +
-            " kg <br/><small>" +
-            cell.getValue().us +
-            " lbs</small>";
-          break;
-
-        case "agent":
-          valueReturn = cell.getValue().eu + " <br/>" + cell.getValue().us;
-          break;
-
-        case "position":
-          valueReturn = cell.getValue().short;
-          break;
-
-        case "salary":
-          if (cell.getValue().real != 0) valueReturn = cell.getValue().real;
-          else valueReturn = cell.getValue().estimation;
-          break;
-
-        case "seasons":
-          if (cell.getValue()[0]) {
-            var season = cell.getValue()[0];
-            valueReturn =
-              season.name +
-              " <br/> " +
-              season.country +
-              " <br/> <strong>" +
-              season.team +
-              "</strong>";
-          }
-          break;
-
-        case "comments":
-          var player_id = cell.getRow()._row.data.id;
-          valueReturn =
-            '<div data-controller="modal"><small data-action="click->modal#open" data-selector="comments_' +
-            player_id +
-            '">' +
-            cell.getValue().length +
-            " comment(s)</small></div>";
-          var commentsList =
-            '<div class="modal-window" id="comments_' + player_id + "\" onclick=\"this.classList.remove('modal-opened')\"> <div style='display: block;'>";
-          cell.getValue().forEach((element) => {
-            commentsList +=
-              '<div class="m-b-xl"><small>' +
-              element.created_at +
-              "</small><strong> - " +
-              element.created_by +
-              ' : </strong><p class="p-l-md">' +
-              element.content +
-              "</p></div>";
-          });
-          commentsList += "</div></div>";
-          document
-            .getElementById("tabulator-players-comments")
-            .insertAdjacentHTML("beforeend", commentsList);
-          break;
-
-        case "profiles":
-          valueReturn = "<div class='flex fdc'>";
-          cell
-            .getValue()
-            .forEach(
-              (element) =>
-                (valueReturn +=
-                  "<a href='" +
-                  element.link +
-                  "' class='tag is-info m-xxs'>" +
-                  element.name +
-                  " </a>")
-            );
-          valueReturn += "</div>";
-          break;
-        case "id":
-          valueReturn =
-            `
-            <div data-controller="modal">
-              <span class="icon is-medium has-text-success" 
-                data-selector="rosters-modal" 
-                data-action="click->modal#open click->roster-selection#setPlayer" 
-                data-player="` +
-            cell.getValue() +
-            `">
-              <i class="fas fa-lg fa-plus-square"></i></span></div>`;
-
-          break;
-        default:
-          valueReturn = "error : " + cell.getField();
-          break;
-      }
+  favoriteFormatter(cell) {
+    if (cell.getValue().value) {
+      var valueReturn =
+        `<span class='icon has-text-warning' data-controller='favorite' data-favorite-url='` +
+        cell.getValue().remove_link +
+        `'>
+          <i class='fas fa-star' data-action='click->favorite#unfav'></i>
+        </span>`;
+    } else {
+      var valueReturn =
+        `<span class='icon' data-controller='favorite' data-favorite-url='` +
+        cell.getValue().add_link +
+        `'>
+          <i class='far fa-star' data-action='click->favorite#fav'></i>
+        </span>`;
     }
-    return valueReturn;
+    return valueReturn
+  }
+
+  heightFormatter(cell) {
+    return "<div class='flex fdc'>" + cell.getValue().eu + " cm <br/><small>" + cell.getValue().us + " ft</small></div>";
+  }
+
+  weightFormatter(cell) {
+    return "<div class='flex fdc'>" + cell.getValue().eu + " kg <br/><small>" + cell.getValue().us + " lbs</small></div>";
+  }
+
+  agentFormatter(cell) {
+    return cell.getValue().eu + " <br/>" + cell.getValue().us;
+  }
+
+  positionFormatter(cell) {
+    return cell.getValue().short;
+  }
+
+  salaryFormatter(cell) {
+    if (cell.getValue().real != 0){
+      return cell.getValue().real;
+    }
+    else {
+      return cell.getValue().estimation;
+    }
+  }
+
+  seasonsFormatter(cell) {
+    if (cell.getValue()[0]) {
+      var season = cell.getValue()[0];
+      return "<div class='flex fdc' >" + season.name + " <br/> " + season.country + " <br/> <strong>" + season.team + "</strong></div>";
+    }
+    return ''
+  }
+
+  commentsFormatter(cell) {
+    var player_id = cell.getRow()._row.data.id;
+    var valueReturn = '<div data-controller="modal"><small data-action="click->modal#open" data-selector="comments_' + player_id + '">' 
+                      + cell.getValue().length + " comment(s)</small></div>";
+
+    var commentsList = '<div class="modal-window" id="comments_' + player_id + "\" onclick=\"this.classList.remove('modal-opened')\"> <div style='display: block;'>";
+    cell.getValue().forEach((element) => {
+      commentsList += '<div class="m-b-xl"><small>' + element.created_at + "</small><strong> - " + element.created_by + ' : </strong><p class="p-l-md">' + element.content + "</p></div>";
+    });
+    commentsList += "</div></div>";
+
+    document.getElementById("tabulator-players-comments").insertAdjacentHTML("beforeend", commentsList);
+
+    return valueReturn
+  }
+
+  profilesFormatter(cell) {
+    var valueReturn = "<div>";
+    cell.getValue().forEach((element) => {
+      valueReturn += "<a href='" + element.link + "' class='tag is-info m-xxs'>" + element.name + " </a>"
+    });
+    valueReturn += "</div>";
+    return valueReturn
+  }
+
+  rosterFormatter(cell) {
+    return `<div data-controller="modal">
+        <span class="icon is-medium has-text-success" 
+          data-selector="rosters-modal" 
+          data-action="click->modal#open click->roster-selection#setPlayer" 
+          data-player="` + cell.getValue() + `">
+            <i class="fas fa-lg fa-plus-square"></i>
+        </span>
+      </div>`;
   }
 
   customSorter(a, b, aRow, bRow, column, dir, sorterParams) {
