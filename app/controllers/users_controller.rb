@@ -4,6 +4,10 @@ class UsersController < ApplicationController
   
   def favorites
     @players = @user.favorite_players
+    respond_to do |format|
+      format.html
+      format.json { render 'players/players' }
+    end
   end
 
   def add_fav_player

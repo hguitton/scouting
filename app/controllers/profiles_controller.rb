@@ -4,6 +4,10 @@ class ProfilesController < ApplicationController
 
   def show
     @players = @profile.players
+    respond_to do |format|
+      format.html
+      format.json { render 'players/players' }
+    end
   end
 
   # POST /profiles

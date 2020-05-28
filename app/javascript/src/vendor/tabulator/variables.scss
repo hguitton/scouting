@@ -24,7 +24,7 @@ $red:          hsl(348, 100%, 61%) !default;
 
 // Typography
 
-$family-sans-serif: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif !default;
+$family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 $family-monospace: monospace !default;
 $render-mode: optimizeLegibility !default;
 
@@ -176,8 +176,8 @@ $table-color: $grey-darker !default;
 $table-background-color: $white !default;
 
 $table-cell-border: 1px solid $grey-lighter !default;
-$table-cell-border-width: 0 0 1px !default;
-$table-cell-padding: 0.5em 0.75em !default;
+$table-cell-border-width: 1px 1px 1px !default;
+$table-cell-padding: 0.25em ;
 $table-cell-heading-color: $text-strong !default;
 
 $table-head-cell-border-width: 0 0 2px !default;

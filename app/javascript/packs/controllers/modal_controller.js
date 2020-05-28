@@ -11,7 +11,7 @@ export default class extends Controller {
     this.modal(event).classList.remove("modal-opened");
   }
 
-  modal(event) {
+  modal(event) {    
     if (event.currentTarget.dataset.selector){
       return document.getElementById(event.currentTarget.dataset.selector);
     }

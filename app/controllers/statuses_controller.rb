@@ -4,6 +4,10 @@ class StatusesController < ApplicationController
 
   def show
     @players = @status.players
+    respond_to do |format|
+      format.html
+      format.json { render 'players/players' }
+    end
   end
 
   # POST /statuss

@@ -14,6 +14,7 @@ class Roster < ApplicationRecord
   end
 
   def available_players
+    return players if roster_spots.empty?
     return [] if players.count.zero?
     players - roster_spots.includes(:players).sum(&:players)
   end

@@ -20,6 +20,8 @@ class Player < ApplicationRecord
   belongs_to :user, foreign_key: "updated_by_user_id"
   validates :name, :nationality, presence: true
 
+  default_scope { includes({ comments: :user}, :user, :position, :status, :priority, :profiles, :seasons) }
+
   scope :with_height_between, -> (min, max) { where(height_eu: min..max) }
   scope :with_weight_between, -> (min, max) { where(weight_eu: min..max) }
   scope :with_position, -> (position_ids) { where(position_id: position_ids) }
@@ -72,5 +74,10 @@ class Player < ApplicationRecord
     self.height_eu = 0 if self.height_eu.nil?
     self.weight_eu = 0 if self.weight_eu.nil?
     self.salary_real = 0 if self.salary_real.nil?
+  end
+
+  def touch_by(user)
+    self.touch
+    self.update_column(:updated_by_user_id, user.id)
   end
 end
