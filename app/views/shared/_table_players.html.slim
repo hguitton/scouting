@@ -1,5 +1,8 @@
 div data-controller="roster-selection tabulator" data-tabulator-path="#{request.original_fullpath}.json"
-  em = "Total : #{@players.size} players"
+  .columns
+    .column.is-one-fifth
+      = text_field_tag 'search', nil, class:"input is-small", placeholder: "Search (by name, status, nationality, priority, ...)", data: { action: "keyup->tabulator#triggerSearch" }
   = render 'shared/rosters_modal'
   #tabulator-players
   #tabulator-players-comments
+  em = "Total : #{@players.size} players"

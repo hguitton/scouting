@@ -6,7 +6,7 @@ import Tabulator from "tabulator-tables";
 export default class extends Controller {
   connect() {
     //define table
-    var table = new Tabulator("#tabulator-players", {
+    this.table = new Tabulator("#tabulator-players", {
       pagination:"local",
       paginationSize: 10, 
       layout: "fitColumns",
@@ -178,16 +178,29 @@ export default class extends Controller {
     });
 
     if(this.data.get('path')){
-      table.setData(this.data.get('path'));
+      this.table.setData(this.data.get('path'));
     }
 
-    window.addEventListener("resize", function () {
-      table.redraw();
+    window.addEventListener("resize", () => {
+      this.table.redraw();
     });
   }
 
+  triggerSearch(e){
+    var value = e.target.value;
+    this.table.setFilter([
+      [
+        { field: "name", type: "like", value: value },
+        { field: "nationality", type: "like", value: value },
+        { field: "status", type: "like", value: value },
+        { field: "priority", type: "like", value: value },
+        { field: "available", type: "like", value: value },
+      ]
+    ]);
+  }
+
   updatedFormatter(cell){
-    return "<div class='flex fdc'><em>" + cell.getValue().ago + " ago </em><span>" + cell.getValue().by_user + "</span></div>"
+    return "<div class='flex fdc'><em>" + cell.getValue().ago + " ago </em><strong> " + cell.getValue().by_user + "</strong></div>"
   }
 
   favoriteFormatter(cell) {
@@ -237,7 +250,7 @@ export default class extends Controller {
   seasonsFormatter(cell) {
     if (cell.getValue()[0]) {
       var season = cell.getValue()[0];
-      return "<div class='flex fdc' >" + season.name + " <br/> " + season.country + " <br/> <strong>" + season.team + "</strong></div>";
+      return "<div class='flex fdc'>" + season.name + " <br/> " + season.country + " <br/> <strong>" + season.team + "</strong></div>";
     }
     return ''
   }
@@ -249,7 +262,7 @@ export default class extends Controller {
 
     var commentsList = '<div class="modal-window" id="comments_' + player_id + "\" onclick=\"this.classList.remove('modal-opened')\"> <div style='display: block;'>";
     cell.getValue().forEach((element) => {
-      commentsList += '<div class="m-b-xl"><small>' + element.created_at + "</small><strong> - " + element.created_by + ' : </strong><p class="p-l-md">' + element.content + "</p></div>";
+      commentsList += '<div class="m-b-xl"><small>' + moment(element.created_at).format('DD/MM/YYYY') + "</small><strong> - " + element.created_by + ' : </strong><p class="p-l-md">' + element.content + "</p></div>";
     });
     commentsList += "</div></div>";
 
