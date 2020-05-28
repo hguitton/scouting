@@ -3,7 +3,11 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   
   def favorites
-    @players = @user.favorite_players
+    @players = @user.favorite_players.includes({ comments: :user}, :position, :status, :priority, :profiles, :seasons)
+    respond_to do |format|
+      format.html
+      format.json { render 'players/players' }
+    end
   end
 
   def add_fav_player

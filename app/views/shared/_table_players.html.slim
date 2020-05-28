@@ -1,4 +1,5 @@
-div data-controller="roster-selection tabulator" 
+div data-controller="roster-selection tabulator" data-tabulator-path="#{request.original_fullpath}.json"
+  em = "Total : #{@players.size} players"
   = render 'shared/rosters_modal'
   #tabulator-players
   #tabulator-players-comments

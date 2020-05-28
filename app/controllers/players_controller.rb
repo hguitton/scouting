@@ -1,15 +1,18 @@
 class PlayersController < ApplicationController
   before_action :set_player, only: [:show, :edit, :update, :destroy]
   # before_action :authenticate_user!
-  
+  def root
+    redirect_to players_path
+  end
+
   # GET /players
   def index
-    @players = Player.includes({ comments: :user}, :position, :status, :priority, :profiles, :seasons).all
+    @players = Player.all
     @player = Player.new  
 
     respond_to do |format|
       format.html { render :index }
-      format.json
+      format.json { render 'players/players'}
     end
   end
 

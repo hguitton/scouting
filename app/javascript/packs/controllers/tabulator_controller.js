@@ -32,13 +32,9 @@ export default class extends Controller {
         },
         {
           title: "Update",
-          field: "updated_at",
-          formatter: "datetimediff",
-          formatterParams: {
-            humanize: true,
-            invalidPlaceholder: "(invalid date)",
-            suffix: true,
-          },
+          field: "updated",
+          formatter: this.updatedFormatter,
+          sorter: this.customSorter,
           hozAlign: "center",
           vertAlign: "middle",
           width: "80",
@@ -180,12 +176,18 @@ export default class extends Controller {
         }
       ],
     });
-    // define URL data json
-    table.setData("/players.json");
+
+    if(this.data.get('path')){
+      table.setData(this.data.get('path'));
+    }
 
     window.addEventListener("resize", function () {
       table.redraw();
     });
+  }
+
+  updatedFormatter(cell){
+    return "<div class='flex fdc'><em>" + cell.getValue().ago + " ago </em><span>" + cell.getValue().by_user + "</span></div>"
   }
 
   favoriteFormatter(cell) {
@@ -294,6 +296,10 @@ export default class extends Controller {
 
       case "position":
         valueReturn = a.order - b.order;
+        break;
+
+      case "updated":
+        valueReturn = moment(a.at) - moment(b.at);
         break;
 
       default:

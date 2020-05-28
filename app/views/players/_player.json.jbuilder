@@ -3,12 +3,16 @@ json.(player, :id, :name, :nationality, :available, :created_at)
 json.birthdate player.birthdate_timestamp
 
 json.favorite do 
-json.value current_user.favorite_players.include?(player)
-json.remove_link remove_favorite_user_path(current_user.id, player.id)
-json.add_link add_favorite_user_path(current_user.id, player.id)
+  json.value current_user.favorite_players.include?(player)
+  json.remove_link remove_favorite_user_path(current_user.id, player.id)
+  json.add_link add_favorite_user_path(current_user.id, player.id)
 end
-json.updated_at player.updated_at.in_time_zone('Paris')
-json.updated_by_user
+
+json.updated do
+  json.at player.updated_at.in_time_zone('Paris')
+  json.ago time_ago_in_words(player.updated_at.in_time_zone('Paris'))
+  json.by_user player.user.name
+end
 
 json.height do
   json.eu player.height_eu
