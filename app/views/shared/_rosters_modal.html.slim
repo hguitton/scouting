@@ -1,0 +1,8 @@
+.modal-window#rosters-modal data-action="click->roster-selection#closeModal"
+  div 
+    h3.h3.title Select roster
+    - @rosters.each do |roster|
+      hr
+      .button.is-primary.is-outlined.is-fullwidth data-roster="#{roster.id}" data-action="click->roster-selection#setRoster" = roster.name
+  input type="hidden" data-target="roster-selection.input"
+

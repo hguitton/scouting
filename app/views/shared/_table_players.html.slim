@@ -1,40 +1,8 @@
-div data-controller="modal"
-  table.table.compact.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.has-text-centered data-controller="table" id='table_id'
-    thead
-      tr
-        th Last Update
-        th Name
-        th Age
-        th Height
-        th Weight
-        th Status
-        th Nat.
-        th Pos.
-        th Profiles
-        th Salary
-        th Agent
-        th Last season
-        th Comments
-        th Priority
-        th Available?
-
-    tbody
-      - players.order(created_at: :desc).decorate.each do |player|
-        tr
-          td
-            em = player.last_update
-          td = link_to player.name, player, data: { turbolinks: false }
-          td = player.age
-          td = player.height
-          td = player.weight
-          td = player.status.short
-          td = player.nationality
-          td = player.position.short
-          td = player.profiles_tags
-          td = player.salary
-          td = player.agent
-          td = player.last_season
-          td = player.comments_cell
-          td = player.priority.name
-          td = player.available
-  br
+div data-controller="roster-selection tabulator" data-tabulator-path="#{request.original_fullpath}.json"
+  .columns
+    .column.is-one-fifth
+      = text_field_tag 'search', nil, class:"input is-small", placeholder: "Search (by name, status, nationality, priority, ...)", data: { action: "keyup->tabulator#triggerSearch" }
+  = render 'shared/rosters_modal'
+  #tabulator-players
+  #tabulator-players-comments
+  em = "Total : #{@players.size} players"

@@ -1,11 +1,10 @@
-@import "variables.scss";
+@import "./variables.scss";
 
 // Style conversion file, bulma to tabulator
-
 //Main Theme Variables
 $backgroundColor: $table-background-color !default; //background color of tabulator
 // $borderColor:#999 !default; //border to tabulator
-$textSize:$size-normal !default; //table text size
+$textSize: $size-small !default; //table text size
 
 //header themeing
 $headerBackgroundColor:$table-head-background-color !default; //border to tabulator
@@ -43,13 +42,13 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 //Tabulator Containing Element
 .tabulator{
 	position: relative;
-
 	background-color: $backgroundColor;
-
 	font-size:$textSize;
 	text-align: left;
 	overflow:hidden;
 
+  max-height: 80vh;
+  max-width: 90vw;
 	-webkit-transform: translatez(0);
 	-moz-transform: translatez(0);
 	-ms-transform: translatez(0);
@@ -72,8 +71,6 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 	.tabulator-header{
 		position:relative;
 		box-sizing: border-box;
-
-		width:100%;
 		border:$table-cell-border;
 		border-width:$table-head-cell-border-width;
 		background-color: $headerBackgroundColor;
@@ -736,14 +733,11 @@ $footerBorderColor:$grey-lighter !default; //footer border color
 	//cell element
 	.tabulator-cell{
 		display:inline-block;
-		position: relative;
 		box-sizing:border-box;
 		padding:$table-cell-padding;
-		// border-right:1px solid $rowBorderColor;
-		border:$table-cell-border;
-		border-width:$table-cell-border-width;
+		border: $table-cell-border;
 		vertical-align:middle;
-		white-space:nowrap;
+    white-space: normal;
 		overflow:hidden;
 		text-overflow:ellipsis;
 

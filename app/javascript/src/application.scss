@@ -6,8 +6,11 @@
 @import '../src/vendor/easy-autocomplete';
 @import "bulma";
 @import '../src/vendor/tabulator/tabulator_bulma.scss';
+@import '../src/vendor/fontawesome.scss';
 @import '../src/base/grid';
 @import '../src/components/index';
+
+
 body {
   font-size: 14px;
 }
@@ -19,4 +22,11 @@ body {
 
 .img-player {
   object-fit: contain;
+}
+
+.w-110p{
+  width: 110px;
+}
+.w-150p{
+  width: 150px;
 }

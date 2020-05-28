@@ -32,22 +32,22 @@
         .control
           = f.number_field :height_eu, class: "input is-format-height", placeholder: "Height", data: { target: 'converter.heightEu scraper.height', action: 'keyup->converter#updateHeightUs' }
         .control
-          a.button.is-static.p-none cm
+          a.button.is-static.p-sm cm
       .field.has-addons
         .control
           = f.text_field :height_us, class: "input is-format-height-us", placeholder: "Height", data: { target: 'converter.heightUs', action: 'keyup->converter#updateHeightEu' }
         .control
-          a.button.is-static.p-none ft            
+          a.button.is-static.p-sm ft            
       .field.has-addons
         .control
           = f.number_field :weight_eu, class: "input is-format-weight", placeholder: "Weight", data: { target: 'converter.weightEu scraper.weight', action: 'keyup->converter#updateWeightUs' }
         .control
-          a.button.is-static.p-none kg
+          a.button.is-static.p-sm kg
       .field.has-addons
         .control
           = f.number_field :weight_us, class: "input is-format-weight", placeholder: "Weight", data: { target: 'converter.weightUs', action: 'keyup->converter#updateWeightEu' }
         .control
-          a.button.is-static.p-none lbs
+          a.button.is-static.p-sm lbs
       div
         label.label Level
         .select
@@ -86,14 +86,14 @@
           .control
             = f.number_field :salary_real, class: "input is-format-salary", placeholder: "Real salary", data: { target: 'converter.salaryEuro', action: 'keyup->converter#updateSalaryDollar' }
           .control
-            a.button.is-static.p-none k€
+            a.button.is-static.p-sm k€
       div
         label.label Salary real ($)
         .field.has-addons
           .control
             input.input.is-format-salary type="number" placeholder="Or real salary" data-target='converter.salaryDollar' data-action='keyup->converter#updateSalaryEuro'
           .control
-            a.button.is-static.p-none k$
+            a.button.is-static.p-sm k$
       div
         label.label Priority
         .select

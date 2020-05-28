@@ -33,14 +33,14 @@
             .control
               = f.number_field :min_height, class: "input is-format-height", placeholder: "Min height", value: "#{@search.min_height ||= '160'}"
             .control
-              a.button.is-static.p-none cm
+              a.button.is-static.p-sm cm
           p.help Min Height
         .m-l-md
           .field.has-addons
             .control
               = f.number_field :max_height, class: "input is-format-height", placeholder: "Min height", value: "#{@search.max_height ||= '240'}"
             .control
-              a.button.is-static.p-none cm
+              a.button.is-static.p-sm cm
           p.help Max Height
       .flex.fdr.m-b-md
         .m-t-md
@@ -48,14 +48,14 @@
             .control
               = f.number_field :min_weight, class: "input is-format-weight", placeholder: "Min weight", value: "#{@search.min_weight ||= '0'}"
             .control
-              a.button.is-static.p-none kg
+              a.button.is-static.p-sm kg
           p.help Min Weight
         .m-t-md.m-l-md
           .field.has-addons
             .control
               = f.number_field :max_weight, class: "input is-format-weight", placeholder: "Max weight", value: "#{@search.max_weight ||= '160'}"
             .control
-              a.button.is-static.p-none kg
+              a.button.is-static.p-sm kg
           p.help Max Weight
 
       .flex.fdr
@@ -64,14 +64,14 @@
             .control
               = f.number_field :min_age, class: "input is-format-weight", placeholder: "Min age", value: "#{@search.min_age ||= '15'}"
             .control
-              a.button.is-static.p-none ans
+              a.button.is-static.p-sm ans
           p.help Min Age
         .m-t-md.m-l-md
           .field.has-addons
             .control
               = f.number_field :max_age, class: "input is-format-weight", placeholder: "Max age", value: "#{@search.max_age ||= '45'}"
             .control
-              a.button.is-static.p-none ans
+              a.button.is-static.p-sm ans
           p.help Max Age
     .column.is-3
       .title.has-text-bold.has-text-centered.has-text-black Profile
@@ -89,7 +89,7 @@
             .control
               = f.number_field :min_salary, class: "input is-format-salary", placeholder: "Min salary", value: "#{@search.min_salary ||= '40'}"
             .control
-              a.button.is-static.p-none k€   
+              a.button.is-static.p-sm k€   
           p.help Min. Salary
 
         .m-t-md
@@ -97,7 +97,7 @@
             .control
               = f.number_field :max_salary, class: "input is-format-salary", placeholder: "Max salary", value: "#{@search.max_salary ||= '500'}"
             .control
-              a.button.is-static.p-none k€   
+              a.button.is-static.p-sm k€   
           p.help Max. Salary
         
         .m-t-md.title.has-text-bold.has-text-centered.has-text-black Available

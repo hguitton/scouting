@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
   # POST /comments
   def create
     @comment = Comment.new(comment_params)
+    @comment.player.touch_by(current_user)
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @comment.player, notice: 'Comment was successfully added.' }

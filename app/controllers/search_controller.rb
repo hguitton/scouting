@@ -18,6 +18,10 @@ class SearchController < ApplicationController
 
   def show
     @players = @search.find_players
+    respond_to do |format|
+      format.html
+      format.json { render 'players/index'}
+    end
   end
 
   def update

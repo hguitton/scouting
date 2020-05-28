@@ -25,4 +25,4 @@ players:
       name: "250k€ +"
       min: 250
       max: 999
-version: "0.2.3"
+version: "1.0"

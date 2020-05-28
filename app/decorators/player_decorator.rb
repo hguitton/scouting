@@ -1,5 +1,18 @@
 class PlayerDecorator < Draper::Decorator
+  include ActionView::Helpers::UrlHelper
   delegate_all
+
+  def favorite_star
+    if(h.current_user.favorite_players.include?(object))
+      h.tag.span(class: "icon has-text-warning", data: { controller: 'favorite', 'favorite-url': Rails.application.routes.url_helpers.remove_favorite_user_path(h.current_user.id, object.id) }) do 
+        h.concat(h.tag.i(class: 'fas fa-star', data: { action: 'click->favorite#unfav' }))
+      end
+    else
+      h.tag.span(class: "icon", data: { controller: 'favorite', 'favorite-url': Rails.application.routes.url_helpers.add_favorite_user_path(h.current_user.id, object.id) }) do 
+        h.concat(h.tag.i(class: 'far fa-star', data: { action: 'click->favorite#fav' }))
+      end
+    end
+  end
 
   def last_update
     return build_last_update(player.updated_at, player.user) if object.comments.empty? || (object.updated_at > object.comments.last.updated_at)
@@ -60,7 +73,7 @@ class PlayerDecorator < Draper::Decorator
   def comments_cell
     return if object.comments.empty?
     h.tag.div(data:{ controller: "modal"}) do 
-      h.concat(h.tag.small "#{object.comments.count} comment(s)", data: { action: "click->modal#open"})
+      h.concat(h.tag.small "#{object.comments.size} comment(s)", data: { action: "click->modal#open"})
       h.concat(h.tag.div(class: "modal-window", data: { target: "modal.modalWindow", action: 'click->modal#close' }) do
         h.concat(h.tag.div(style: "display: block;") do 
           object.comments.order(created_at: :desc).each do |comment|

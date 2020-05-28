@@ -1,0 +1,20 @@
+.card-roster-small {
+  display: none;
+  .card-small-infos{
+    margin: auto;
+    padding-right: .5rem;
+  }
+}
+
+.sortable {
+  .card-roster-small {
+    display: block;
+    .card-header-title {
+      padding: .25rem
+    }
+  }
+  .card-roster-big {
+    display: none;
+  }
+}
+

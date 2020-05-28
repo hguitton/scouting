@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  get 'users/show'
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root 'players#index'
+  root 'players#root'
   resources :players
   resources :comments, only: [:create]
   resources :seasons, only: [:create]
@@ -10,7 +11,24 @@ Rails.application.routes.draw do
   resources :positions, only: [:show]
   resources :profiles, only: [:show]
   resources :search, only: [:index, :new, :create, :show, :update]
-  
+  resources :rosters do
+    member do 
+      post 'add_player/:player_id', to: "rosters#add_player", as: :add_player
+      post 'remove_player/:player_id', to: "rosters#remove_player", as: :remove_player
+    end
+    resources :spots, controller: :roster_spots, only: [:create, :update, :destroy] do
+      member do
+        post 'update_players'
+      end
+    end
+  end
+  resources :users do 
+    member do
+      get :favorites
+      post 'add_favorite/:player_id', to: "users#add_fav_player", as: :add_favorite
+      post 'remove_favorite/:player_id', to: "users#remove_fav_player", as: :remove_favorite
+    end
+  end
   get 'resources/agents', to: "resources#agents"
   get 'resources/countries', to: "resources#countries"
   get 'resources/leagues', to: "resources#leagues"

@@ -15,29 +15,24 @@ nav.navbar.is-white
           | Players
         a.navbar-item.has-text-weight-bold href="/players/new" 
           | New player
-        a.navbar-item.has-text-weight-bold  href="/search/new" 
+        a.navbar-item.has-text-weight-bold href="/search/new" 
           | Search
-        .navbar-item.has-text-weight-bold.disable
-          | Roster
+        a.navbar-item.has-text-weight-bold href="/rosters" 
+          | Rosters
 
       .navbar-end
         - if user_signed_in?
+          .navbar-item.has-text-weight-bold.has-dropdown.is-hoverable
+            a.navbar-link
+              | Favorites
+            .navbar-dropdown
+              = link_to 'My Favorites', favorites_user_path(current_user), class: "navbar-item has-text-weight-bold"
+              hr.navbar-divider/
+              - users_list.each do |user|
+                = link_to "#{user.name}'s fav.", favorites_user_path(user), class: "navbar-item has-text-weight-bold"
           = link_to "#{current_user.name} - Log out", destroy_user_session_path, { method: "delete", class: "navbar-item has-text-weight-bold" }
         - else 
           = link_to "Sign in", new_user_session_path,  class: "navbar-item has-text-weight-bold"
 
-      /   a.navbar-item.has-text-weight-bold.disable href="" 
-      /     | Fav
-      /   .navbar-item.has-text-weight-bold.has-dropdown
-      /     a.navbar-link
-      /       | My account
-      /     .navbar-dropdown
-      /       a.navbar-item.has-text-weight-bold.disable
-      /         | Overview
-      /       a.navbar-item.has-text-weight-bold.disable
-      /         | Elements
-      /       hr.navbar-divider/
-      /       a.navbar-item.has-text-weight-bold
-      /         | Log out
 
 

@@ -2,6 +2,11 @@
 
 ## develop
 
+# 28-05-20: 1.0
+- Add players to favorites
+- Tabulator table
+- Roster planning feature
+
 # 16-05-20: 0.2.3
 - Fix scraper
 

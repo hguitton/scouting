@@ -20,6 +20,7 @@ module Scouting
     config.generators do |g|
       g.jbuilder false
       g.helper false
+      g.test_framework :rspec
     end
     config.filter_parameters << :password
     config.dsn = 'https://5eb4f0d9c79c4965b30ce8878241c4a0:f8d99d0e1a344012b1eadc0fc75d089a@o393401.ingest.sentry.io/5242434'
