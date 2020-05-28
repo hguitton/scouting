@@ -63,6 +63,6 @@ export default class extends Controller {
   }
 
   updateSpotFields(e){
-    e.currentTarget.form.submit();
+    e.target.form.submit();
   }
 }
