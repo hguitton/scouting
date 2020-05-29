@@ -7,6 +7,9 @@ export default class extends Controller {
   connect() {
     //define table
     this.table = new Tabulator("#tabulator-players", {
+      initialSort:[
+        {column:"updated", dir:"desc"}
+      ],
       pagination:"local",
       paginationSize: 10, 
       layout: "fitColumns",
