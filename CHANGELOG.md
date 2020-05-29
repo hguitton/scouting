@@ -2,9 +2,12 @@
 
 ## develop
 
+# 29-05-20: 1.0.2
+- Fix search json template 
+
 # 29-05-20: 1.0.1
 - Remove html table roster
-- Order by updated_at by default 
+- Order by updated_at by defaultrails  
 
 # 28-05-20: 1.0
 - Add players to favorites

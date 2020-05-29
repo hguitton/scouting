@@ -20,7 +20,7 @@ class SearchController < ApplicationController
     @players = @search.find_players
     respond_to do |format|
       format.html
-      format.json { render 'players/index'}
+      format.json { render 'players/players'}
     end
   end
 
