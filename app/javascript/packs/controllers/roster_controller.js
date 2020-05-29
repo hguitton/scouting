@@ -5,7 +5,7 @@ export default class extends Controller {
   static targets = ['sortable']
   
   connect(){
-    this.list = ""
+    this.list = ".table-spots, "
     this.sortableTargets.forEach(el => {
       this.list += " .sortable-" + el.dataset.id + ","
     });
@@ -14,6 +14,8 @@ export default class extends Controller {
     sortable('.players-pool',{
       acceptFrom: this.list + ', .players-pool',
     })
+    
+    console.log(this.list);
     
     sortable(this.list, {
       acceptFrom: this.list + ', .players-pool',
