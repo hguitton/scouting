@@ -8,3 +8,18 @@
   min-height: 40px;
   border: $grey dotted 1px;
 }
+
+.roster {
+  background-color: $white;
+  .roster-row {
+    background-color: $grey-light;
+  }
+  .roster-spots{
+    form {
+      margin: 15px 0;
+    }
+    form:nth-child(odd){
+      background-color: $white-ter;
+    }
+  }
+}

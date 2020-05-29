@@ -1,41 +1,57 @@
-table.table.compact.is-striped.is-narrow.is-hoverable.is-bordered.is-fullwidth.has-text-centered data-controller="format"
-  thead
-    tr
-      th.has-text-centered Position
-      th.has-text-centered Name
-      th.has-text-centered Player(s)
-      th.has-text-centered.w-110p Minutes
-      th.has-text-centered.w-150p Budgets
-      th
-  tbody
-    - position_list = Position.order(order: :asc).all
+.roster data-controller="format"
+  .columns.has-text-centered.roster-header
+    .column.is-2
+      .h3.has-text-weight-bold Position
+    .column.is-2
+      .h3.has-text-weight-bold Name
+    .column.is-4
+      .h3.has-text-weight-bold Player
+    .column.is-1
+      .h3.has-text-weight-bold Minutes
+    .column.is-2
+      .h3.has-text-weight-bold Budget
+    .column.is-1
+
+  - position_list = Position.order(order: :asc).all
+  .roster-spots
     - roster.roster_spots.includes(:position, player_spots: :player).order("positions.order asc").each do |spot|
-      tr
-        = form_for spot, url: roster_spot_path(roster, spot), namespace: spot.id, method: :patch do |f|
-          td = f.collection_select :position_id, position_list, :id, :name, {}, class: 'input', data: { action: "change->roster#updateSpotFields"}
-          td = f.text_field :name, class: "input", placeholder: "Status, impact, ...", data: { action: "change->roster#updateSpotFields"}
-        
-          td
+      = form_for spot, url: roster_spot_path(roster, spot), namespace: spot.id, method: :patch do |f|
+        .columns.has-text-centered
+          .column.is-2
+            = f.collection_select :position_id, position_list, :id, :name, {}, class: 'input is-small select m-l-sm', data: { action: "change->roster#updateSpotFields"}
+          .column.is-2
+            = f.text_field :name, class: "input is-small", placeholder: "Status, impact, ...", data: { action: "change->roster#updateSpotFields"}
+          .column.is-4
             div class="sortable sortable-#{spot.id}" data-target="roster.sortable" data-id="#{spot.id}" data-url="#{update_players_roster_spot_path(roster, spot)}"
               - spot.player_spots.includes(player: [:status, :position]).each do |ps|
                 = render 'card', player: ps.player, first_choice: ps.order.zero?
+          .column.is-1
+            = f.number_field :minutes, class: "input is-small",  placeholder: "Minutes", value: spot.minutes, min: 1, max: 40, data: { action: "change->roster#updateSpotFields"}
+          .column.is-2
+            = f.text_field :price, class: "input is-small is-format-salary-roster", placeholder: "Budget", value: spot.price, data: { action: "change->roster#updateSpotFields"}
+          .column.is-1   
+            = link_to roster_spot_path(roster,spot), method: :delete do
+              span.icon.has-text-danger
+                i.fas.fa-minus-square
 
-          td = f.number_field :minutes, class: "input",  placeholder: "Minutes", value: spot.minutes, min: 1, max: 40, data: { action: "change->roster#updateSpotFields"}
-          td = f.text_field :price, class: "input is-format-salary-roster", placeholder: "Budget", value: spot.price, data: { action: "change->roster#updateSpotFields"}
-          td = link_to roster_spot_path(roster,spot), method: :delete do
-            span.icon.has-text-danger
-              i.fas.fa-minus-square
+  = form_for RosterSpot.new, url: roster_spots_path(roster_id: roster.id) do |f|
+    .columns.has-text-centered
+      .column.is-2
+        = f.collection_select :position_id, position_list, :id, :name, {}, class: 'input is-small select m-l-sm'
+      .column.is-2
+        = f.text_field :name, class: "input is-small", placeholder: "Status, impact, ..."
+      .column.is-4
+      .column.is-1
+        = f.number_field :minutes, class: "input is-small",  placeholder: "Minutes", min: 1, max: 40
+      .column.is-2
+        = f.text_field :price, class: "input is-small is-format-salary-roster", placeholder: "Budget"
+      .column.is-1
+        = f.submit 'Add', class: "button is-success is-small"
 
-    tr
-      = form_for RosterSpot.new, url: roster_spots_path(roster_id: roster.id) do |f|
-        td = f.collection_select :position_id, position_list, :id, :name, {}, class: 'input'
-        td = f.text_field :name, class: "input", placeholder: "Status, impact, ..."
-        td 
-        td = f.number_field :minutes, class: "input", placeholder: "Minutes",  min: 1, max: 40
-        td = f.text_field :price, class: "input is-format-salary-roster", placeholder: "Budget"
-        td = f.submit 'Add', class: "button is-success"
-  tfoot
-    tr
-      th.is-size-5 colspan="3" Total
-      th.is-size-5.has-text-centered = roster.total_minutes
-      th.is-size-5.has-text-centered = roster.total_price
+    .columns
+      .column.is-8.is-size-4.has-text-weight-bold.m-l-sm Total
+      .column.is-1.is-size-4.has-text-centered
+        .h1.has-text-weight-bold = roster.total_minutes
+      .column.is-2.is-size-4.has-text-centered
+        .h1.has-text-weight-bold = roster.total_price
+      .column.is-1
