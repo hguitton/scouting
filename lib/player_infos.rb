@@ -9,7 +9,7 @@ class PlayerInfos
     @infos = {}
     if url =~ URI::regexp
       doc = Nokogiri::HTML(open(url, 'Cookie' => ENV["COOKIE"]))
-      doc.css('#teamlogo div>div>div b').each do |row|
+      doc.css('#teamlogo b').each do |row|
         scrape_row(row)
       end
       @infos[:name] = scrape_name(doc.css('.playertitle'))
@@ -35,7 +35,8 @@ class PlayerInfos
       @infos[:agent] = scrape_basic(link_content(row))
     when 'position'
       @infos[:position] = Position.find_by(name: scrape_basic(text_content(row)))&.id
-    when 'team'
+    when 'team', 'teams'
+
       @league = scrape_basic(link_content(row)).split.last.tr('()', '')
     end
   end
@@ -83,7 +84,6 @@ class PlayerInfos
       title = content.css('h4').map(&:text).first
     end
     table = content.xpath("//h4[text()='#{title}']/following-sibling::table")[1]
-    puts table.inspect.red
     stats[:name] = title.split[1].gsub('-', ' - ')
     stats[:country] = title[/\(.*?\)/].tr('()', '')
     
