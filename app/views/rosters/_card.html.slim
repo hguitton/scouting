@@ -2,7 +2,8 @@
   .card.card-roster-small
     header.card-header.card-small
       span class="card-header-title #{'has-text-grey-light' unless first_choice}"= player.name
-      span class="card-small-infos #{'has-text-grey-light' unless first_choice}" = "#{player.status.name} "
+      span class="card-small-infos #{'has-text-grey-light' unless first_choice}"= player.salary_real.zero? ? player.salary_estimation : "#{player.salary_real}k€"
+      span class="card-small-infos #{'has-text-grey-light' unless first_choice}" = " - #{player.status.name} "
   .card.card-roster-big
     header.card-header
       p.card-header-title = player.name
