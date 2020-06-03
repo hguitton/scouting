@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_17_163607) do
+ActiveRecord::Schema.define(version: 2020_06_03_124619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 2020_05_17_163607) do
     t.bigint "position_id"
     t.string "photo"
     t.datetime "birthdate_timestamp"
+    t.boolean "active", default: true
     t.index ["level_id"], name: "index_players_on_level_id"
     t.index ["position_id"], name: "index_players_on_position_id"
     t.index ["priority_id"], name: "index_players_on_priority_id"

@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'players#root'
-  resources :players
+  resources :players do 
+    member do
+      get 'active', to: "players#active"
+    end
+  end
   resources :comments, only: [:create]
   resources :seasons, only: [:create]
   
