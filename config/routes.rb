@@ -16,7 +16,8 @@ Rails.application.routes.draw do
   resources :profiles, only: [:show]
   resources :search, only: [:index, :new, :create, :show, :update]
   resources :rosters do
-    member do 
+    member do
+      get 'duplicate', to: "rosters#duplicate", as: :duplicate
       post 'add_player/:player_id', to: "rosters#add_player", as: :add_player
       post 'remove_player/:player_id', to: "rosters#remove_player", as: :remove_player
     end
