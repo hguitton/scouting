@@ -1,5 +1,5 @@
 class PlayersController < ApplicationController
-  before_action :set_player, only: [:show, :edit, :update, :destroy]
+  before_action :set_player, only: [:show, :edit, :update, :destroy, :active]
   before_action :authenticate_user!
   
   def root
@@ -73,10 +73,17 @@ class PlayersController < ApplicationController
     end
   end
 
+  def active
+    if params[:active]
+      @player.update_column(:active, params[:active])
+    end
+    redirect_to players_path, notice: 'Player was successfully deleted.'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_player
-      @player = Player.find(params[:id]).decorate
+      @player = Player.unscoped.find(params[:id]).decorate
     end
 
     # Only allow a list of trusted parameters through.

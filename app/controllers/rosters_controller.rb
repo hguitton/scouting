@@ -1,5 +1,5 @@
 class RostersController < ApplicationController
-  before_action :set_roster, only: [:show, :edit, :update, :destroy, :add_player, :remove_player]
+  before_action :set_roster, only: [:show, :edit, :update, :destroy, :add_player, :remove_player, :duplicate]
   before_action :authenticate_user!
   
   def index
@@ -38,8 +38,20 @@ class RostersController < ApplicationController
     redirect_to rosters_url, notice: 'Roster was successfully destroyed.'
   end
 
-  def get_spot
+  def duplicate
+    new_roster = @roster.dup
+    new_roster.user = current_user
+    new_roster.save
+    @roster.roster_spots.each do |spot|
+      new_spot = spot.dup
+      new_spot.save
+      new_roster.roster_spots << new_spot
+    end
     
+    @roster.players.each do |player|
+      new_roster.players << player
+    end
+    redirect_to edit_roster_path(new_roster)
   end
   
   def add_player
@@ -60,7 +72,7 @@ class RostersController < ApplicationController
 
   private
     def set_roster
-      @roster = Roster.find(params[:id]).decorate
+      @roster = Roster.find(params[:id])
     end
 
     def roster_params

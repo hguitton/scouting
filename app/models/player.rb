@@ -20,7 +20,7 @@ class Player < ApplicationRecord
   belongs_to :user, foreign_key: "updated_by_user_id"
   validates :name, :nationality, presence: true
 
-  default_scope { includes({ comments: :user}, :user, :position, :status, :priority, :profiles, :seasons) }
+  default_scope { includes({ comments: :user}, :user, :position, :status, :priority, :profiles, :seasons).where(active: true) }
 
   scope :with_height_between, -> (min, max) { where(height_eu: min..max) }
   scope :with_weight_between, -> (min, max) { where(weight_eu: min..max) }
