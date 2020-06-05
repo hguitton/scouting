@@ -12,6 +12,7 @@ section.hero.is-info
       .subtitle.is-4.has-text-weight-bold  = "Age : #{@player.age}"
       .subtitle.is-4.has-text-weight-bold  = "#{@player.height_eu}cm - #{@player.weight_eu}kg"
       = link_to 'Edit Player', edit_player_path(@player), class:"button is-warning"
+      = link_to 'Retired / Delete', active_player_path(@player, active: false), class: "m-l-sm button is-danger", data: { confirm: 'Are you sure ?' }
 
 section.m-t-md
   .container
