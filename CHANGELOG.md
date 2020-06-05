@@ -2,6 +2,12 @@
 
 ## develop
 
+# 05-06-20: 1.0.3
+- Fix young players infos
+- Add price with name on roster
+- Duplicate Roster
+- Remove/Retire players
+
 # 29-05-20: 1.0.2
 - Fix search json template 
 
