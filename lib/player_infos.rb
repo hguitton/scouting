@@ -9,11 +9,11 @@ class PlayerInfos
     @infos = {}
     if url =~ URI::regexp
       doc = Nokogiri::HTML(open(url, 'Cookie' => ENV["COOKIE"]))
-      doc.css('#teamlogo b').each do |row|
+      doc.css('.players-info b').each do |row|
         scrape_row(row)
       end
-      @infos[:name] = scrape_name(doc.css('.playertitle'))
-      @infos[:photo] = scrape_photo(doc.css('#PlayerInfo'))
+      @infos[:name] = scrape_name(doc.css('.player-title'))
+      @infos[:photo] = scrape_photo(doc.css('.player-pic'))
       @infos[:stats] = scrape_stats(doc.css("#divStatsData"))
     end
   end
@@ -36,13 +36,12 @@ class PlayerInfos
     when 'position'
       @infos[:position] = Position.find_by(name: scrape_basic(text_content(row)))&.id
     when 'team', 'teams'
-
       @league = scrape_basic(link_content(row)).split.last.tr('()', '')
     end
   end
 
   def scrape_name(row)
-    name = row.text[1..-1].split[0...-2].join(" ").gsub(/\u00a0/, ' ').split
+    name = row.text[1..-1].split[0...-4].join(" ").gsub(/\u00a0/, ' ').split
     name[0] = name[0].capitalize
     name.join(" ")
   end
