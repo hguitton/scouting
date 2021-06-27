@@ -26,7 +26,7 @@ class PlayerInfos
     when 'weight'
       @infos[:weight] = scrape_numbers(text_content(row))
     when 'born'
-      @infos[:birthdate] = scrape_birthdate(text_content(row))
+      @infos[:birthdate] = scrape_birthdate(link_content(row))
     when 'nationality'
       @infos[:nationality] = scrape_nationality(text_content(row))
     when 'college'
@@ -82,10 +82,9 @@ class PlayerInfos
     unless title
       title = content.css('h4').map(&:text).first
     end
-    table = content.xpath("//h4[text()='#{title}']/following-sibling::table")[1]
+    table = content.xpath("//h4[text()='#{title}']//following-sibling::div[@class='dvgamesstats']")[1]
     stats[:name] = title.split[1].gsub('-', ' - ')
     stats[:country] = title[/\(.*?\)/].tr('()', '')
-    
     line = table&.css('.my_pStats1')&.css('td').map(&:text)
     stats[:team] = line[0]
     stats[:min] = line[2]
